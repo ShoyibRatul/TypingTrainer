@@ -13,11 +13,12 @@
     "windows": [
       {
         "title": "Typing Trainer",
-        "width": 1200,
-        "height": 840,
-        "minWidth": 900,
-        "minHeight": 650,
+        "width": 1280,
+        "height": 800,
+        "minWidth": 960,
+        "minHeight": 600,
         "center": true,
+        "decorations": false,
         "resizable": true,
         "fullscreen": false
       }
