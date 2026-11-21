@@ -4,61 +4,16 @@ on:
   push:
     tags:
       - 'v*'
-    branches:
-      - main
-      - master
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   # -------------------------------------------------------------
-  # Job 1: Build & Deploy Web / PWA version to GitHub Pages
-  # -------------------------------------------------------------
-  build-web:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build Web Application
-        run: npm run build
-
-      - name: Upload Web Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-
-  deploy-pages:
-    needs: build-web
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  # -------------------------------------------------------------
-  # Job 2: Build Native Binaries for Windows, macOS, and Linux
+  # Build Native Binaries for Windows, macOS, and Linux
   # -------------------------------------------------------------
   build-tauri:
-    needs: build-web
     strategy:
       fail-fast: false
       matrix:
@@ -117,10 +72,3 @@ jobs:
             - **macOS**: Universal `.dmg` (Supports both Apple Silicon M1/M2/M3/M4 & Intel Macs)
             - **Linux**: `.AppImage` (Run anywhere) & `.deb` (Debian/Ubuntu/Mint)
             - **Web**: Live at GitHub Pages
-
-            ### License Notice:
-            Free for personal, educational, and non-commercial use under the [PolyForm Noncommercial License 1.0.0](https://github.com/ShoyibRatul/TypingTrainer/blob/main/LICENSE).
-            Commercial use requires a separate license. See [COMMERCIAL.md](https://github.com/ShoyibRatul/TypingTrainer/blob/main/COMMERCIAL.md).
-          releaseDraft: false
-          prerelease: false
-          args: ${{ matrix.args }}

@@ -36,7 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, []);
 
   const cycleTheme = () => {
-    const next: ThemeMode = themeMode === 'system' ? 'dark' : themeMode === 'dark' ? 'light' : 'system';
+    const next: ThemeMode = themeMode === 'system' ? 'midnight' : themeMode === 'midnight' ? 'paper' : 'system';
     setThemeMode(next);
     applyTheme(next);
   };
@@ -102,8 +102,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
             title="Cycle Theme (System, Dark, Light)"
           >
             {themeMode === 'system' && <Monitor className="w-3.5 h-3.5 text-accent" />}
-            {themeMode === 'dark' && <Moon className="w-3.5 h-3.5 text-accent" />}
-            {themeMode === 'light' && <Sun className="w-3.5 h-3.5 text-accent" />}
+            {themeMode === 'midnight' && <Moon className="w-3.5 h-3.5 text-accent" />}
+            {themeMode === 'paper' && <Sun className="w-3.5 h-3.5 text-accent" />}
             <span className="capitalize">{themeMode}</span>
           </button>
         </div>

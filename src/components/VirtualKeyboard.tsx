@@ -19,7 +19,7 @@ interface PhysicalKeySlot {
 
 // Standard ANSI Keyboard physical geometry slots
 const ANSI_KEY_SLOTS: PhysicalKeySlot[] = [
-  // Row 0: Number Row
+  // Row 0: Number Row (14 keys)
   { code: 'Backquote', defaultLabel: '`', row: 0, width: 1.0 },
   { code: 'Digit1', defaultLabel: '1', row: 0, width: 1.0 },
   { code: 'Digit2', defaultLabel: '2', row: 0, width: 1.0 },
@@ -33,9 +33,9 @@ const ANSI_KEY_SLOTS: PhysicalKeySlot[] = [
   { code: 'Digit0', defaultLabel: '0', row: 0, width: 1.0 },
   { code: 'Minus', defaultLabel: '-', row: 0, width: 1.0 },
   { code: 'Equal', defaultLabel: '=', row: 0, width: 1.0 },
-  { code: 'Backspace', defaultLabel: 'Backspace', row: 0, width: 2.0, isModifier: true },
+  { code: 'Backspace', defaultLabel: '⌫', row: 0, width: 2.0, isModifier: true },
 
-  // Row 1: Top Alpha Row
+  // Row 1: Top Alpha Row (14 keys)
   { code: 'Tab', defaultLabel: 'Tab', row: 1, width: 1.5, isModifier: true },
   { code: 'KeyQ', defaultLabel: 'q', row: 1, width: 1.0 },
   { code: 'KeyW', defaultLabel: 'w', row: 1, width: 1.0 },
@@ -51,7 +51,7 @@ const ANSI_KEY_SLOTS: PhysicalKeySlot[] = [
   { code: 'BracketRight', defaultLabel: ']', row: 1, width: 1.0 },
   { code: 'Backslash', defaultLabel: '\\', row: 1, width: 1.5 },
 
-  // Row 2: Home Row
+  // Row 2: Home Row (13 keys)
   { code: 'CapsLock', defaultLabel: 'Caps', row: 2, width: 1.75, isModifier: true },
   { code: 'KeyA', defaultLabel: 'a', row: 2, width: 1.0 },
   { code: 'KeyS', defaultLabel: 's', row: 2, width: 1.0 },
@@ -66,7 +66,7 @@ const ANSI_KEY_SLOTS: PhysicalKeySlot[] = [
   { code: 'Quote', defaultLabel: "'", row: 2, width: 1.0 },
   { code: 'Enter', defaultLabel: 'Enter', row: 2, width: 2.25, isModifier: true },
 
-  // Row 3: Bottom Alpha Row
+  // Row 3: Bottom Alpha Row (12 keys)
   { code: 'ShiftLeft', defaultLabel: 'Shift', row: 3, width: 2.25, isModifier: true },
   { code: 'KeyZ', defaultLabel: 'z', row: 3, width: 1.0 },
   { code: 'KeyX', defaultLabel: 'x', row: 3, width: 1.0 },
@@ -80,7 +80,7 @@ const ANSI_KEY_SLOTS: PhysicalKeySlot[] = [
   { code: 'Slash', defaultLabel: '/', row: 3, width: 1.0 },
   { code: 'ShiftRight', defaultLabel: 'Shift', row: 3, width: 2.75, isModifier: true },
 
-  // Row 4: Space Row
+  // Row 4: Space Row (7 keys)
   { code: 'ControlLeft', defaultLabel: 'Ctrl', row: 4, width: 1.25, isModifier: true },
   { code: 'MetaLeft', defaultLabel: 'Win', row: 4, width: 1.25, isModifier: true },
   { code: 'AltLeft', defaultLabel: 'Alt', row: 4, width: 1.25, isModifier: true },
@@ -123,12 +123,12 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
     : 'Home Row Rest';
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 bg-surface rounded-card border border-border shadow-sm">
+    <div className="w-full max-w-4xl mx-auto p-4 bg-surface rounded-md border border-border shadow-sm">
       {/* Top Hint Bar */}
       <div className="flex items-center justify-between gap-2 mb-3 px-1 text-xs">
         <div className="flex items-center gap-2">
           <span className="text-txt-muted font-medium">Target Finger:</span>
-          <span className="px-2.5 py-0.5 rounded-full font-semibold text-xs bg-accent-soft text-accent border border-accent/20">
+          <span className="px-2.5 py-0.5 rounded-sm font-semibold text-xs bg-accent-soft text-accent border border-accent/20">
             {fingerLabel}
           </span>
         </div>
@@ -137,7 +137,7 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
         </div>
       </div>
 
-      {/* Keyboard Grid */}
+      {/* Keyboard Grid with Real Stagger & Tactile Keycaps */}
       <div className="space-y-1.5 font-mono select-none">
         {[0, 1, 2, 3, 4].map((rowIndex) => {
           const rowKeys = ANSI_KEY_SLOTS.filter((k) => k.row === rowIndex);
@@ -151,7 +151,7 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
 
                 const isTarget =
                   (normTarget === ' ' && slot.code === 'Space') ||
-                  (baseLabel && baseLabel === normTarget) ||
+                  (baseLabel && baseLabel.toLowerCase() === normTarget.toLowerCase()) ||
                   (shiftLabel && shiftLabel === normTarget);
 
                 const isShiftKey = slot.code === 'ShiftLeft' || slot.code === 'ShiftRight';
@@ -167,7 +167,7 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
                     (activeKey === 'Enter' && slot.code === 'Enter'));
 
                 const keyWidth = slot.width || 1.0;
-                const flexBasis = `${keyWidth * 56}px`;
+                const flexBasis = `${keyWidth * 54}px`;
 
                 return (
                   <div
@@ -175,17 +175,17 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
                     style={{
                       flexBasis,
                       flexGrow: slot.width ? slot.width * 0.5 : 1,
-                      minWidth: slot.width ? `${slot.width * 38}px` : '38px',
-                      height: '44px',
+                      minWidth: slot.width ? `${slot.width * 36}px` : '36px',
+                      height: '42px',
                     }}
-                    className={`relative rounded-key flex flex-col items-center justify-center transition-all duration-75 text-xs font-semibold border ${
+                    className={`relative rounded-sm flex flex-col items-center justify-center transition-all duration-75 text-xs font-semibold ${
                       isPressed && isError
-                        ? 'bg-danger text-white border-danger translate-y-0.5 shadow-inner'
+                        ? 'bg-danger text-white border-b border-danger translate-y-[1.5px]'
                         : isPressed
-                        ? 'bg-accent text-white border-accent-hover translate-y-0.5 shadow-inner'
+                        ? 'bg-accent text-on-accent border-b border-accent-hover translate-y-[1.5px]'
                         : isTarget || isShiftTarget
-                        ? 'bg-accent-soft text-accent border-accent ring-2 ring-accent/40 font-bold animate-pulse'
-                        : 'bg-surface-2 text-txt border-border hover:border-txt-muted/40 shadow-sm'
+                        ? 'bg-accent-soft text-accent border-b-[2.5px] border-accent key-glow font-bold'
+                        : 'bg-surface-2 text-txt border-b-[2.5px] border-border hover:border-txt-muted/50'
                     }`}
                   >
                     {/* Shift Label */}
@@ -196,9 +196,9 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
                     {/* Base Label */}
                     <span className="leading-tight">{slot.isModifier ? slot.defaultLabel : baseLabel.toUpperCase()}</span>
 
-                    {/* Tactile Bumps on F and J */}
+                    {/* Raised Tactile Bumps on F and J */}
                     {slot.homeBump && (
-                      <span className="absolute bottom-1 w-3.5 h-0.5 rounded-full bg-txt-muted/80"></span>
+                      <span className="absolute bottom-1 w-3 h-0.5 rounded-full bg-accent" />
                     )}
                   </div>
                 );

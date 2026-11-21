@@ -62,6 +62,49 @@
       },
       "minItems": 1
     },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+          "title": {
+            "type": "object",
+            "additionalProperties": { "type": "string" },
+            "minProperties": 1
+          },
+          "icon": { "type": "string" },
+          "color": { "type": "string" },
+          "description": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "lessons": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "title", "lessons"],
+              "properties": {
+                "id": { "type": "string" },
+                "title": {
+                  "type": "object",
+                  "additionalProperties": { "type": "string" }
+                },
+                "lessons": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "unlock": {
       "type": "string",
       "enum": ["sequential", "open", "scoreThreshold"],

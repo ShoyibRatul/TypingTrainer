@@ -33,9 +33,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const actions: PaletteAction[] = [
     {
+      id: 'nav-home',
+      label: 'Home Dashboard',
+      description: 'Overview, ambient typing centerpiece, and stats',
+      category: 'Navigation',
+      icon: BookOpen,
+      perform: () => {
+        onNavigate('home');
+        onClose();
+      },
+    },
+    {
       id: 'nav-lessons',
       label: 'Lessons & Drills',
-      description: 'Practice structured typing lessons',
+      description: 'Practice structured touch typing lessons',
       category: 'Navigation',
       icon: BookOpen,
       perform: () => {

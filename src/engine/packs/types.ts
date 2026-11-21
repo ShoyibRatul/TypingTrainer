@@ -115,6 +115,22 @@ export interface LessonDefinition {
   };
 }
 
+export interface CourseCategoryGroup {
+  id: string;
+  title: Record<string, string>;
+  lessons: string[];
+}
+
+export interface CourseCategory {
+  id: string;
+  title: Record<string, string>;
+  icon?: string;
+  color?: string;
+  description?: Record<string, string>;
+  groups?: CourseCategoryGroup[];
+  lessons?: string[];
+}
+
 export interface CourseLevel {
   id: string;
   title: Record<string, string>;
@@ -128,6 +144,7 @@ export interface CourseDefinition {
   description: Record<string, string>;
   layout: string;
   levels: CourseLevel[];
+  categories?: CourseCategory[];
 }
 
 export interface LoadedPack {

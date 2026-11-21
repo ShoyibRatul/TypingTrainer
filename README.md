@@ -4,8 +4,10 @@
 > Engineered for **Windows, macOS (Apple Silicon & Intel), Linux & Modern Web Browsers**.
 
 [![Release & Multi-Platform Auto-Build](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/release.yml/badge.svg)](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/release.yml)
-[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue.svg)](LICENSE)
+[![Deploy Web (GitHub Pages)](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/pages.yml/badge.svg)](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/pages.yml)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-green.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Web-emerald.svg)](https://github.com/ShoyibRatul/TypingTrainer)
+[![Web Live](https://img.shields.io/badge/Web%20App-GitHub%20Pages-22c55e.svg)](https://shoyibratul.github.io/TypingTrainer/)
 
 ---
 

@@ -1,38 +1,160 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { VirtualKeyboard } from './VirtualKeyboard';
-import { HandGuide } from './HandGuide';
 import { useProfile } from '../context/ProfileContext';
 import { soundEngine } from '../utils/audio';
 import { TypingSession } from '../engine/session';
 import { packRegistry } from '../engine/packs/registry';
-import { CourseDefinition, LessonDefinition, LessonStep } from '../engine/packs/types';
+import { LessonDefinition, LessonStep } from '../engine/packs/types';
+import { ProgressRing } from './ui/ProgressRing';
 import confetti from 'canvas-confetti';
 import {
   RotateCcw,
   Star,
-  Award,
   Zap,
   Target,
   ArrowRight,
   BookOpen,
   Maximize2,
   Minimize2,
-  ChevronDown,
-  ChevronRight,
   CheckCircle2,
+  Play,
+  Award,
+  Hash,
+  Code,
+  Sparkles,
 } from 'lucide-react';
-import { Button } from './ui/Button';
+
+interface CategoryItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  lessonIds: string[];
+}
 
 export const LessonView: React.FC = () => {
   const { activeProfile, recordLessonCompletion, recordKeyTelemetry } = useProfile();
 
-  // Pack & Curriculum State
-  const [course, setCourse] = useState<CourseDefinition | undefined>(() => packRegistry.getCourse());
+  // Categories configuration (TypingMaster style 8 categories)
+  const categories: CategoryItem[] = [
+    {
+      id: 'cat-home',
+      title: 'Home Row Foundation',
+      description: 'Master anchor keys A S D F J K L ; and spacebar flow',
+      icon: BookOpen,
+      lessonIds: [
+        'fund-01-fj',
+        'fund-02-dk',
+        'fund-03-sl',
+        'fund-04-a-semi',
+        'fund-05-gh',
+        'fund-06-home-mastery',
+      ],
+    },
+    {
+      id: 'cat-top',
+      title: 'Top Row & Vowels',
+      description: 'Upper reach training: Q W E R T Y U I O P',
+      icon: Sparkles,
+      lessonIds: [
+        'fund-07-ei',
+        'fund-08-ru',
+        'fund-09-ty',
+        'fund-10-op',
+        'fund-11-qw',
+        'fund-12-top-mastery',
+      ],
+    },
+    {
+      id: 'cat-bottom',
+      title: 'Bottom Row Reaches',
+      description: 'Lower diagonal stagger: Z X C V B N M , . /',
+      icon: Target,
+      lessonIds: [
+        'fund-07-ei', // fallback or bottom row
+        'fund-13-cm',
+        'fund-14-vn',
+        'fund-15-bx',
+        'fund-16-z-slash',
+        'fund-17-comma-period',
+        'fund-18-alphabet-run',
+      ],
+    },
+    {
+      id: 'cat-shift',
+      title: 'Shift & Capitals',
+      description: 'Synchronized pinky shift coordination for uppercase words',
+      icon: Zap,
+      lessonIds: [
+        'fund-19-left-shift',
+        'fund-20-right-shift',
+        'fund-21-mixed-caps',
+        'fund-22-sentence-caps',
+        'fund-23-acronyms',
+        'fund-24-caps-speed',
+      ],
+    },
+    {
+      id: 'cat-numbers',
+      title: 'Number Row & Dates',
+      description: 'Top numerical row touch muscle memory: 1 through 0',
+      icon: Hash,
+      lessonIds: [
+        'fund-25-num-47',
+        'fund-26-num-38',
+        'fund-27-num-29',
+        'fund-28-num-10',
+        'fund-29-num-dates',
+        'fund-30-num-sprint',
+      ],
+    },
+    {
+      id: 'cat-symbols',
+      title: 'Punctuation & Prose',
+      description: 'Special symbols, quotes, hyphens, and multi-line paragraphs',
+      icon: Award,
+      lessonIds: [
+        'fund-31-quotes-hyphens',
+        'fund-32-parentheses-excl',
+        'fund-33-symbols',
+        'fund-34-paragraphs',
+        'fund-35-grand-mastery',
+      ],
+    },
+    {
+      id: 'cat-numpad',
+      title: 'Numeric Keypad',
+      description: '10-key high-speed data entry and accounting rhythm',
+      icon: Hash,
+      lessonIds: [
+        'numpad-01-home',
+        'numpad-02-reaches',
+        'numpad-03-zero-decimal',
+        'numpad-04-speed-entry',
+      ],
+    },
+    {
+      id: 'cat-programmer',
+      title: 'Programmer Syntax',
+      description: 'Brackets, braces, operators, camelCase, JSX and code snippets',
+      icon: Code,
+      lessonIds: [
+        'prog-01-delimiters',
+        'prog-02-operators',
+        'prog-03-casing',
+        'prog-04-jsx-html',
+        'prog-05-snippets',
+      ],
+    },
+  ];
+
+  const [activeCategoryId, setActiveCategoryId] = useState<string>('cat-home');
   const [activeLessonId, setActiveLessonId] = useState<string>('fund-01-fj');
   const [activeLesson, setActiveLesson] = useState<LessonDefinition | undefined>(() =>
-    packRegistry.getLesson('fund-01-fj') || packRegistry.getLesson('lesson-1-anchor')
+    packRegistry.getLesson('fund-01-fj') || packRegistry.getLesson('001-home')
   );
   const [stepIndex, setStepIndex] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   // Drill Execution State
   const [session, setSession] = useState<TypingSession | null>(null);
@@ -56,27 +178,7 @@ export const LessonView: React.FC = () => {
     stars: number;
   } | null>(null);
 
-  // Level accordion expansion state
-  const [expandedLevels, setExpandedLevels] = useState<Record<string, boolean>>({
-    'level-1-home-row': true,
-  });
-
   const hiddenInputRef = useRef<HTMLInputElement>(null);
-
-  // Sync with pack changes
-  useEffect(() => {
-    const onPackChange = () => {
-      const c = packRegistry.getCourse();
-      setCourse(c);
-      if (c && c.levels.length > 0 && c.levels[0].lessons.length > 0) {
-        const firstLessonId = c.levels[0].lessons[0];
-        setActiveLessonId(firstLessonId);
-        setActiveLesson(packRegistry.getLesson(firstLessonId));
-        setStepIndex(0);
-      }
-    };
-    return packRegistry.subscribe(onPackChange);
-  }, []);
 
   const activeStep: LessonStep =
     activeLesson?.steps[stepIndex] || { type: 'keys', items: ['ff jj ff jj'] };
@@ -87,8 +189,20 @@ export const LessonView: React.FC = () => {
   };
 
   useEffect(() => {
-    resetDrill();
-  }, [activeLessonId, stepIndex]);
+    if (isPlaying) {
+      resetDrill();
+    }
+  }, [activeLessonId, stepIndex, isPlaying]);
+
+  const startDrill = (lessonId: string) => {
+    const l = packRegistry.getLesson(lessonId);
+    if (l) {
+      setActiveLessonId(lessonId);
+      setActiveLesson(l);
+      setStepIndex(0);
+      setIsPlaying(true);
+    }
+  };
 
   const resetDrill = () => {
     if (!targetText) return;
@@ -167,6 +281,11 @@ export const LessonView: React.FC = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setLastActiveKey(e.key);
 
+    if (e.key === 'Escape') {
+      setIsPlaying(false);
+      return;
+    }
+
     if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) {
       return;
     }
@@ -191,307 +310,436 @@ export const LessonView: React.FC = () => {
     if (stepIndex + 1 < activeLesson.steps.length) {
       setStepIndex((prev) => prev + 1);
     } else {
-      // Find next lesson in course
-      if (course) {
-        const allLessonIds = course.levels.flatMap((lvl) => lvl.lessons);
-        const currIdx = allLessonIds.indexOf(activeLessonId);
-        if (currIdx + 1 < allLessonIds.length) {
-          const nextId = allLessonIds[currIdx + 1];
+      // Find next lesson
+      const activeCat = categories.find((c) => c.id === activeCategoryId);
+      if (activeCat) {
+        const currIdx = activeCat.lessonIds.indexOf(activeLessonId);
+        if (currIdx + 1 < activeCat.lessonIds.length) {
+          const nextId = activeCat.lessonIds[currIdx + 1];
           setActiveLessonId(nextId);
           setActiveLesson(packRegistry.getLesson(nextId));
           setStepIndex(0);
+        } else {
+          setIsPlaying(false);
         }
       }
     }
   };
 
-  const toggleLevel = (levelId: string) => {
-    setExpandedLevels((prev) => ({
-      ...prev,
-      [levelId]: !prev[levelId],
-    }));
-  };
+  const currentCategory = categories.find((c) => c.id === activeCategoryId) || categories[0];
+  const activeLessonMeta = packRegistry.getLesson(activeLessonId);
+  const activeRecord = activeProfile?.stats.lessonScores[activeLessonId];
 
-  const selectLesson = (lessonId: string) => {
-    setActiveLessonId(lessonId);
-    setActiveLesson(packRegistry.getLesson(lessonId));
-    setStepIndex(0);
-  };
+  // If in active typing player mode
+  if (isPlaying) {
+    return (
+      <div className="w-full h-full flex flex-col justify-between py-2 select-none relative">
+        <input
+          ref={hiddenInputRef}
+          type="text"
+          onKeyDown={handleKeyDown}
+          className="opacity-0 absolute -z-50 pointer-events-none"
+          autoFocus
+        />
 
-  const layout = packRegistry.getLayout();
-  const targetKeyDef = Object.values(layout.keys).find(
-    (def) => def.base === currentExpected || def.shift === currentExpected
-  );
-
-  return (
-    <div className="w-full max-w-6xl mx-auto space-y-6">
-      {/* Hidden input for receiving clean keystrokes */}
-      <input
-        ref={hiddenInputRef}
-        type="text"
-        onKeyDown={handleKeyDown}
-        className="opacity-0 absolute -z-50 pointer-events-none"
-        autoFocus
-      />
-
-      {/* Main Workspace Layout */}
-      <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left: Course Navigation & Level Progress Tree (Hidden in Focus Mode) */}
-        {!isFocusMode && (
-          <aside className="w-full lg:w-72 bg-surface border border-border rounded-card p-4 shadow-sm flex flex-col gap-3">
-            <div className="pb-3 border-b border-border">
-              <span className="text-[10px] uppercase font-mono tracking-wider text-accent font-semibold block">
-                Active Curriculum
-              </span>
-              <h3 className="font-bold text-sm text-txt flex items-center gap-1.5 mt-0.5">
-                <BookOpen className="w-4 h-4 text-accent" />
-                {course?.title['en'] || 'English QWERTY'}
-              </h3>
-              <p className="text-[11px] text-txt-muted mt-0.5 line-clamp-2">
-                {course?.description['en'] || 'Standard touch typing curriculum.'}
-              </p>
-            </div>
-
-            {/* Course Levels Tree */}
-            <div className="space-y-2 max-h-[calc(100vh-22rem)] overflow-y-auto pr-1">
-              {course?.levels.map((level) => {
-                const isExpanded = expandedLevels[level.id] ?? false;
-
-                return (
-                  <div key={level.id} className="border border-border/60 rounded-btn overflow-hidden bg-surface-2/30">
-                    <button
-                      onClick={() => toggleLevel(level.id)}
-                      className="w-full flex items-center justify-between p-2.5 text-left text-xs font-semibold text-txt hover:bg-surface-2 transition-colors"
-                    >
-                      <span className="truncate">{level.title['en'] || level.id}</span>
-                      {isExpanded ? (
-                        <ChevronDown className="w-3.5 h-3.5 text-txt-muted" />
-                      ) : (
-                        <ChevronRight className="w-3.5 h-3.5 text-txt-muted" />
-                      )}
-                    </button>
-
-                    {isExpanded && (
-                      <div className="p-1 space-y-0.5 border-t border-border/40 bg-surface">
-                        {level.lessons.map((lessonId) => {
-                          const l = packRegistry.getLesson(lessonId);
-                          const isCurrent = lessonId === activeLessonId;
-                          const profileRecord = activeProfile?.stats.lessonScores[lessonId];
-                          const stars = profileRecord?.stars || 0;
-
-                          return (
-                            <button
-                              key={lessonId}
-                              onClick={() => selectLesson(lessonId)}
-                              className={`w-full flex items-center justify-between px-2.5 py-2 rounded-btn text-left text-xs transition-colors ${
-                                isCurrent
-                                  ? 'bg-accent-soft text-accent font-semibold'
-                                  : 'hover:bg-surface-2 text-txt-muted hover:text-txt'
-                              }`}
-                            >
-                              <div className="flex items-center gap-2 truncate">
-                                {profileRecord ? (
-                                  <CheckCircle2 className="w-3.5 h-3.5 text-accent flex-shrink-0" />
-                                ) : (
-                                  <span className="w-1.5 h-1.5 rounded-full bg-border flex-shrink-0" />
-                                )}
-                                <span className="truncate">{l?.title['en'] || lessonId}</span>
-                              </div>
-                              {stars > 0 && (
-                                <div className="flex text-warning">
-                                  {[...Array(stars)].map((_, i) => (
-                                    <Star key={i} className="w-2.5 h-2.5 fill-warning" />
-                                  ))}
-                                </div>
-                              )}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </aside>
-        )}
-
-        {/* Right: Active Drill & Focus Canvas */}
-        <main className="flex-1 space-y-5">
-          {/* Header & Metrics Strip */}
-          <div className="bg-surface border border-border rounded-card p-4 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        {/* Top Player Header */}
+        <div className="flex items-center justify-between pb-3 border-b border-border">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsPlaying(false)}
+              className="px-2.5 py-1 rounded-sm bg-surface-2 hover:bg-surface-2/80 text-xs text-txt-muted hover:text-txt border border-border transition-colors cursor-pointer"
+            >
+              &larr; Exit (Esc)
+            </button>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded bg-accent-soft text-accent font-semibold">
-                  Step {stepIndex + 1} of {activeLesson?.steps.length || 1}
-                </span>
-                <span className="text-[11px] text-txt-muted">
-                  Type: <strong className="text-txt uppercase font-mono">{activeStep.type}</strong>
-                </span>
-              </div>
-              <h2 className="text-base font-bold text-txt mt-1">
-                {activeLesson?.title['en'] || 'Practice Exercise'}
+              <span className="text-[10px] font-mono text-accent uppercase font-bold tracking-wider">
+                Step {stepIndex + 1} of {activeLesson?.steps.length || 1}
+              </span>
+              <h2 className="text-sm font-bold text-txt">
+                {activeLesson?.title['en'] || activeLessonId}
               </h2>
             </div>
+          </div>
 
-            <div className="flex items-center gap-5">
-              {/* Calm Live Metrics */}
-              <div className="flex items-center gap-4 text-xs font-mono">
-                <div className="flex items-center gap-1.5">
-                  <Zap className="w-4 h-4 text-accent" />
-                  <div>
-                    <span className="text-txt font-bold">{liveWpm}</span>
-                    <span className="text-txt-muted text-[10px] ml-1">WPM</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Target className="w-4 h-4 text-accent" />
-                  <div>
-                    <span className="text-txt font-bold">{liveAccuracy}%</span>
-                    <span className="text-txt-muted text-[10px] ml-1">ACC</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className={`font-bold ${mistakeCount > 0 ? 'text-danger' : 'text-txt-muted'}`}>{mistakeCount}</span>
-                  <span className="text-txt-muted text-[10px]">ERR</span>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex items-center gap-1.5">
-                <Button variant="outline" size="sm" onClick={resetDrill} title="Restart Exercise">
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setIsFocusMode(!isFocusMode)}
-                  title={isFocusMode ? 'Exit Focus Mode' : 'Enter Focus Mode'}
-                >
-                  {isFocusMode ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-                </Button>
-              </div>
+          {/* Calm Live Metrics */}
+          <div className="flex items-center gap-6 font-mono text-xs">
+            <div className="flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-accent" />
+              <span className="font-bold text-txt">{liveWpm}</span>
+              <span className="text-[10px] text-txt-muted">WPM</span>
             </div>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="w-full h-1 bg-surface-2 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-accent transition-all duration-150 ease-out"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-
-          {/* Drill Typing Card */}
-          <div
-            onClick={focusInput}
-            className="bg-surface border border-border rounded-card p-8 shadow-sm cursor-text min-h-[160px] flex flex-col justify-center items-center text-center relative overflow-hidden select-none"
-          >
-            <div className="text-2xl sm:text-3xl font-mono leading-relaxed tracking-wider max-w-3xl">
-              {/* Typed graphemes */}
-              {typedGraphemes.map((char, idx) => (
-                <span key={idx} className="text-accent font-semibold">
-                  {char === ' ' ? '\u00A0' : char}
-                </span>
-              ))}
-
-              {/* Current Caret & Next Character */}
-              {session && session.getStatus() !== 'completed' && (
-                <span className="relative inline-block">
-                  <span className="animate-pulse text-txt bg-accent-soft px-0.5 rounded border-b-2 border-accent">
-                    {currentExpected === ' ' ? '\u00A0' : currentExpected}
-                  </span>
-                </span>
-              )}
-
-              {/* Remaining un-typed target text */}
-              <span className="text-txt-muted/50">
-                {targetText.slice(typedGraphemes.length + (currentExpected ? 1 : 0))}
+            <div className="flex items-center gap-1.5">
+              <Target className="w-3.5 h-3.5 text-accent" />
+              <span className="font-bold text-txt">{liveAccuracy}%</span>
+              <span className="text-[10px] text-txt-muted">ACC</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className={`font-bold ${mistakeCount > 0 ? 'text-danger' : 'text-txt-muted'}`}>
+                {mistakeCount}
               </span>
+              <span className="text-[10px] text-txt-muted">ERR</span>
             </div>
-
-            <p className="text-[11px] text-txt-muted mt-6">
-              Click anywhere or press any key to focus. Rest fingers on <span className="font-mono text-txt">F</span> and{' '}
-              <span className="font-mono text-txt">J</span>.
-            </p>
+            <button
+              onClick={() => setIsFocusMode(!isFocusMode)}
+              className="p-1 rounded-sm text-txt-muted hover:text-txt hover:bg-surface-2"
+              title={isFocusMode ? 'Exit Full Focus' : 'Full Focus'}
+            >
+              {isFocusMode ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
+            </button>
           </div>
+        </div>
 
-          {/* Virtual Keyboard (Rendered dynamically from layout JSON) */}
+        {/* Thin Green Progress Thread */}
+        <div className="w-full h-1 bg-surface-2 rounded-full overflow-hidden my-2">
+          <div
+            className="h-full bg-accent transition-all duration-150 ease-out"
+            style={{ width: `${progressPercent}%` }}
+          />
+        </div>
+
+        {/* Center: Signature Big Typing Text Display */}
+        <div
+          onClick={focusInput}
+          className="my-auto py-12 px-8 bg-surface rounded-md border border-border flex flex-col justify-center items-center text-center cursor-text min-h-[220px]"
+        >
+          <div className="text-3xl font-mono leading-relaxed tracking-wider max-w-3xl">
+            {/* Typed characters */}
+            {typedGraphemes.map((char, idx) => (
+              <span key={idx} className="text-accent font-semibold">
+                {char === ' ' ? '\u00A0' : char}
+              </span>
+            ))}
+
+            {/* Active Caret */}
+            {session && session.getStatus() !== 'completed' && (
+              <span className="relative inline-block">
+                <span className="inline-block w-0.5 h-7 bg-accent animate-caret align-middle mx-0.5" />
+                <span className="text-txt underline decoration-accent decoration-2 underline-offset-4">
+                  {currentExpected === ' ' ? '\u00A0' : currentExpected}
+                </span>
+              </span>
+            )}
+
+            {/* Remaining untyped text */}
+            {session && (
+              <span className="text-txt-muted/40 font-normal">
+                {targetText.slice(typedGraphemes.length + 1)}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Bottom: Signature Virtual Keyboard */}
+        <div className="pt-3">
           <VirtualKeyboard
             targetChar={currentExpected}
             activeKey={lastActiveKey}
             isError={isLastKeyError}
           />
+        </div>
 
-          {/* Hand Visualizer synced to required finger */}
-          <HandGuide activeFinger={targetKeyDef?.finger} />
-        </main>
-      </div>
-
-      {/* Mastery Results Sheet Modal */}
-      {completedResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-          <div className="bg-surface border border-border rounded-card w-full max-w-md shadow-2xl p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
-            <div className="text-center space-y-2">
-              <div className="w-14 h-14 rounded-full bg-accent-soft text-accent flex items-center justify-center mx-auto">
-                <Award className="w-7 h-7" />
+        {/* Completed Modal */}
+        {completedResult && (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className="w-full max-w-md bg-surface border border-border rounded-md p-6 shadow-float space-y-5 animate-fadeIn">
+              <div className="text-center space-y-1">
+                <div className="w-12 h-12 rounded-full bg-accent-soft text-accent mx-auto flex items-center justify-center">
+                  <CheckCircle2 className="w-7 h-7" />
+                </div>
+                <h3 className="text-lg font-bold text-txt">Lesson Completed!</h3>
+                <p className="text-xs text-txt-muted">
+                  {completedResult.accuracy >= 90
+                    ? 'Excellent precision! Muscle memory normalized.'
+                    : 'Target threshold missed. Give it another repetition!'}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-txt">Exercise Completed!</h3>
-              <p className="text-xs text-txt-muted">
-                {completedResult.stars >= 3
-                  ? 'Mastery Level Achieved! Exceptional speed and rhythm.'
-                  : completedResult.stars >= 2
-                  ? 'Great performance! Your muscle memory is locking in.'
-                  : 'Well done! Keep practicing to increase accuracy.'}
-              </p>
 
-              {/* Star Rating */}
-              <div className="flex justify-center gap-1.5 pt-1 text-warning">
-                {[1, 2, 3].map((starNum) => (
+              {/* Stars */}
+              <div className="flex justify-center gap-2 text-warning">
+                {[...Array(3)].map((_, i) => (
                   <Star
-                    key={starNum}
+                    key={i}
                     className={`w-6 h-6 ${
-                      starNum <= completedResult.stars ? 'fill-warning text-warning' : 'text-border fill-transparent'
+                      i < completedResult.stars ? 'fill-warning text-warning' : 'text-border'
                     }`}
                   />
                 ))}
               </div>
-            </div>
 
-            {/* Metrics Breakdown Grid */}
-            <div className="grid grid-cols-2 gap-3 p-4 bg-surface-2 rounded-btn text-center font-mono">
-              <div>
-                <span className="text-[10px] text-txt-muted uppercase block">Speed</span>
-                <span className="text-xl font-bold text-accent">{completedResult.wpm}</span>
-                <span className="text-[10px] text-txt-muted ml-1">WPM</span>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-2.5 rounded-sm bg-surface-2 border border-border">
+                  <span className="text-[10px] text-txt-muted uppercase font-mono">Speed</span>
+                  <span className="text-base font-bold text-txt block">{completedResult.wpm} WPM</span>
+                </div>
+                <div className="p-2.5 rounded-sm bg-surface-2 border border-border">
+                  <span className="text-[10px] text-txt-muted uppercase font-mono">Accuracy</span>
+                  <span className="text-base font-bold text-txt block">{completedResult.accuracy}%</span>
+                </div>
+                <div className="p-2.5 rounded-sm bg-surface-2 border border-border">
+                  <span className="text-[10px] text-txt-muted uppercase font-mono">Errors</span>
+                  <span className="text-base font-bold text-txt block">{completedResult.errors}</span>
+                </div>
               </div>
-              <div>
-                <span className="text-[10px] text-txt-muted uppercase block">Accuracy</span>
-                <span className="text-xl font-bold text-txt">{completedResult.accuracy}%</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-txt-muted uppercase block">Errors</span>
-                <span className="text-sm font-semibold text-txt">{completedResult.errors}</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-txt-muted uppercase block">Duration</span>
-                <span className="text-sm font-semibold text-txt">{completedResult.elapsedSeconds}s</span>
-              </div>
-            </div>
 
-            {/* Modal Actions */}
-            <div className="flex gap-2 pt-2">
-              <Button variant="outline" size="sm" onClick={resetDrill} className="flex-1">
-                <RotateCcw className="w-3.5 h-3.5" /> Retry
-              </Button>
-              <Button variant="primary" size="sm" onClick={nextStepOrLesson} className="flex-1">
-                <span>Next</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Button>
+              <div className="flex items-center gap-3 pt-2">
+                <button
+                  onClick={resetDrill}
+                  className="flex-1 py-2 rounded-sm bg-surface-2 hover:bg-surface-2/80 text-txt text-xs font-semibold border border-border flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Retry (R)</span>
+                </button>
+                <button
+                  onClick={nextStepOrLesson}
+                  className="flex-1 py-2 rounded-sm bg-accent hover:bg-accent-hover text-on-accent text-xs font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                >
+                  <span>Continue</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
+        )}
+      </div>
+    );
+  }
+
+  // Master-Detail Catalog View
+  return (
+    <div className="h-full flex gap-5 overflow-hidden">
+      {/* Column 1: Category Tree (240px) */}
+      <aside className="w-60 bg-surface rounded-md border border-border p-3 flex flex-col justify-between flex-shrink-0">
+        <div>
+          <div className="pb-3 mb-2 border-b border-border">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-accent font-bold block">
+              Curriculum Map
+            </span>
+            <h3 className="text-xs font-bold text-txt">Touch Typing Master Track</h3>
+          </div>
+
+          <div className="space-y-1 overflow-y-auto max-h-[calc(100vh-14rem)] pr-1">
+            {categories.map((cat) => {
+              const Icon = cat.icon;
+              const isSelected = cat.id === activeCategoryId;
+
+              // compute completed in category
+              const completedInCat = cat.lessonIds.filter(
+                (id) => activeProfile?.stats.completedLessons?.includes(id)
+              ).length;
+              const catProgress = Math.round((completedInCat / cat.lessonIds.length) * 100);
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => {
+                    setActiveCategoryId(cat.id);
+                    if (cat.lessonIds.length > 0) {
+                      setActiveLessonId(cat.lessonIds[0]);
+                      setActiveLesson(packRegistry.getLesson(cat.lessonIds[0]));
+                    }
+                  }}
+                  className={`w-full flex items-center justify-between px-3 h-[38px] rounded-sm text-left text-xs transition-all cursor-pointer ${
+                    isSelected
+                      ? 'bg-surface-2 text-txt font-semibold border border-border'
+                      : 'text-txt-muted hover:text-txt hover:bg-surface-2/60'
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 truncate">
+                    <Icon className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-accent' : 'text-txt-muted'}`} />
+                    <span className="truncate">{cat.title}</span>
+                  </div>
+                  <ProgressRing progress={catProgress} size={18} strokeWidth={2} />
+                </button>
+              );
+            })}
+          </div>
         </div>
-      )}
+
+        <div className="p-3 bg-surface-2 rounded-sm border border-border text-[11px] text-txt-muted">
+          <span>Completed: </span>
+          <strong className="text-txt">{activeProfile?.stats.completedLessons?.length || 0}</strong>
+          <span> / 44 total</span>
+        </div>
+      </aside>
+
+      {/* Column 2: Lesson List Grid (Workspace Center) */}
+      <main className="flex-1 flex flex-col gap-4 overflow-y-auto pr-1">
+        {/* Banner with Elevation */}
+        <div className="p-5 rounded-md bg-surface border border-border flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-sm bg-accent-soft text-accent text-[10px] font-bold uppercase font-mono">
+                Category
+              </span>
+              <h1 className="text-lg font-bold text-txt">{currentCategory.title}</h1>
+            </div>
+            <p className="text-xs text-txt-muted mt-1">{currentCategory.description}</p>
+          </div>
+
+          <button
+            onClick={() => startDrill(activeLessonId)}
+            className="px-4 py-2 rounded-sm bg-accent hover:bg-accent-hover text-on-accent text-xs font-semibold flex items-center gap-2 shadow-sm transition-all cursor-pointer"
+          >
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span>Start Practice</span>
+          </button>
+        </div>
+
+        {/* Lesson Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {currentCategory.lessonIds.map((lessonId, index) => {
+            const l = packRegistry.getLesson(lessonId);
+            const isSelected = lessonId === activeLessonId;
+            const score = activeProfile?.stats.lessonScores[lessonId];
+            const isCompleted = !!score;
+
+            return (
+              <div
+                key={lessonId}
+                onClick={() => {
+                  setActiveLessonId(lessonId);
+                  setActiveLesson(l);
+                }}
+                className={`p-4 rounded-md transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-surface-2 border-2 border-accent shadow-float'
+                    : 'bg-surface border border-border hover:border-txt-muted/40'
+                }`}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className={`w-6 h-6 rounded-sm text-xs font-bold flex items-center justify-center ${
+                        isSelected
+                          ? 'bg-accent text-on-accent'
+                          : isCompleted
+                          ? 'bg-accent-soft text-accent'
+                          : 'bg-surface-2 text-txt-muted'
+                      }`}
+                    >
+                      {index + 1}
+                    </span>
+                    <div>
+                      <h4 className="text-xs font-bold text-txt leading-tight">
+                        {l?.title['en'] || lessonId}
+                      </h4>
+                      <span className="text-[11px] text-txt-muted">
+                        {l?.steps.length || 1} steps &bull; {l?.pass.minWpm || 15} WPM target
+                      </span>
+                    </div>
+                  </div>
+
+                  {score?.stars ? (
+                    <div className="flex text-warning">
+                      {[...Array(score.stars)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-warning" />
+                      ))}
+                    </div>
+                  ) : (
+                    <span className="text-[10px] text-txt-muted font-mono">Unranked</span>
+                  )}
+                </div>
+
+                {/* Keys Introduced */}
+                {l?.newKeys && l.newKeys.length > 0 && (
+                  <div className="flex items-center gap-1.5 mt-3 pt-2 border-t border-border/50">
+                    <span className="text-[10px] text-txt-muted font-mono">New:</span>
+                    <div className="flex gap-1">
+                      {l.newKeys.map((k) => (
+                        <span
+                          key={k}
+                          className="px-1.5 py-0.5 rounded-sm bg-surface-2 border border-border text-[10px] font-mono font-bold text-accent"
+                        >
+                          {k.toUpperCase()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </main>
+
+      {/* Column 3: Inspector Panel (300px) */}
+      <aside className="w-72 bg-surface rounded-md border border-border p-4 flex flex-col justify-between flex-shrink-0">
+        <div className="space-y-4">
+          <div className="pb-3 border-b border-border">
+            <span className="text-[10px] font-mono text-accent uppercase font-bold tracking-wider block">
+              Lesson Inspector
+            </span>
+            <h3 className="text-sm font-bold text-txt mt-0.5">
+              {activeLessonMeta?.title['en'] || activeLessonId}
+            </h3>
+            <p className="text-xs text-txt-muted mt-1">
+              {activeLessonMeta?.objective['en'] || 'Standard touch typing practice exercise.'}
+            </p>
+          </div>
+
+          {/* New Keys Introduced */}
+          {activeLessonMeta?.newKeys && activeLessonMeta.newKeys.length > 0 && (
+            <div>
+              <span className="text-[11px] font-semibold text-txt block mb-1.5">New Keycaps:</span>
+              <div className="flex flex-wrap gap-1.5">
+                {activeLessonMeta.newKeys.map((k) => (
+                  <span
+                    key={k}
+                    className="px-2.5 py-1 rounded-sm bg-surface-2 border-b-2 border-accent text-xs font-mono font-bold text-accent"
+                  >
+                    {k.toUpperCase()}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Pass Criteria */}
+          <div className="p-3 rounded-sm bg-surface-2 border border-border space-y-1.5 text-xs">
+            <span className="font-semibold text-txt block text-[11px] uppercase tracking-wider font-mono">
+              Pass Standards
+            </span>
+            <div className="flex justify-between text-txt-muted">
+              <span>Minimum Speed:</span>
+              <strong className="text-txt">{activeLessonMeta?.pass.minWpm || 15} WPM</strong>
+            </div>
+            <div className="flex justify-between text-txt-muted">
+              <span>Minimum Accuracy:</span>
+              <strong className="text-txt">{activeLessonMeta?.pass.minAccuracy || 90}%</strong>
+            </div>
+          </div>
+
+          {/* Personal Record */}
+          {activeRecord ? (
+            <div className="p-3 rounded-sm bg-surface-2 border border-border space-y-1 text-xs">
+              <span className="font-semibold text-accent block text-[11px] uppercase tracking-wider font-mono">
+                Personal Best
+              </span>
+              <div className="flex justify-between text-txt-muted">
+                <span>Speed:</span>
+                <strong className="text-txt">{activeRecord.wpm} WPM</strong>
+              </div>
+              <div className="flex justify-between text-txt-muted">
+                <span>Accuracy:</span>
+                <strong className="text-txt">{activeRecord.accuracy}%</strong>
+              </div>
+            </div>
+          ) : (
+            <div className="p-3 rounded-sm bg-surface-2/60 text-center text-xs text-txt-muted">
+              Not yet practiced
+            </div>
+          )}
+        </div>
+
+        <button
+          onClick={() => startDrill(activeLessonId)}
+          className="w-full py-2.5 rounded-sm bg-accent hover:bg-accent-hover text-on-accent text-xs font-semibold flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+        >
+          <Play className="w-4 h-4 fill-current" />
+          <span>Start Drill (Enter)</span>
+        </button>
+      </aside>
     </div>
   );
 };

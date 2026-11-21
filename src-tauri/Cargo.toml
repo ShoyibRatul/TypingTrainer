@@ -1,6 +1,6 @@
 [package]
 name = "typing-trainer"
-version = "1.0.0"
+version = "1.0.1"
 description = "Next-Generation Touch Typing Training Suite"
 authors = ["Shoyib Ratul <hello@shoyibratul.com>"]
 repository = "https://github.com/ShoyibRatul/TypingTrainer"
