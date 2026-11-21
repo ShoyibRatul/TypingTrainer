@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "prog-04-jsx-html",
+  "title": {
+    "en": "HTML Tags & JSX Elements"
+  },
+  "objective": {
+    "en": "Rapidly type angle brackets (<, >), self-closing tags, and attributes."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "<button onClick={handleClick} className=\"px-3 py-2 text-sm\">"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "<div className=\"flex items-center gap-2\" />"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "prog-05-snippets",
+  "title": {
+    "en": "Full Code Snippet Fluency"
+  },
+  "objective": {
+    "en": "Type complete functional TypeScript / Rust statements without pausing."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "export async function query<T>(sql: string, params: unknown[] = []): Promise<T[]> { const res = await db.execute(sql, params); return res.rows as T[]; }"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 32,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

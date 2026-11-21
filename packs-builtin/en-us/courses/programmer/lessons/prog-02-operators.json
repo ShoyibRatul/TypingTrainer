@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "prog-02-operators",
+  "title": {
+    "en": "Comparison & Logic Operators"
+  },
+  "objective": {
+    "en": "Type arrows, comparisons, and boolean logic (=>, ===, &&, ||)."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "if (a === b && c !== d || count <= 0) return true;"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "const add = (x: number, y: number): number => x + y;"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

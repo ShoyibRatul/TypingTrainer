@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "stages": [
+    {
+      "id": "stage-home-row",
+      "type": "homeRow",
+      "content": "asdf jkl; fdsa ;lkj dad ask fall salad flask half glad",
+      "durationSeconds": 30
+    },
+    {
+      "id": "stage-all-letters",
+      "type": "allLetters",
+      "content": "the quick brown fox jumps over the lazy dog and pack my box with five dozen jugs",
+      "durationSeconds": 45
+    },
+    {
+      "id": "stage-paragraph",
+      "type": "paragraph",
+      "content": "Smooth, steady touch typing unlocks effortless creative thought. When fingers find every key naturally through muscle memory, ideas flow straight from the mind onto the screen without hesitation.",
+      "durationSeconds": 60
+    }
+  ],
+  "evaluations": [
+    {
+      "minWpm": 45,
+      "minAccuracy": 96,
+      "recommendCourseId": "programmer",
+      "recommendLessonId": "prog-01-delimiters"
+    },
+    {
+      "minWpm": 25,
+      "minAccuracy": 90,
+      "recommendCourseId": "fundamentals",
+      "recommendLessonId": "stage-4-caps-01"
+    },
+    {
+      "minWpm": 0,
+      "minAccuracy": 0,
+      "recommendCourseId": "fundamentals",
+      "recommendLessonId": "stage-1-anchor-01"
+    }
+  ]
+}

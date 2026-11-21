@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-27-num-29",
+  "title": {
+    "en": "Ring Numbers: 2 and 9"
+  },
+  "objective": {
+    "en": "Reach left ring up to 2 and right ring up to 9."
+  },
+  "newKeys": [
+    "Digit2",
+    "Digit9"
+  ],
+  "tips": [
+    {
+      "en": "S reaches up to 2; L reaches up to 9."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "s2 2s s2 2s l9 9l l9 9l 29 92 22 99 2929"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "page 29 lists 92 references and 299 citations"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 24,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

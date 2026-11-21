@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-20-right-shift",
+  "title": {
+    "en": "Right Shift: Capitalizing Left Hand Keys"
+  },
+  "objective": {
+    "en": "Hold Right Shift with right pinky while striking left hand keys."
+  },
+  "newKeys": [
+    "ShiftRight"
+  ],
+  "tips": [
+    {
+      "en": "Press and hold Right Shift before striking F, D, S, A, R, E, W, Q, etc."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "Frank David Sarah Alice Robert Edward William"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Frank Saw David While Alice Rested"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

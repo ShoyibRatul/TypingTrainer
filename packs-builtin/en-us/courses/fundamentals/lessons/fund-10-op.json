@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-10-op",
+  "title": {
+    "en": "Right Top Extensions: O and P"
+  },
+  "objective": {
+    "en": "Reach right ring to O and right pinky to P."
+  },
+  "newKeys": [
+    "KeyO",
+    "KeyP"
+  ],
+  "tips": [
+    {
+      "en": "L reaches up to O; Semicolon reaches up to P."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "lo ol lo ol ;p p; ;p p; lop pol pop ooo ppp"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "poor drop hope pool shop stop point report"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "proper people hope to drop poor reports"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 24,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

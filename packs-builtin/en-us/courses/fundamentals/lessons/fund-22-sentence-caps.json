@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-22-sentence-caps",
+  "title": {
+    "en": "Full Sentence Capitalization & Rhythm"
+  },
+  "objective": {
+    "en": "Type punctuated paragraphs with standard sentence capitalization."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Maintain a constant typing tempo."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "Great things are not done by impulse, but by a series of small things brought together. Vincent Van Gogh observed this truth about all mastery."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

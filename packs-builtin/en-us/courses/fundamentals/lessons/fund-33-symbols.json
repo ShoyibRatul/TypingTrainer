@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-33-symbols",
+  "title": {
+    "en": "Currency & Symbols ($, %, &, @, #)"
+  },
+  "objective": {
+    "en": "Reach shifted symbol keys across the number row."
+  },
+  "newKeys": [
+    "Digit2",
+    "Digit3",
+    "Digit4",
+    "Digit5",
+    "Digit7"
+  ],
+  "tips": [
+    {
+      "en": "4 reaches for $, 5 for %, 7 for &, 2 for @, 3 for #."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "save $500 or 15% on orders at user@example.com #deals"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "growth & profit reached $100M with a 25% margin"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

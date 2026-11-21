@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "prog-03-casing",
+  "title": {
+    "en": "Identifiers & Naming Conventions"
+  },
+  "objective": {
+    "en": "Practice camelCase, PascalCase, snake_case, and CONST_CASE."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "getUserById fetchUserProfile MAX_RETRY_COUNT is_valid_token"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "const activeProfileId = profileRepo.get_default_id();"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-12-top-mastery",
+  "title": {
+    "en": "Top Row Comprehensive Fluency"
+  },
+  "objective": {
+    "en": "Combine top row and home row keys into complex vocabulary."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Keep hands hovering lightly above the home row."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "power query write quiet yellow update report repeat"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "the power to write quiet queries updates our reports"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

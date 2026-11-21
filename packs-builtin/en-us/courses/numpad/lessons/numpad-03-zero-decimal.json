@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "numpad-03-zero-decimal",
+  "title": {
+    "en": "Zero, Decimal, and Enter"
+  },
+  "objective": {
+    "en": "Use thumb on 0, ring on Decimal (.), and pinky on Enter (+ - * /)."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "10.50 250.00 45.99 1200.50 89.10 3.1415"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "100 + 250 = 350; 500 - 125 = 375;"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 32,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

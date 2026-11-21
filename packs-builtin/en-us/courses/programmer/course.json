@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "programmer",
+  "title": {
+    "en": "Developer Code Syntax"
+  },
+  "description": {
+    "en": "Targeted drills for brackets, arrows, operators, and programming identifiers."
+  },
+  "layout": "en-us-qwerty",
+  "levels": [
+    {
+      "id": "prog-level-1",
+      "title": {
+        "en": "Code Mechanics"
+      },
+      "lessons": [
+        "lessons/prog-01-delimiters.json",
+        "lessons/prog-02-operators.json",
+        "lessons/prog-03-casing.json",
+        "lessons/prog-04-jsx-html.json",
+        "lessons/prog-05-snippets.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "id": "fundamentals",
+  "title": {
+    "en": "English QWERTY Comprehensive Mastery"
+  },
+  "description": {
+    "en": "The complete 35-lesson touch-typing journey from Home Row anchor to professional prose fluency."
+  },
+  "layout": "en-us-qwerty",
+  "levels": [
+    {
+      "id": "level-1-home-row",
+      "title": {
+        "en": "Stage 1: Home Row Foundation"
+      },
+      "lessons": [
+        "lessons/fund-01-fj.json",
+        "lessons/fund-02-dk.json",
+        "lessons/fund-03-sl.json",
+        "lessons/fund-04-a-semi.json",
+        "lessons/fund-05-gh.json",
+        "lessons/fund-06-home-mastery.json"
+      ]
+    },
+    {
+      "id": "level-2-top-row",
+      "title": {
+        "en": "Stage 2: Top Row & High Frequency Vowels"
+      },
+      "lessons": [
+        "lessons/fund-07-ei.json",
+        "lessons/fund-08-ru.json",
+        "lessons/fund-09-ty.json",
+        "lessons/fund-10-op.json",
+        "lessons/fund-11-qw.json",
+        "lessons/fund-12-top-mastery.json"
+      ]
+    },
+    {
+      "id": "level-3-bottom-row",
+      "title": {
+        "en": "Stage 3: Bottom Row Reaches"
+      },
+      "lessons": [
+        "lessons/fund-13-cm.json",
+        "lessons/fund-14-vn.json",
+        "lessons/fund-15-bx.json",
+        "lessons/fund-16-z-slash.json",
+        "lessons/fund-17-comma-period.json",
+        "lessons/fund-18-alphabet-run.json"
+      ]
+    },
+    {
+      "id": "level-4-capitals",
+      "title": {
+        "en": "Stage 4: Capitalization & Shift Keys"
+      },
+      "lessons": [
+        "lessons/fund-19-left-shift.json",
+        "lessons/fund-20-right-shift.json",
+        "lessons/fund-21-mixed-caps.json",
+        "lessons/fund-22-sentence-caps.json",
+        "lessons/fund-23-acronyms.json",
+        "lessons/fund-24-caps-speed.json"
+      ]
+    },
+    {
+      "id": "level-5-numbers",
+      "title": {
+        "en": "Stage 5: Number Row Reaches"
+      },
+      "lessons": [
+        "lessons/fund-25-num-47.json",
+        "lessons/fund-26-num-38.json",
+        "lessons/fund-27-num-29.json",
+        "lessons/fund-28-num-10.json",
+        "lessons/fund-29-num-dates.json",
+        "lessons/fund-30-num-sprint.json"
+      ]
+    },
+    {
+      "id": "level-6-punctuation",
+      "title": {
+        "en": "Stage 6: Punctuation & Cadence Fluency"
+      },
+      "lessons": [
+        "lessons/fund-31-quotes-hyphens.json",
+        "lessons/fund-32-parentheses-excl.json",
+        "lessons/fund-33-symbols.json",
+        "lessons/fund-34-paragraphs.json",
+        "lessons/fund-35-grand-mastery.json"
+      ]
+    }
+  ]
+}

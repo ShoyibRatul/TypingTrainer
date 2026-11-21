@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-01-fj",
+  "title": {
+    "en": "Anchor Keys: F and J"
+  },
+  "objective": {
+    "en": "Feel the tactile bumps on F and J to establish your physical anchor."
+  },
+  "newKeys": [
+    "KeyF",
+    "KeyJ"
+  ],
+  "tips": [
+    {
+      "en": "Rest your left index on F and right index on J."
+    },
+    {
+      "en": "Never look at your hands."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "ff jj ff jj fj fj jf jf ff jj fjf jfj"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "keys",
+      "items": [
+        "fff jjj fff jjj fj fj jf jf"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "fjf jfj ff jj fj jf"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 12,
+    "minAccuracy": 90,
+    "maxErrorsPerStep": null
+  }
+}

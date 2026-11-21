@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-06-home-mastery",
+  "title": {
+    "en": "Home Row Mastery Sprint"
+  },
+  "objective": {
+    "en": "Demonstrate rhythm and cadence across the entire home row."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Breathe calmly and maintain an even tempo."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "glad flash shall flags half dash hall alas salad asks"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "a sad dad asks a lad as glad gals laugh loudly"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 20,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

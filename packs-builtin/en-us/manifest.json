@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "org.typingtrainer.en-us",
+  "name": {
+    "en": "English (Universal QWERTY & More)"
+  },
+  "version": "1.0.0",
+  "description": {
+    "en": "Comprehensive English touch-typing master curriculum featuring 40+ lessons, code syntax, numpad, and alternative layouts."
+  },
+  "language": "en",
+  "region": "US",
+  "script": "Latn",
+  "direction": "ltr",
+  "authors": [
+    {
+      "name": "Shoyib Ratul",
+      "email": "hello@shoyibratul.com",
+      "url": "https://github.com/ShoyibRatul/TypingTrainer"
+    }
+  ],
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "minAppVersion": "1.0.0",
+  "dependencies": [],
+  "defaults": {
+    "layout": "en-us-qwerty",
+    "course": "fundamentals"
+  },
+  "unitOfLength": {
+    "type": "word",
+    "charsPerWord": 5
+  },
+  "contents": {
+    "layouts": [
+      "layouts/en-us-qwerty.json",
+      "layouts/en-dvorak.json",
+      "layouts/en-colemak.json",
+      "layouts/en-colemak-dh.json"
+    ],
+    "courses": [
+      "courses/fundamentals/course.json",
+      "courses/programmer/course.json",
+      "courses/numpad/course.json"
+    ],
+    "wordlists": [
+      "wordlists/frequency-1000.txt"
+    ],
+    "placement": "assessment/placement.json"
+  }
+}

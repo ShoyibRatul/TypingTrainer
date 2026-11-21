@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-32-parentheses-excl",
+  "title": {
+    "en": "Exclamation, Question, and Parentheses"
+  },
+  "objective": {
+    "en": "Type Shifted punctuation marks (!, ?, (, ))."
+  },
+  "newKeys": [
+    "Digit1",
+    "Slash",
+    "Digit9",
+    "Digit0"
+  ],
+  "tips": [
+    {
+      "en": "Use opposite shift key for shifted number row symbols."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "Are you ready? Yes, absolutely! (Let us begin now.)"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Wait! Did you notice the difference (between A and B)?"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

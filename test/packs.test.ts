@@ -226,12 +226,37 @@ describe('Pack Registry & Built-in English Pack', () => {
 
     const course = packRegistry.getCourse();
     expect(course).toBeDefined();
-    expect(course?.id).toBe('english-fundamentals');
-    expect(course?.levels.length).toBeGreaterThan(0);
+    expect(course?.id).toBe('fundamentals');
+    expect(course?.levels.length).toBe(6);
 
-    const lesson = packRegistry.getLesson('lesson-1-anchor');
+    const lesson = packRegistry.getLesson('fund-01-fj');
     expect(lesson).toBeDefined();
     expect(lesson?.newKeys).toContain('KeyF');
+    expect(lesson?.newKeys).toContain('KeyJ');
+  });
+
+  it('supports alternative English layouts (Dvorak, Colemak, Colemak-DH)', () => {
+    const active = packRegistry.getActivePack();
+    expect(active.layouts.has('en-dvorak')).toBe(true);
+    expect(active.layouts.has('en-colemak')).toBe(true);
+    expect(active.layouts.has('en-colemak-dh')).toBe(true);
+
+    const dvorak = packRegistry.getLayout('en-dvorak');
+    expect(dvorak.keys['KeyU'].base).toBe('g'); // Dvorak maps U position to g
+  });
+
+  it('provides specialized Programmer and Numpad courses', () => {
+    const active = packRegistry.getActivePack();
+    expect(active.courses.has('programmer')).toBe(true);
+    expect(active.courses.has('numpad')).toBe(true);
+
+    const progLesson = packRegistry.getLesson('prog-01-delimiters');
+    expect(progLesson).toBeDefined();
+    expect(progLesson?.title.en).toContain('Braces');
+
+    const numpadLesson = packRegistry.getLesson('numpad-01-home');
+    expect(numpadLesson).toBeDefined();
+    expect(numpadLesson?.title.en).toContain('4, 5, 6');
   });
 
   it('prevents uninstallation of built-in English pack', () => {

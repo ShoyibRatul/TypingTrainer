@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-28-num-10",
+  "title": {
+    "en": "Pinky Numbers: 1 and 0"
+  },
+  "objective": {
+    "en": "Reach left pinky up to 1 and right pinky up to 0."
+  },
+  "newKeys": [
+    "Digit1",
+    "Digit0"
+  ],
+  "tips": [
+    {
+      "en": "A reaches up to 1; Semicolon reaches up to 0."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "a1 1a a1 1a ;0 0; ;0 0; 10 100 1000 1010"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "unit 10 received 100 requests in 10 minutes"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

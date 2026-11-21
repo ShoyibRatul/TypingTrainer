@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-02-dk",
+  "title": {
+    "en": "Middle Fingers: D and K"
+  },
+  "objective": {
+    "en": "Locate D and K with your middle fingers beside your anchor keys."
+  },
+  "newKeys": [
+    "KeyD",
+    "KeyK"
+  ],
+  "tips": [
+    {
+      "en": "Left middle rests on D; right middle rests on K."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "dd kk dd kk dk dk kd kd fd jk df kj"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "kdd dkk fdf jkj fdk jkd"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 14,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

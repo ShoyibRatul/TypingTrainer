@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-25-num-47",
+  "title": {
+    "en": "Index Numbers: 4, 5, 6, 7"
+  },
+  "objective": {
+    "en": "Reach left index up to 4 and 5; right index up to 6 and 7."
+  },
+  "newKeys": [
+    "Digit4",
+    "Digit5",
+    "Digit6",
+    "Digit7"
+  ],
+  "tips": [
+    {
+      "en": "F reaches up to 4 and 5; J reaches up to 6 and 7."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "f4 4f f5 5f j7 7j j6 6j 45 67 47 56 4567"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "44 55 66 77 457 765 476 574"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "we ordered 45 items and 67 boxes from room 47"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 22,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

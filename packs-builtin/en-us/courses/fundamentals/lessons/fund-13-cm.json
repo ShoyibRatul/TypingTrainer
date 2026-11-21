@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-13-cm",
+  "title": {
+    "en": "Bottom Reaches: C and M"
+  },
+  "objective": {
+    "en": "Curl left middle down to C and right index down to M."
+  },
+  "newKeys": [
+    "KeyC",
+    "KeyM"
+  ],
+  "tips": [
+    {
+      "en": "D curls down to C; J reaches down-right to M."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "dc cd dc cd jm mj jm mj dcd jmj ccc mmm"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "claim calm music cream march magic come"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "calm music creates much magic in summer"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

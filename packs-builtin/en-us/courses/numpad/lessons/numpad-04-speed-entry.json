@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "numpad-04-speed-entry",
+  "title": {
+    "en": "High-Speed Accounting Entry"
+  },
+  "objective": {
+    "en": "Rapidly enter financial and numeric ledger data."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "1024 2048 4096 8192 16384 32768 65536 131072 262144 524288"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 38,
+    "minAccuracy": 96,
+    "maxErrorsPerStep": null
+  }
+}

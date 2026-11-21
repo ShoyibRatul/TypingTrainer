@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "numpad-02-reaches",
+  "title": {
+    "en": "Numpad Reaches: 7, 8, 9 and 1, 2, 3"
+  },
+  "objective": {
+    "en": "Reach upward to 7 8 9 and downward to 1 2 3."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "789 123 789 123 741 852 963 159 357"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "123 789 456 741 852 963 789123"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

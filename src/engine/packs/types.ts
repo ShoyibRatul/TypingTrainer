@@ -42,6 +42,16 @@ export interface PackManifest {
 }
 
 export type FingerAssignment =
+  | 'L-pinky'
+  | 'L-ring'
+  | 'L-middle'
+  | 'L-index'
+  | 'L-thumb'
+  | 'R-thumb'
+  | 'R-index'
+  | 'R-middle'
+  | 'R-ring'
+  | 'R-pinky'
   | 'left-pinky'
   | 'left-ring'
   | 'left-middle'
@@ -58,6 +68,8 @@ export interface KeyDefinition {
   altgr?: string;
   shiftAltgr?: string;
   finger: FingerAssignment;
+  homeBump?: boolean;
+  style?: string;
   label?: string;
   display?: string;
   hand?: 'left' | 'right';
@@ -75,11 +87,13 @@ export interface KeyboardLayout {
 }
 
 export interface LessonStep {
-  type: 'keys' | 'words' | 'sentence' | 'paragraph' | 'dictation' | 'game';
+  type: string;
+  items?: string[];
   target?: string;
   repeat?: number;
   blind?: boolean;
   timeLimitSeconds?: number;
+  minAccuracy?: number;
   minAccuracyPercent?: number;
   minWpm?: number;
   reading?: string;
@@ -94,9 +108,10 @@ export interface LessonDefinition {
   tips?: Array<Record<string, string>>;
   steps: LessonStep[];
   pass: {
-    minAccuracyPercent: number;
     minWpm: number;
-    maxMistakes?: number;
+    minAccuracy: number;
+    minAccuracyPercent?: number;
+    maxErrorsPerStep?: number | null;
   };
 }
 

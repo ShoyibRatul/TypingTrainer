@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-11-qw",
+  "title": {
+    "en": "Left Top Extensions: Q and W"
+  },
+  "objective": {
+    "en": "Reach left pinky to Q and left ring to W."
+  },
+  "newKeys": [
+    "KeyQ",
+    "KeyW"
+  ],
+  "tips": [
+    {
+      "en": "A reaches up to Q; S reaches up to W."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "aq qa aq qa sw ws sw ws qsw wsq qqq www"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "quiet quick write water sweet power west"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "quick water flows west with quiet power"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 24,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

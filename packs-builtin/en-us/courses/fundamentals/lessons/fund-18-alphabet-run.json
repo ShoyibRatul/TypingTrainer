@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-18-alphabet-run",
+  "title": {
+    "en": "The Complete Alphabet Marathon"
+  },
+  "objective": {
+    "en": "Type sentences containing all 26 letters of the English alphabet."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Trust muscle memory without hesitating."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "the quick brown fox jumps over the lazy dog"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "pack my box with five dozen liquor jugs"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "sphinx of black quartz judge my vow as we discover all keys cleanly and rhythmically."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

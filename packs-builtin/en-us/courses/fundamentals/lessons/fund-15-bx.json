@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-15-bx",
+  "title": {
+    "en": "Outer Bottom: B and X"
+  },
+  "objective": {
+    "en": "Stretch left index down to B and left ring down to X."
+  },
+  "newKeys": [
+    "KeyB",
+    "KeyX"
+  ],
+  "tips": [
+    {
+      "en": "F reaches down-right to B; S curls down to X."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "fb bf fb bf sx xs sx xs fbf sxs bbb xxx"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "box exact basic habit blame mixed balance"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "exact habits balance basic mixed boxes"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

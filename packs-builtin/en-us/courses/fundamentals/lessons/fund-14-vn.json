@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-14-vn",
+  "title": {
+    "en": "Bottom Center: V and N"
+  },
+  "objective": {
+    "en": "Curl left index down to V and right index down to N."
+  },
+  "newKeys": [
+    "KeyV",
+    "KeyN"
+  ],
+  "tips": [
+    {
+      "en": "F curls down-right to V; J curls down-left to N."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "fv vf fv vf jn nj jn nj fvf jnj vvv nnn"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "voice view never novel river raven navy"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "never leave a novel view unseen along the river"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

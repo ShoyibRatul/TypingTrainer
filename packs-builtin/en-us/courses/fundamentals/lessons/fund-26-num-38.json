@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-26-num-38",
+  "title": {
+    "en": "Middle Numbers: 3 and 8"
+  },
+  "objective": {
+    "en": "Reach left middle up to 3 and right middle up to 8."
+  },
+  "newKeys": [
+    "Digit3",
+    "Digit8"
+  ],
+  "tips": [
+    {
+      "en": "D reaches up to 3; K reaches up to 8."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "d3 3d d3 3d k8 8k k8 8k 38 83 33 88 3838"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "the flight leaves at 38 minutes past 3 or 8"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 24,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

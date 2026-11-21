@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-09-ty",
+  "title": {
+    "en": "Center Top Reaches: T and Y"
+  },
+  "objective": {
+    "en": "Reach index fingers up and inward to T and Y."
+  },
+  "newKeys": [
+    "KeyT",
+    "KeyY"
+  ],
+  "tips": [
+    {
+      "en": "F reaches up-right to T; J reaches up-left to Y."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "ft tf ft tf jy yj jy yj fty jty ty ty"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "they that city study tasty yet try style"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "they try to study the tasty style of art"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 22,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

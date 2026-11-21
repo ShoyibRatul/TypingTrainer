@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-19-left-shift",
+  "title": {
+    "en": "Left Shift: Capitalizing Right Hand Keys"
+  },
+  "objective": {
+    "en": "Hold Left Shift with left pinky while striking right hand keys."
+  },
+  "newKeys": [
+    "ShiftLeft"
+  ],
+  "tips": [
+    {
+      "en": "Press and hold Left Shift before striking J, K, L, U, I, O, P, etc."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "John King Lake United Ohio Pacific Mountain"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "John Kept Looking In Open Places"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

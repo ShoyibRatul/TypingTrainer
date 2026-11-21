@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-24-caps-speed",
+  "title": {
+    "en": "Capitalization Sprint"
+  },
+  "objective": {
+    "en": "Combine speed with zero shift release errors."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Release shift immediately after key impact."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "The North Atlantic Treaty, The United Nations, and The World Wide Web Consortium shape international standards across continents."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 32,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

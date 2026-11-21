@@ -8,7 +8,7 @@ interface HandGuideProps {
 
 export const HandGuide: React.FC<HandGuideProps> = ({ activeFinger }) => {
   // Normalize to string
-  const norm = typeof activeFinger === 'number'
+  const raw = typeof activeFinger === 'number'
     ? {
         1: 'left-pinky',
         2: 'left-ring',
@@ -21,6 +21,19 @@ export const HandGuide: React.FC<HandGuideProps> = ({ activeFinger }) => {
         9: 'thumb',
       }[activeFinger] || ''
     : activeFinger || '';
+
+  const norm = {
+    'L-pinky': 'left-pinky',
+    'L-ring': 'left-ring',
+    'L-middle': 'left-middle',
+    'L-index': 'left-index',
+    'L-thumb': 'thumb',
+    'R-thumb': 'thumb',
+    'R-index': 'right-index',
+    'R-middle': 'right-middle',
+    'R-ring': 'right-ring',
+    'R-pinky': 'right-pinky',
+  }[raw] || raw;
 
   return (
     <div className="flex items-center justify-center gap-12 my-2 py-1 select-none">

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-05-gh",
+  "title": {
+    "en": "Center Reaches: G and H"
+  },
+  "objective": {
+    "en": "Reach inward with left index to G and right index to H."
+  },
+  "newKeys": [
+    "KeyG",
+    "KeyH"
+  ],
+  "tips": [
+    {
+      "en": "F reaches right to G and returns. J reaches left to H and returns."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "fg gf fg gf jh hj jh hj fgh jhg asdfg hjkl;"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "glad half flag dash hall fall flash"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "half a flag falls as a glad dad laughs"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 18,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-21-mixed-caps",
+  "title": {
+    "en": "Alternating Shift Hand Coordination"
+  },
+  "objective": {
+    "en": "Coordinate both shift keys seamlessly on proper names and titles."
+  },
+  "newKeys": [
+    "ShiftLeft",
+    "ShiftRight"
+  ],
+  "tips": [
+    {
+      "en": "Opposite shift key rule: right hand keys use left shift; left hand keys use right shift."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "London Paris Tokyo Berlin Washington Madrid Cairo Sydney"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Every New City Brings Fresh Energy And Bright Hope"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

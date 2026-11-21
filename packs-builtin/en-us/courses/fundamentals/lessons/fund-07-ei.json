@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-07-ei",
+  "title": {
+    "en": "High Frequency Vowels: E and I"
+  },
+  "objective": {
+    "en": "Reach middle fingers upward to E (left) and I (right)."
+  },
+  "newKeys": [
+    "KeyE",
+    "KeyI"
+  ],
+  "tips": [
+    {
+      "en": "D reaches up to E; K reaches up to I. Return immediately."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "de ed de ed ki ik ki ik ded kik ee ii"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "feed side silk life like desk field"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "he likes a hike like life in a field"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 20,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

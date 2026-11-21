@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "numpad-01-home",
+  "title": {
+    "en": "10-Key Home Row: 4, 5, 6"
+  },
+  "objective": {
+    "en": "Anchor middle finger on 5 (tactile bump), index on 4, ring on 6."
+  },
+  "newKeys": [],
+  "tips": [],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "456 654 456 654 44 55 66 45 56 64 546"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "456 546 645 564 465 654"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

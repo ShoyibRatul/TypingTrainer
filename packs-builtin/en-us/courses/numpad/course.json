@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "numpad",
+  "title": {
+    "en": "10-Key Numpad Mastery"
+  },
+  "description": {
+    "en": "Touch typing on the dedicated numeric keypad for accounting and data entry."
+  },
+  "layout": "en-us-qwerty",
+  "levels": [
+    {
+      "id": "numpad-level-1",
+      "title": {
+        "en": "10-Key Touch Skills"
+      },
+      "lessons": [
+        "lessons/numpad-01-home.json",
+        "lessons/numpad-02-reaches.json",
+        "lessons/numpad-03-zero-decimal.json",
+        "lessons/numpad-04-speed-entry.json"
+      ]
+    }
+  ]
+}

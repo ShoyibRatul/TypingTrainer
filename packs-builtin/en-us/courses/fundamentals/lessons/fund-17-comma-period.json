@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-17-comma-period",
+  "title": {
+    "en": "Punctuation Drops: Comma and Period"
+  },
+  "objective": {
+    "en": "Curl right middle down to Comma (,) and right ring down to Period (.)."
+  },
+  "newKeys": [
+    "Comma",
+    "Period"
+  ],
+  "tips": [
+    {
+      "en": "K reaches down to Comma (,); L reaches down to Period (.)."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "k, ,k k, ,k l. .l l. .l k,l. ,.,."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "yes, no. wait, look. stop, go. clear, clean."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "steady hands make few mistakes, and speed grows daily."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

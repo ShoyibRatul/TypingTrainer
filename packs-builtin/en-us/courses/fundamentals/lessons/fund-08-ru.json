@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-08-ru",
+  "title": {
+    "en": "Top Row Reaches: R and U"
+  },
+  "objective": {
+    "en": "Reach index fingers upward to R (left) and U (right)."
+  },
+  "newKeys": [
+    "KeyR",
+    "KeyU"
+  ],
+  "tips": [
+    {
+      "en": "F reaches up-left to R; J reaches up-right to U."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "fr rf fr rf ju uj ju uj fru jur frf juj"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "surf rush rust fruit user ruler dark"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "sure fruit rush under a dark summer rule"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 22,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-31-quotes-hyphens",
+  "title": {
+    "en": "Quotes, Apostrophes, and Hyphens"
+  },
+  "objective": {
+    "en": "Master single quote ('), double quote (\"), and hyphen (-)."
+  },
+  "newKeys": [
+    "Quote",
+    "Minus"
+  ],
+  "tips": [
+    {
+      "en": "Right pinky controls Quote and Hyphen."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "it's don't can't well-known full-time high-speed"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "\"Knowledge is power,\" said the well-known teacher."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

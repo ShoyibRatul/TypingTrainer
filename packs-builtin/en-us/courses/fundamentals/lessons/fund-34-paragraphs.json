@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-34-paragraphs",
+  "title": {
+    "en": "Professional Prose Fluency"
+  },
+  "objective": {
+    "en": "Sustain steady 40+ WPM cadence across multi-sentence paragraphs."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Maintain calm posture and breathe smoothly."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "Precision in typing reflects precision in thought. When your fingers move across the keyboard effortlessly, you remove the barrier between conceptual idea and written expression."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 35,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

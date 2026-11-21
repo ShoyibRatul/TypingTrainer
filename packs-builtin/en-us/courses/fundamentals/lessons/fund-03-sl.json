@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-03-sl",
+  "title": {
+    "en": "Ring Fingers: S and L"
+  },
+  "objective": {
+    "en": "Engage your ring fingers on S and L."
+  },
+  "newKeys": [
+    "KeyS",
+    "KeyL"
+  ],
+  "tips": [
+    {
+      "en": "Left ring on S; right ring on L. Keep wrists relaxed."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "ss ll ss ll sl sl ls ls sdk lkj sld kls"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "fall ask lads flask salad"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 15,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

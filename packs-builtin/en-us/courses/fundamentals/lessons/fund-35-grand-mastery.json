@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-35-grand-mastery",
+  "title": {
+    "en": "Touch Typing Grand Mastery Assessment"
+  },
+  "objective": {
+    "en": "Final certification of comprehensive English QWERTY touch-typing skill."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "You have conquered all 47 keys. Type with confidence!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "Congratulations on reaching the pinnacle of English touch typing! From humble beginnings on the F and J bumps, you have mastered every reach, symbol, number, and capital letter across the entire keyboard layout."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 40,
+    "minAccuracy": 96,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "id": "en-us-qwerty",
+  "name": {
+    "en": "US QWERTY"
+  },
+  "type": "physical",
+  "geometry": "ansi",
+  "direction": "ltr",
+  "inputMethod": "direct",
+  "keys": {
+    "Backquote": {
+      "base": "`",
+      "shift": "~",
+      "finger": "L-pinky"
+    },
+    "Digit1": {
+      "base": "1",
+      "shift": "!",
+      "finger": "L-pinky"
+    },
+    "Digit2": {
+      "base": "2",
+      "shift": "@",
+      "finger": "L-ring"
+    },
+    "Digit3": {
+      "base": "3",
+      "shift": "#",
+      "finger": "L-middle"
+    },
+    "Digit4": {
+      "base": "4",
+      "shift": "$",
+      "finger": "L-index"
+    },
+    "Digit5": {
+      "base": "5",
+      "shift": "%",
+      "finger": "L-index"
+    },
+    "Digit6": {
+      "base": "6",
+      "shift": "^",
+      "finger": "R-index"
+    },
+    "Digit7": {
+      "base": "7",
+      "shift": "&",
+      "finger": "R-index"
+    },
+    "Digit8": {
+      "base": "8",
+      "shift": "*",
+      "finger": "R-middle"
+    },
+    "Digit9": {
+      "base": "9",
+      "shift": "(",
+      "finger": "R-ring"
+    },
+    "Digit0": {
+      "base": "0",
+      "shift": ")",
+      "finger": "R-pinky"
+    },
+    "Minus": {
+      "base": "-",
+      "shift": "_",
+      "finger": "R-pinky"
+    },
+    "Equal": {
+      "base": "=",
+      "shift": "+",
+      "finger": "R-pinky"
+    },
+    "KeyQ": {
+      "base": "q",
+      "shift": "Q",
+      "finger": "L-pinky"
+    },
+    "KeyW": {
+      "base": "w",
+      "shift": "W",
+      "finger": "L-ring"
+    },
+    "KeyE": {
+      "base": "e",
+      "shift": "E",
+      "finger": "L-middle"
+    },
+    "KeyR": {
+      "base": "r",
+      "shift": "R",
+      "finger": "L-index"
+    },
+    "KeyT": {
+      "base": "t",
+      "shift": "T",
+      "finger": "L-index"
+    },
+    "KeyY": {
+      "base": "y",
+      "shift": "Y",
+      "finger": "R-index"
+    },
+    "KeyU": {
+      "base": "u",
+      "shift": "U",
+      "finger": "R-index"
+    },
+    "KeyI": {
+      "base": "i",
+      "shift": "I",
+      "finger": "R-middle"
+    },
+    "KeyO": {
+      "base": "o",
+      "shift": "O",
+      "finger": "R-ring"
+    },
+    "KeyP": {
+      "base": "p",
+      "shift": "P",
+      "finger": "R-pinky"
+    },
+    "BracketLeft": {
+      "base": "[",
+      "shift": "{",
+      "finger": "R-pinky"
+    },
+    "BracketRight": {
+      "base": "]",
+      "shift": "}",
+      "finger": "R-pinky"
+    },
+    "Backslash": {
+      "base": "\\",
+      "shift": "|",
+      "finger": "R-pinky"
+    },
+    "KeyA": {
+      "base": "a",
+      "shift": "A",
+      "finger": "L-pinky"
+    },
+    "KeyS": {
+      "base": "s",
+      "shift": "S",
+      "finger": "L-ring"
+    },
+    "KeyD": {
+      "base": "d",
+      "shift": "D",
+      "finger": "L-middle"
+    },
+    "KeyF": {
+      "base": "f",
+      "shift": "F",
+      "finger": "L-index",
+      "homeBump": true
+    },
+    "KeyG": {
+      "base": "g",
+      "shift": "G",
+      "finger": "L-index"
+    },
+    "KeyH": {
+      "base": "h",
+      "shift": "H",
+      "finger": "R-index"
+    },
+    "KeyJ": {
+      "base": "j",
+      "shift": "J",
+      "finger": "R-index",
+      "homeBump": true
+    },
+    "KeyK": {
+      "base": "k",
+      "shift": "K",
+      "finger": "R-middle"
+    },
+    "KeyL": {
+      "base": "l",
+      "shift": "L",
+      "finger": "R-ring"
+    },
+    "Semicolon": {
+      "base": ";",
+      "shift": ":",
+      "finger": "R-pinky"
+    },
+    "Quote": {
+      "base": "'",
+      "shift": "\"",
+      "finger": "R-pinky"
+    },
+    "KeyZ": {
+      "base": "z",
+      "shift": "Z",
+      "finger": "L-pinky"
+    },
+    "KeyX": {
+      "base": "x",
+      "shift": "X",
+      "finger": "L-ring"
+    },
+    "KeyC": {
+      "base": "c",
+      "shift": "C",
+      "finger": "L-middle"
+    },
+    "KeyV": {
+      "base": "v",
+      "shift": "V",
+      "finger": "L-index"
+    },
+    "KeyB": {
+      "base": "b",
+      "shift": "B",
+      "finger": "L-index"
+    },
+    "KeyN": {
+      "base": "n",
+      "shift": "N",
+      "finger": "R-index"
+    },
+    "KeyM": {
+      "base": "m",
+      "shift": "M",
+      "finger": "R-index"
+    },
+    "Comma": {
+      "base": ",",
+      "shift": "<",
+      "finger": "R-middle"
+    },
+    "Period": {
+      "base": ".",
+      "shift": ">",
+      "finger": "R-ring"
+    },
+    "Slash": {
+      "base": "/",
+      "shift": "?",
+      "finger": "R-pinky"
+    },
+    "Space": {
+      "base": " ",
+      "shift": " ",
+      "finger": "R-thumb"
+    }
+  }
+}

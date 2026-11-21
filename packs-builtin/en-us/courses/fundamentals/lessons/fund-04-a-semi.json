@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-04-a-semi",
+  "title": {
+    "en": "Pinky Keys: A and Semicolon"
+  },
+  "objective": {
+    "en": "Anchor the edges of the home row with A and Semicolon (;)."
+  },
+  "newKeys": [
+    "KeyA",
+    "Semicolon"
+  ],
+  "tips": [
+    {
+      "en": "Left pinky on A; right pinky on Semicolon (;)."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "aa ;; aa ;; a; a; ;a ;a asdf jkl; asdf jkl;"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "all alas salad shall flask asks"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 16,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-29-num-dates",
+  "title": {
+    "en": "Dates, Times, and Full Numbers"
+  },
+  "objective": {
+    "en": "Type standard numbers and historical dates fluidly."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Return to home row after every number reach."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "in 1969 humans landed on the moon after 10 years of effort"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "the year 2026 brings 365 days of new possibilities"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

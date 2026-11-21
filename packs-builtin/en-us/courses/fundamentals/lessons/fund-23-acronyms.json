@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-23-acronyms",
+  "title": {
+    "en": "ALL CAPS & Acronym Control"
+  },
+  "objective": {
+    "en": "Type multi-character uppercase acronyms without losing finger home placement."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Do not use CapsLock for short acronyms; hold the shift key."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "HTML CSS JSON REST API HTTP URL ASCII UTF"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Send the JSON payload via HTTP to the REST API"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

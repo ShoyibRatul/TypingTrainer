@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-30-num-sprint",
+  "title": {
+    "en": "Number Row Mastery Sprint"
+  },
+  "objective": {
+    "en": "Execute rapid number sequences without looking."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Count rhythmically in your mind."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "dial 1800 234 5678 or call office 302 on floor 19"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 28,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "fund-16-z-slash",
+  "title": {
+    "en": "Pinky Drops: Z and Slash"
+  },
+  "objective": {
+    "en": "Curl left pinky to Z and right pinky to Slash (/)."
+  },
+  "newKeys": [
+    "KeyZ",
+    "Slash"
+  ],
+  "tips": [
+    {
+      "en": "A reaches down to Z; Semicolon reaches down to Slash."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "az za az za ;/ /; ;/ /; az/ z/z zzz ///"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "zero zone maze prize puzzle blaze zip"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "the blaze in the zero zone amazed the team"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

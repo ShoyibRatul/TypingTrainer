@@ -28,9 +28,9 @@ export const LessonView: React.FC = () => {
 
   // Pack & Curriculum State
   const [course, setCourse] = useState<CourseDefinition | undefined>(() => packRegistry.getCourse());
-  const [activeLessonId, setActiveLessonId] = useState<string>('lesson-1-anchor');
+  const [activeLessonId, setActiveLessonId] = useState<string>('fund-01-fj');
   const [activeLesson, setActiveLesson] = useState<LessonDefinition | undefined>(() =>
-    packRegistry.getLesson('lesson-1-anchor')
+    packRegistry.getLesson('fund-01-fj') || packRegistry.getLesson('lesson-1-anchor')
   );
   const [stepIndex, setStepIndex] = useState<number>(0);
 
@@ -79,8 +79,8 @@ export const LessonView: React.FC = () => {
   }, []);
 
   const activeStep: LessonStep =
-    activeLesson?.steps[stepIndex] || { type: 'keys', target: 'ff jj ff jj' };
-  const targetText = activeStep.target || '';
+    activeLesson?.steps[stepIndex] || { type: 'keys', items: ['ff jj ff jj'] };
+  const targetText = activeStep.target || (activeStep.items && activeStep.items[0]) || '';
 
   const focusInput = () => {
     hiddenInputRef.current?.focus();
@@ -104,11 +104,12 @@ export const LessonView: React.FC = () => {
         setLiveAccuracy(metrics.accuracy);
       },
       onComplete: (finalMetrics) => {
-        const passReq = activeLesson?.pass || { minAccuracyPercent: 90, minWpm: 15 };
+        const passReq = activeLesson?.pass || { minAccuracy: 90, minWpm: 15 };
+        const minAcc = passReq.minAccuracy ?? (passReq as any).minAccuracyPercent ?? 90;
         let stars = 1;
         if (finalMetrics.accuracy >= 98 && finalMetrics.wpm >= passReq.minWpm * 1.3) {
           stars = 3;
-        } else if (finalMetrics.accuracy >= passReq.minAccuracyPercent) {
+        } else if (finalMetrics.accuracy >= minAcc) {
           stars = 2;
         }
 
