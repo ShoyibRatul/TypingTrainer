@@ -110,13 +110,17 @@ jobs:
           releaseBody: |
             ## Typing Trainer Release ${{ github.ref_name }}
             
-            Welcome to the latest release of **Typing Trainer**, the 100% free and open-source multi-platform touch typing tutor!
+            Welcome to the latest release of **Typing Trainer**, the modern multi-platform touch typing tutor!
             
             ### Included Assets:
             - **Windows**: `.msi` installer & `.exe` setup
             - **macOS**: Universal `.dmg` (Supports both Apple Silicon M1/M2/M3/M4 & Intel Macs)
             - **Linux**: `.AppImage` (Run anywhere) & `.deb` (Debian/Ubuntu/Mint)
             - **Web**: Live at GitHub Pages
+
+            ### License Notice:
+            Free for personal, educational, and non-commercial use under the [PolyForm Noncommercial License 1.0.0](https://github.com/ShoyibRatul/TypingTrainer/blob/main/LICENSE).
+            Commercial use requires a separate license. See [COMMERCIAL.md](https://github.com/ShoyibRatul/TypingTrainer/blob/main/COMMERCIAL.md).
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}

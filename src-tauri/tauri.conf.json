@@ -37,7 +37,21 @@
       "icons/icon.ico"
     ],
     "category": "Education",
-    "shortDescription": "Free, open-source cross-platform touch typing tutor",
-    "longDescription": "Typing Trainer is a modern, privacy-respecting, multi-platform touch typing trainer featuring structured curriculums, multi-user profiles with PIN lock, dynamic SVG keyboard, and arcade games."
+    "copyright": "Copyright (c) 2026 Shoyib Ratul",
+    "publisher": "Shoyib Ratul",
+    "license": "PolyForm-Noncommercial-1.0.0",
+    "licenseFile": "../LICENSE",
+    "shortDescription": "Cross-platform touch typing tutor, free for non-commercial use",
+    "longDescription": "Typing Trainer is a modern, privacy-respecting, multi-platform touch typing trainer featuring structured curriculums, multi-user profiles with PIN lock, dynamic SVG keyboard, and arcade games.",
+    "resources": [
+      "../LICENSE",
+      "../COMMERCIAL.md",
+      "../THIRD_PARTY_NOTICES.md"
+    ],
+    "windows": {
+      "nsis": {
+        "license": "../LICENSE"
+      }
+    }
   }
 }

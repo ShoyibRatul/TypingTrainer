@@ -40,12 +40,19 @@ const MainLayout: React.FC = () => {
           onOpenProfiles={() => setIsProfilesOpen(true)}
         />
 
-        <main className="flex-1 overflow-y-auto p-6 bg-bg">
-          {activeTab === 'curriculum' && <LessonView />}
-          {activeTab === 'test' && <SpeedTestView />}
-          {activeTab === 'arcade' && <ArcadeView />}
-          {activeTab === 'analytics' && <AnalyticsView />}
-          {activeTab === 'settings' && <SettingsView />}
+        <main className="flex-1 overflow-y-auto p-6 bg-bg flex flex-col justify-between">
+          <div className="flex-1">
+            {activeTab === 'curriculum' && <LessonView />}
+            {activeTab === 'test' && <SpeedTestView />}
+            {activeTab === 'arcade' && <ArcadeView />}
+            {activeTab === 'analytics' && <AnalyticsView />}
+            {activeTab === 'settings' && <SettingsView />}
+          </div>
+          <footer className="mt-8 pt-4 border-t border-border/50 text-center text-[11px] text-txt-muted">
+            Typing Trainer &copy; 2026 Shoyib Ratul &bull; Free for non-commercial use under{' '}
+            <a href="https://github.com/ShoyibRatul/TypingTrainer/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-accent underline">PolyForm Noncommercial 1.0.0</a> &bull;{' '}
+            <a href="https://github.com/ShoyibRatul/TypingTrainer/blob/main/COMMERCIAL.md" target="_blank" rel="noopener noreferrer" className="hover:text-accent underline">Commercial Licensing</a>
+          </footer>
         </main>
       </div>
 

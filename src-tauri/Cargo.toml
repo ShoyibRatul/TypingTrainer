@@ -1,8 +1,10 @@
 [package]
 name = "typing-trainer"
 version = "1.0.0"
-description = "Next-Generation Open-Source Touch Typing Training Suite"
-authors = ["Typing Trainer Community"]
+description = "Next-Generation Touch Typing Training Suite"
+authors = ["Shoyib Ratul <hello@shoyibratul.com>"]
+repository = "https://github.com/ShoyibRatul/TypingTrainer"
+license = "PolyForm-Noncommercial-1.0.0"
 edition = "2021"
 
 [build-dependencies]

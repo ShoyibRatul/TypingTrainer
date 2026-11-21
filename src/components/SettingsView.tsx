@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { hashPin } from '../utils/crypto';
-import { Settings, Volume2, Shield, Eye, Download, Check, Lock } from 'lucide-react';
+import { Settings, Volume2, Shield, Eye, Download, Check, Lock, Info } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
 
@@ -167,6 +167,26 @@ export const SettingsView: React.FC = () => {
         <Button variant="outline" size="sm" onClick={handleExportData}>
           <Download className="w-3.5 h-3.5" /> Export JSON
         </Button>
+      </div>
+
+      {/* About & License */}
+      <div className="bg-surface border border-border rounded-card p-5 shadow-sm space-y-3">
+        <div className="flex items-center gap-2">
+          <Info className="w-4 h-4 text-accent" />
+          <h3 className="font-bold text-sm text-txt">About Typing Trainer</h3>
+        </div>
+        <div className="space-y-1.5 text-xs text-txt-muted">
+          <p><span className="font-semibold text-txt">Typing Trainer</span> &bull; Version 1.0.0</p>
+          <p>Required Notice: Copyright &copy; 2026 Shoyib Ratul (<a href="https://github.com/ShoyibRatul/TypingTrainer" target="_blank" rel="noopener noreferrer" className="text-accent underline">github.com/ShoyibRatul/TypingTrainer</a>)</p>
+          <p>
+            Licensed under the <span className="text-txt font-medium">PolyForm Noncommercial License 1.0.0</span>.
+            Free for personal study, education, and non-commercial use.
+          </p>
+          <p>
+            Commercial use requires a separate license. Contact:{' '}
+            <a href="mailto:hello@shoyibratul.com" className="text-accent underline">hello@shoyibratul.com</a>
+          </p>
+        </div>
       </div>
     </div>
   );

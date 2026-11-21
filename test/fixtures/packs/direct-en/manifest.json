@@ -8,8 +8,8 @@
   "region": "US",
   "script": "Latn",
   "direction": "ltr",
-  "authors": [{ "name": "Typing Trainer Core Team" }],
-  "license": "MIT",
+  "authors": [{ "name": "Typing Trainer Contributors" }],
+  "license": "CC0-1.0",
   "minAppVersion": "1.0.0",
   "dependencies": [],
   "defaults": {

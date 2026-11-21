@@ -3,7 +3,18 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Next-Generation Open-Source Touch Typing Training Suite for Windows, macOS, Linux & Web",
+  "description": "Next-Generation Touch Typing Training Suite for Windows, macOS, Linux & Web",
+  "author": "Shoyib Ratul <hello@shoyibratul.com>",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShoyibRatul/TypingTrainer.git"
+  },
+  "homepage": "https://github.com/ShoyibRatul/TypingTrainer#readme",
+  "bugs": {
+    "url": "https://github.com/ShoyibRatul/TypingTrainer/issues",
+    "email": "hello@shoyibratul.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

@@ -1,17 +1,17 @@
 # ⌨️ Typing Trainer
 
-> **Next-Generation, 100% Free & Open-Source (FOSS) Multi-Platform Touch Typing Suite**  
+> **Next-Generation Multi-Platform Touch Typing Suite**  
 > Engineered for **Windows, macOS (Apple Silicon & Intel), Linux & Modern Web Browsers**.
 
-[![Release & Multi-Platform Auto-Build](https://github.com/your-username/typing-trainer/actions/workflows/release.yml/badge.svg)](https://github.com/your-username/typing-trainer/actions/workflows/release.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Web-indigo.svg)](https://github.com)
+[![Release & Multi-Platform Auto-Build](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/release.yml/badge.svg)](https://github.com/ShoyibRatul/TypingTrainer/actions/workflows/release.yml)
+[![License: PolyForm Noncommercial](https://img.shields.io/badge/License-PolyForm%20Noncommercial-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Web-emerald.svg)](https://github.com/ShoyibRatul/TypingTrainer)
 
 ---
 
 ## 🌟 Highlights & Key Features
 
-* **100% Free & Open Source (MIT)**: Zero paywalls, zero locked lessons, zero trial limits, and zero tracking telemetry.
+* **Free for Non-Commercial & Educational Use**: Free for personal study, schools, universities, hobbyists, and non-profit organizations.
 * **Universal Multi-Platform Support**:
   * 🪟 **Windows**: Native `.msi` installer & `.exe` executable.
   * 🍎 **macOS**: Universal `.dmg` supporting Apple Silicon (M1/M2/M3/M4) & Intel x64.
@@ -20,7 +20,7 @@
 * **Multi-User Profile System with PIN Security**:
   * Perfect for classrooms, families, or shared computers.
   * Multiple users (e.g., Alice, Bob, Charlie) with isolated progress and history.
-  * Each profile can be optionally locked with a **SHA-256 encrypted PIN/password**.
+  * Each profile can be optionally locked with a **PBKDF2-SHA256 encrypted PIN/password**.
 * **Clean-Room, 100% Original Curriculum**:
   * Independent pedagogical structure starting from the Home Row anchor (`ASDF JKL;`), moving through vowels, reaches, capitalization, numbers, and code syntax.
   * Clean-room design avoiding any copyrighted texts or materials from legacy software.
@@ -32,11 +32,11 @@
   * Choose between *Cherry MX Blue*, *Cherry MX Brown*, *Topre Thock*, and *Vintage Typewriter*.
 * **Fine-Grained Telemetry & Weak Key Diagnostics**:
   * Measures **Inter-Key Latency (IKL)** in milliseconds to diagnose hesitation friction.
-  * Real-time WPM, Raw WPM, CPM, Accuracy %, and Error Heatmap.
+  * Real-time WPM, Raw WPM, CPM, Accuracy %, and Consistency variance.
 * **Arcade Mini-Games**:
   * Built-in *Word Fall Arena* with falling blocks, combo multipliers, and retro particle effects.
 * **Automated GitHub Actions CI/CD**:
-  * Pushing a tag (e.g. `v1.0.0`) automatically compiles native binaries for Windows, macOS, and Linux, creates a GitHub Release, and publishes the Web app to GitHub Pages!
+  * Pushing a tag (e.g. `v1.0.0`) automatically compiles native binaries for Windows, macOS, and Linux, creates a GitHub Release, and publishes the Web app to GitHub Pages.
 
 ---
 
@@ -49,8 +49,8 @@
 ### Running Locally
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/typing-trainer.git
-cd typing-trainer
+git clone https://github.com/ShoyibRatul/TypingTrainer.git
+cd TypingTrainer
 
 # Install dependencies
 npm install
@@ -89,7 +89,7 @@ To build native installers for **Windows**, **macOS**, and **Linux** automatical
    * Compile **Windows `.msi` and `.exe`** binaries on a Windows runner.
    * Compile **macOS Universal `.dmg`** on an Apple runner.
    * Compile **Linux `.AppImage` and `.deb`** on an Ubuntu runner.
-   * Create an official **GitHub Release** and attach all installers!
+   * Create an official **GitHub Release** and attach all installers.
 
 ---
 
@@ -104,4 +104,10 @@ Unlike legacy commercial typing tutors that employ invasive global keyboard snif
 
 ## 📜 License
 
-Licensed under the **MIT License**. Free for personal, commercial, and educational use.
+Free for personal, educational and non-commercial use under the
+[PolyForm Noncommercial License 1.0.0](LICENSE).
+Commercial use requires a separate license. See [COMMERCIAL.md](COMMERCIAL.md).
+
+For contribution terms and licensing of contributions, see [CONTRIBUTING.md](CONTRIBUTING.md).
+For third-party components and open-source licenses, see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+For code of conduct and security reporting, see [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) and [SECURITY.md](SECURITY.md).

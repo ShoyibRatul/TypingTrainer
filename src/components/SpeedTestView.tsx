@@ -12,8 +12,8 @@ const TEST_TEXTS = [
     content: 'Touch typing is fundamentally an art of muscle memory, allowing the human mind to translate cognitive thoughts directly into digital expression without visual confirmation of individual keycaps. By practicing deliberate finger placement and maintaining ergonomic wrist alignment, a typist builds neural pathways that accelerate speed and reduce cognitive fatigue.'
   },
   {
-    title: 'The Philosophy of Open Source',
-    content: 'Open source software represents a collaborative paradigm where code is made publicly accessible for inspection, modification, and enhancement. By empowering global communities of developers to scrutinize algorithms, fix vulnerabilities, and share improvements, open source fosters transparent innovation without commercial paywalls or vendor lock-in.'
+    title: 'The Craft of Software Architecture',
+    content: 'Great software architecture balances elegant design principles with pragmatic real-world engineering. By structuring modular components, embracing clear contracts, and designing resilient error boundaries, developers construct maintainable systems that adapt smoothly as requirements evolve over decades of continuous iteration.'
   },
   {
     title: 'The Evolution of Computing Systems',
