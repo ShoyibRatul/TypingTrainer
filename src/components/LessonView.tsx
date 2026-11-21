@@ -22,6 +22,7 @@ import {
   Hash,
   Code,
   Sparkles,
+  Clock,
 } from 'lucide-react';
 
 interface CategoryItem {
@@ -185,6 +186,15 @@ export const LessonView: React.FC = () => {
   );
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [selectedDuration, setSelectedDuration] = useState<number>(() => {
+    try {
+      const saved = localStorage.getItem('typing_trainer_drill_duration');
+      return saved ? parseInt(saved, 10) : 180; // Default 3 minutes like TypingMaster
+    } catch {
+      return 180;
+    }
+  });
+  const [timeLeft, setTimeLeft] = useState<number>(180);
 
   // Drill Execution State
   const [session, setSession] = useState<TypingSession | null>(null);
@@ -241,7 +251,7 @@ export const LessonView: React.FC = () => {
     if (isPlaying) {
       resetDrill();
     }
-  }, [activeLessonId, stepIndex, isPlaying]);
+  }, [activeLessonId, stepIndex, isPlaying, selectedDuration]);
 
   const startDrill = (lessonId: string) => {
     const l = packRegistry.getLesson(lessonId);
@@ -253,16 +263,37 @@ export const LessonView: React.FC = () => {
     }
   };
 
+  const handleDurationChange = (seconds: number) => {
+    setSelectedDuration(seconds);
+    try {
+      localStorage.setItem('typing_trainer_drill_duration', seconds.toString());
+    } catch {}
+  };
+
   const resetDrill = () => {
     if (!targetText) return;
 
+    if (session) {
+      session.destroy();
+    }
+
+    setTimeLeft(selectedDuration);
+
     const newSession = new TypingSession({
       targetText,
+      durationSeconds: selectedDuration,
+      autoLoop: true,
       onKeystroke: (metrics, nextGrapheme) => {
         setProgressPercent(newSession.getProgressPercent());
         setCurrentExpected(nextGrapheme);
         setTypedGraphemes(newSession.getTypedGraphemes());
         setMistakeCount(metrics.errors);
+        setLiveWpm(metrics.wpm);
+        setLiveAccuracy(metrics.accuracy);
+      },
+      onTick: (remainingSeconds, metrics) => {
+        setTimeLeft(remainingSeconds);
+        setProgressPercent(newSession.getProgressPercent());
         setLiveWpm(metrics.wpm);
         setLiveAccuracy(metrics.accuracy);
       },
@@ -324,6 +355,7 @@ export const LessonView: React.FC = () => {
     setLiveAccuracy(100);
     setMistakeCount(0);
     setCompletedResult(null);
+    setTimeLeft(selectedDuration);
     setTimeout(focusInput, 50);
   };
 
@@ -411,7 +443,41 @@ export const LessonView: React.FC = () => {
           </div>
 
           {/* Calm Live Metrics */}
-          <div className="flex items-center gap-6 font-mono text-xs">
+          <div className="flex items-center gap-5 font-mono text-xs">
+            {/* Duration Selector Tabs */}
+            <div className="flex items-center gap-1 bg-surface-2 p-0.5 rounded-sm border border-border">
+              {[
+                { label: '1m', sec: 60 },
+                { label: '2m', sec: 120 },
+                { label: '3m', sec: 180 },
+                { label: '5m', sec: 300 },
+                { label: '∞', sec: 0 },
+              ].map((opt) => (
+                <button
+                  key={opt.label}
+                  onClick={() => handleDurationChange(opt.sec)}
+                  className={`px-1.5 py-0.5 rounded-sm text-[10px] font-semibold transition-colors cursor-pointer ${
+                    selectedDuration === opt.sec
+                      ? 'bg-accent text-on-accent'
+                      : 'text-txt-muted hover:text-txt'
+                  }`}
+                  title={opt.sec === 0 ? 'Unlimited completion mode' : `${opt.label} timed drill`}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Countdown or Duration indicator */}
+            {selectedDuration > 0 && (
+              <div className="flex items-center gap-1.5 text-accent font-bold">
+                <Clock className="w-3.5 h-3.5" />
+                <span>
+                  {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+                </span>
+              </div>
+            )}
+
             <div className="flex items-center gap-1.5">
               <Zap className="w-3.5 h-3.5 text-accent" />
               <span className="font-bold text-txt">{liveWpm}</span>
