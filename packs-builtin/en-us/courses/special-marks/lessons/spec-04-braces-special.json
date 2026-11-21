@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "spec-04-braces-special",
+  "title": {
+    "en": "Curly Braces, Exclamation, Hash, Caret & Asterisk"
+  },
+  "objective": {
+    "en": "Conquer the highest reaches of the number row and complex modifier glyphs."
+  },
+  "newKeys": [
+    "Digit1",
+    "Digit3",
+    "Digit6",
+    "Digit8",
+    "Backslash"
+  ],
+  "tips": [
+    {
+      "en": "Return immediately to home row anchors after reaching for high symbol keys."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "{} !# ^* \\| {} !# ^* \\| {!#} {^*\\} !#1 ^*2 {data}"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "{id: 1} #urgent #trend 2^8=256 5*5=25 alert! stop! path\\file"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Warning! Verify the hash value #9821 with the formula: {result = base^2 * factor}."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

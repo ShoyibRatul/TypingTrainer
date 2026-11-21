@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "spec-02-math-quotes",
+  "title": {
+    "en": "Quotes, Apostrophes, Plus, Minus & Equals"
+  },
+  "objective": {
+    "en": "Fluently type quotations, arithmetic equations, and hyphenated expressions."
+  },
+  "newKeys": [
+    "Quote",
+    "Minus",
+    "Equal"
+  ],
+  "tips": [
+    {
+      "en": "Use the right pinky for quotes, minus, and equals. Anchor on J."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "'' \"\" -- ++ == '' \"\" -- ++ == '-+ '\"= \"-+ ="
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "\"hello\" \"world\" it's don't we're 10+5=15 20-8=12 a+b=c"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "She whispered, \"Don't forget the equation: total = price + tax - discount.\""
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

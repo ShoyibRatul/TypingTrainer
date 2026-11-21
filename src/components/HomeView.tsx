@@ -40,7 +40,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onContinueLesson
 
   // Compute stats
   const completedLessonsCount = stats?.completedLessons?.length || 0;
-  const totalLessons = 54; // built-in English pack (35 fundamentals + 10 speed + 4 numpad + 5 programmer)
+  const totalLessons = 59; // built-in English pack (35 fundamentals + 10 speed + 5 special marks + 4 numpad + 5 programmer)
   const progressPercent = Math.round((completedLessonsCount / totalLessons) * 100);
 
   // Recent best WPM

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "special-marks",
+  "title": {
+    "en": "Special Marks & Complex Punctuation"
+  },
+  "description": {
+    "en": "5 focused drills covering colons, slashes, quotation marks, currency, math operators, brackets, and braces inspired by TypingMaster."
+  },
+  "layout": "en-us-qwerty",
+  "levels": [
+    {
+      "id": "spec-level-1",
+      "title": {
+        "en": "Punctuation & Syntax Symbols"
+      },
+      "lessons": [
+        "lessons/spec-01-colons-slashes.json",
+        "lessons/spec-02-math-quotes.json",
+        "lessons/spec-03-brackets-currency.json",
+        "lessons/spec-04-braces-special.json",
+        "lessons/spec-05-special-mastery.json"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 /**
  * Built-in English (US QWERTY & Alternatives) Master Pack
- * 54 lessons across 4 comprehensive courses (Fundamentals, Programmer, Numpad, Speed Building).
+ * 59 lessons across 5 comprehensive courses (Fundamentals, Programmer, Numpad, Speed Building).
  * Conforms 100% to Typing Trainer Pack Specification.
  */
 
@@ -14,7 +14,7 @@ export const BUILTIN_ENGLISH_MANIFEST: PackManifest = {
   },
   "version": "1.0.0",
   "description": {
-    "en": "Comprehensive English touch-typing master curriculum featuring 54 lessons, code syntax, numpad, speed building, and alternative layouts."
+    "en": "Comprehensive English touch-typing master curriculum featuring 59 lessons, code syntax, numpad, speed building, special marks, and alternative layouts."
   },
   "language": "en",
   "region": "US",
@@ -49,7 +49,8 @@ export const BUILTIN_ENGLISH_MANIFEST: PackManifest = {
       "courses/fundamentals/course.json",
       "courses/programmer/course.json",
       "courses/numpad/course.json",
-      "courses/speed-building/course.json"
+      "courses/speed-building/course.json",
+      "courses/special-marks/course.json"
     ],
     "wordlists": [
       "wordlists/frequency-1000.txt"
@@ -1200,6 +1201,32 @@ export const BUILTIN_ENGLISH_COURSES: Record<string, CourseDefinition> = {
           "lessons/prog-03-casing.json",
           "lessons/prog-04-jsx-html.json",
           "lessons/prog-05-snippets.json"
+        ]
+      }
+    ]
+  },
+  "special-marks": {
+    "schemaVersion": 1,
+    "id": "special-marks",
+    "title": {
+      "en": "Special Marks & Complex Punctuation"
+    },
+    "description": {
+      "en": "5 focused drills covering colons, slashes, quotation marks, currency, math operators, brackets, and braces inspired by TypingMaster."
+    },
+    "layout": "en-us-qwerty",
+    "levels": [
+      {
+        "id": "spec-level-1",
+        "title": {
+          "en": "Punctuation & Syntax Symbols"
+        },
+        "lessons": [
+          "lessons/spec-01-colons-slashes.json",
+          "lessons/spec-02-math-quotes.json",
+          "lessons/spec-03-brackets-currency.json",
+          "lessons/spec-04-braces-special.json",
+          "lessons/spec-05-special-mastery.json"
         ]
       }
     ]
@@ -7831,6 +7858,709 @@ export const BUILTIN_ENGLISH_LESSONS: Record<string, LessonDefinition> = {
     "pass": {
       "minWpm": 45,
       "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  }
+,
+  "spec-01-colons-slashes": {
+    "schemaVersion": 1,
+    "id": "spec-01-colons-slashes",
+    "title": {
+      "en": "Colons, Semicolons, Slashes & Question Marks"
+    },
+    "objective": {
+      "en": "Master right pinky punctuation reaches and Shift modifiers."
+    },
+    "newKeys": [
+      "Semicolon",
+      "Slash"
+    ],
+    "tips": [
+      {
+        "en": "Keep right wrist stable; let the pinky finger stretch smoothly to the colon and slash."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          ";; :: // ?? ;; :: // ?? ;: ;: /? /? :: ?? // ;;"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "note: list: ratio: 1/2 3/4 yes/no true/false who? what? why? how?"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Notice: Is the report ready today? Please check file at docs/readme.txt."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/spec-01-colons-slashes.json": {
+    "schemaVersion": 1,
+    "id": "spec-01-colons-slashes",
+    "title": {
+      "en": "Colons, Semicolons, Slashes & Question Marks"
+    },
+    "objective": {
+      "en": "Master right pinky punctuation reaches and Shift modifiers."
+    },
+    "newKeys": [
+      "Semicolon",
+      "Slash"
+    ],
+    "tips": [
+      {
+        "en": "Keep right wrist stable; let the pinky finger stretch smoothly to the colon and slash."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          ";; :: // ?? ;; :: // ?? ;: ;: /? /? :: ?? // ;;"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "note: list: ratio: 1/2 3/4 yes/no true/false who? what? why? how?"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Notice: Is the report ready today? Please check file at docs/readme.txt."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "special-marks/lessons/spec-01-colons-slashes.json": {
+    "schemaVersion": 1,
+    "id": "spec-01-colons-slashes",
+    "title": {
+      "en": "Colons, Semicolons, Slashes & Question Marks"
+    },
+    "objective": {
+      "en": "Master right pinky punctuation reaches and Shift modifiers."
+    },
+    "newKeys": [
+      "Semicolon",
+      "Slash"
+    ],
+    "tips": [
+      {
+        "en": "Keep right wrist stable; let the pinky finger stretch smoothly to the colon and slash."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          ";; :: // ?? ;; :: // ?? ;: ;: /? /? :: ?? // ;;"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "note: list: ratio: 1/2 3/4 yes/no true/false who? what? why? how?"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Notice: Is the report ready today? Please check file at docs/readme.txt."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "spec-02-math-quotes": {
+    "schemaVersion": 1,
+    "id": "spec-02-math-quotes",
+    "title": {
+      "en": "Quotes, Apostrophes, Plus, Minus & Equals"
+    },
+    "objective": {
+      "en": "Fluently type quotations, arithmetic equations, and hyphenated expressions."
+    },
+    "newKeys": [
+      "Quote",
+      "Minus",
+      "Equal"
+    ],
+    "tips": [
+      {
+        "en": "Use the right pinky for quotes, minus, and equals. Anchor on J."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "'' \"\" -- ++ == '' \"\" -- ++ == '-+ '\"= \"-+ ="
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "\"hello\" \"world\" it's don't we're 10+5=15 20-8=12 a+b=c"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She whispered, \"Don't forget the equation: total = price + tax - discount.\""
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/spec-02-math-quotes.json": {
+    "schemaVersion": 1,
+    "id": "spec-02-math-quotes",
+    "title": {
+      "en": "Quotes, Apostrophes, Plus, Minus & Equals"
+    },
+    "objective": {
+      "en": "Fluently type quotations, arithmetic equations, and hyphenated expressions."
+    },
+    "newKeys": [
+      "Quote",
+      "Minus",
+      "Equal"
+    ],
+    "tips": [
+      {
+        "en": "Use the right pinky for quotes, minus, and equals. Anchor on J."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "'' \"\" -- ++ == '' \"\" -- ++ == '-+ '\"= \"-+ ="
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "\"hello\" \"world\" it's don't we're 10+5=15 20-8=12 a+b=c"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She whispered, \"Don't forget the equation: total = price + tax - discount.\""
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "special-marks/lessons/spec-02-math-quotes.json": {
+    "schemaVersion": 1,
+    "id": "spec-02-math-quotes",
+    "title": {
+      "en": "Quotes, Apostrophes, Plus, Minus & Equals"
+    },
+    "objective": {
+      "en": "Fluently type quotations, arithmetic equations, and hyphenated expressions."
+    },
+    "newKeys": [
+      "Quote",
+      "Minus",
+      "Equal"
+    ],
+    "tips": [
+      {
+        "en": "Use the right pinky for quotes, minus, and equals. Anchor on J."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "'' \"\" -- ++ == '' \"\" -- ++ == '-+ '\"= \"-+ ="
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "\"hello\" \"world\" it's don't we're 10+5=15 20-8=12 a+b=c"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She whispered, \"Don't forget the equation: total = price + tax - discount.\""
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "spec-03-brackets-currency": {
+    "schemaVersion": 1,
+    "id": "spec-03-brackets-currency",
+    "title": {
+      "en": "Brackets, Parentheses, At Sign & Currency"
+    },
+    "objective": {
+      "en": "Master enclosing pairs and financial symbols like @, $, and %."
+    },
+    "newKeys": [
+      "Digit9",
+      "Digit0",
+      "BracketLeft",
+      "BracketRight",
+      "Digit2",
+      "Digit4",
+      "Digit5"
+    ],
+    "tips": [
+      {
+        "en": "Coordinate both Shift keys when alternating between left and right symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "() [] @$ %$ () [] @$ %$ (a) [b] $100 25% @user"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "(overview) [reference] $50.00 15% discount contact@typing.org [index]"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Send payments of $2,500 (with 5% bonus) to finance@corp.com [Invoice #402]."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/spec-03-brackets-currency.json": {
+    "schemaVersion": 1,
+    "id": "spec-03-brackets-currency",
+    "title": {
+      "en": "Brackets, Parentheses, At Sign & Currency"
+    },
+    "objective": {
+      "en": "Master enclosing pairs and financial symbols like @, $, and %."
+    },
+    "newKeys": [
+      "Digit9",
+      "Digit0",
+      "BracketLeft",
+      "BracketRight",
+      "Digit2",
+      "Digit4",
+      "Digit5"
+    ],
+    "tips": [
+      {
+        "en": "Coordinate both Shift keys when alternating between left and right symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "() [] @$ %$ () [] @$ %$ (a) [b] $100 25% @user"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "(overview) [reference] $50.00 15% discount contact@typing.org [index]"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Send payments of $2,500 (with 5% bonus) to finance@corp.com [Invoice #402]."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "special-marks/lessons/spec-03-brackets-currency.json": {
+    "schemaVersion": 1,
+    "id": "spec-03-brackets-currency",
+    "title": {
+      "en": "Brackets, Parentheses, At Sign & Currency"
+    },
+    "objective": {
+      "en": "Master enclosing pairs and financial symbols like @, $, and %."
+    },
+    "newKeys": [
+      "Digit9",
+      "Digit0",
+      "BracketLeft",
+      "BracketRight",
+      "Digit2",
+      "Digit4",
+      "Digit5"
+    ],
+    "tips": [
+      {
+        "en": "Coordinate both Shift keys when alternating between left and right symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "() [] @$ %$ () [] @$ %$ (a) [b] $100 25% @user"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "(overview) [reference] $50.00 15% discount contact@typing.org [index]"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Send payments of $2,500 (with 5% bonus) to finance@corp.com [Invoice #402]."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "spec-04-braces-special": {
+    "schemaVersion": 1,
+    "id": "spec-04-braces-special",
+    "title": {
+      "en": "Curly Braces, Exclamation, Hash, Caret & Asterisk"
+    },
+    "objective": {
+      "en": "Conquer the highest reaches of the number row and complex modifier glyphs."
+    },
+    "newKeys": [
+      "Digit1",
+      "Digit3",
+      "Digit6",
+      "Digit8",
+      "Backslash"
+    ],
+    "tips": [
+      {
+        "en": "Return immediately to home row anchors after reaching for high symbol keys."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "{} !# ^* \\| {} !# ^* \\| {!#} {^*\\} !#1 ^*2 {data}"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "{id: 1} #urgent #trend 2^8=256 5*5=25 alert! stop! path\\file"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Warning! Verify the hash value #9821 with the formula: {result = base^2 * factor}."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/spec-04-braces-special.json": {
+    "schemaVersion": 1,
+    "id": "spec-04-braces-special",
+    "title": {
+      "en": "Curly Braces, Exclamation, Hash, Caret & Asterisk"
+    },
+    "objective": {
+      "en": "Conquer the highest reaches of the number row and complex modifier glyphs."
+    },
+    "newKeys": [
+      "Digit1",
+      "Digit3",
+      "Digit6",
+      "Digit8",
+      "Backslash"
+    ],
+    "tips": [
+      {
+        "en": "Return immediately to home row anchors after reaching for high symbol keys."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "{} !# ^* \\| {} !# ^* \\| {!#} {^*\\} !#1 ^*2 {data}"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "{id: 1} #urgent #trend 2^8=256 5*5=25 alert! stop! path\\file"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Warning! Verify the hash value #9821 with the formula: {result = base^2 * factor}."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "special-marks/lessons/spec-04-braces-special.json": {
+    "schemaVersion": 1,
+    "id": "spec-04-braces-special",
+    "title": {
+      "en": "Curly Braces, Exclamation, Hash, Caret & Asterisk"
+    },
+    "objective": {
+      "en": "Conquer the highest reaches of the number row and complex modifier glyphs."
+    },
+    "newKeys": [
+      "Digit1",
+      "Digit3",
+      "Digit6",
+      "Digit8",
+      "Backslash"
+    ],
+    "tips": [
+      {
+        "en": "Return immediately to home row anchors after reaching for high symbol keys."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "{} !# ^* \\| {} !# ^* \\| {!#} {^*\\} !#1 ^*2 {data}"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "{id: 1} #urgent #trend 2^8=256 5*5=25 alert! stop! path\\file"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Warning! Verify the hash value #9821 with the formula: {result = base^2 * factor}."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 26,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "spec-05-special-mastery": {
+    "schemaVersion": 1,
+    "id": "spec-05-special-mastery",
+    "title": {
+      "en": "Comprehensive Symbols Mastery Sprint"
+    },
+    "objective": {
+      "en": "Combine all punctuation, arithmetic, brackets, and modifier symbols into realistic text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Stay relaxed and trust your muscle memory when transitioning between prose and symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The server configuration (located at /etc/config.json) specifies: {\"port\": 8080, \"ssl\": true, \"rate\": 99.9%}. Please send logs to admin@network.org!"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "\"Incredible!\" shouted the developer. Total savings reached $145,000 [Q4 Report, page 12]. The ROI formula used was (revenue - cost) * 100 / baseline >= 35%."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 94,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/spec-05-special-mastery.json": {
+    "schemaVersion": 1,
+    "id": "spec-05-special-mastery",
+    "title": {
+      "en": "Comprehensive Symbols Mastery Sprint"
+    },
+    "objective": {
+      "en": "Combine all punctuation, arithmetic, brackets, and modifier symbols into realistic text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Stay relaxed and trust your muscle memory when transitioning between prose and symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The server configuration (located at /etc/config.json) specifies: {\"port\": 8080, \"ssl\": true, \"rate\": 99.9%}. Please send logs to admin@network.org!"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "\"Incredible!\" shouted the developer. Total savings reached $145,000 [Q4 Report, page 12]. The ROI formula used was (revenue - cost) * 100 / baseline >= 35%."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 94,
+      "maxErrorsPerStep": null
+    }
+  },
+  "special-marks/lessons/spec-05-special-mastery.json": {
+    "schemaVersion": 1,
+    "id": "spec-05-special-mastery",
+    "title": {
+      "en": "Comprehensive Symbols Mastery Sprint"
+    },
+    "objective": {
+      "en": "Combine all punctuation, arithmetic, brackets, and modifier symbols into realistic text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Stay relaxed and trust your muscle memory when transitioning between prose and symbols."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The server configuration (located at /etc/config.json) specifies: {\"port\": 8080, \"ssl\": true, \"rate\": 99.9%}. Please send logs to admin@network.org!"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "\"Incredible!\" shouted the developer. Total savings reached $145,000 [Q4 Report, page 12]. The ROI formula used was (revenue - cost) * 100 / baseline >= 35%."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 94,
       "maxErrorsPerStep": null
     }
   }

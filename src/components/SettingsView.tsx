@@ -253,7 +253,7 @@ export const SettingsView: React.FC = () => {
         </div>
         <div className="space-y-1.5 text-xs text-txt-muted">
           <p>
-            <span className="font-semibold text-txt">Typing Trainer</span> &bull; Version 1.0.1
+            <span className="font-semibold text-txt">Typing Trainer</span> &bull; Version 1.0.2
           </p>
           <p>
             Copyright &copy; 2026 Shoyib Ratul (

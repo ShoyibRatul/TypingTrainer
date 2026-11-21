@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "spec-05-special-mastery",
+  "title": {
+    "en": "Comprehensive Symbols Mastery Sprint"
+  },
+  "objective": {
+    "en": "Combine all punctuation, arithmetic, brackets, and modifier symbols into realistic text."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Stay relaxed and trust your muscle memory when transitioning between prose and symbols."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "The server configuration (located at /etc/config.json) specifies: {\"port\": 8080, \"ssl\": true, \"rate\": 99.9%}. Please send logs to admin@network.org!"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "\"Incredible!\" shouted the developer. Total savings reached $145,000 [Q4 Report, page 12]. The ROI formula used was (revenue - cost) * 100 / baseline >= 35%."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 94,
+    "maxErrorsPerStep": null
+  }
+}

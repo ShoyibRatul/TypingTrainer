@@ -139,6 +139,19 @@ export const LessonView: React.FC = () => {
       ],
     },
     {
+      id: 'cat-special-marks',
+      title: 'Special Marks & Symbols',
+      description: 'TypingMaster-inspired drills for colons, slashes, quotes, brackets, and arithmetic',
+      icon: Sparkles,
+      lessonIds: [
+        'spec-01-colons-slashes',
+        'spec-02-math-quotes',
+        'spec-03-brackets-currency',
+        'spec-04-braces-special',
+        'spec-05-special-mastery',
+      ],
+    },
+    {
       id: 'cat-numpad',
       title: 'Numeric Keypad',
       description: '10-key high-speed data entry and accounting rhythm',
@@ -595,7 +608,7 @@ export const LessonView: React.FC = () => {
         <div className="p-3 bg-surface-2 rounded-sm border border-border text-[11px] text-txt-muted">
           <span>Completed: </span>
           <strong className="text-txt">{activeProfile?.stats.completedLessons?.length || 0}</strong>
-          <span> / 54 total</span>
+          <span> / 59 total</span>
         </div>
       </aside>
 

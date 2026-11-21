@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "spec-01-colons-slashes",
+  "title": {
+    "en": "Colons, Semicolons, Slashes & Question Marks"
+  },
+  "objective": {
+    "en": "Master right pinky punctuation reaches and Shift modifiers."
+  },
+  "newKeys": [
+    "Semicolon",
+    "Slash"
+  ],
+  "tips": [
+    {
+      "en": "Keep right wrist stable; let the pinky finger stretch smoothly to the colon and slash."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        ";; :: // ?? ;; :: // ?? ;: ;: /? /? :: ?? // ;;"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "note: list: ratio: 1/2 3/4 yes/no true/false who? what? why? how?"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Notice: Is the report ready today? Please check file at docs/readme.txt."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

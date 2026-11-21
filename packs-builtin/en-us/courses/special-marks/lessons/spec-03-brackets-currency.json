@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "id": "spec-03-brackets-currency",
+  "title": {
+    "en": "Brackets, Parentheses, At Sign & Currency"
+  },
+  "objective": {
+    "en": "Master enclosing pairs and financial symbols like @, $, and %."
+  },
+  "newKeys": [
+    "Digit9",
+    "Digit0",
+    "BracketLeft",
+    "BracketRight",
+    "Digit2",
+    "Digit4",
+    "Digit5"
+  ],
+  "tips": [
+    {
+      "en": "Coordinate both Shift keys when alternating between left and right symbols."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "() [] @$ %$ () [] @$ %$ (a) [b] $100 25% @user"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "(overview) [reference] $50.00 15% discount contact@typing.org [index]"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Send payments of $2,500 (with 5% bonus) to finance@corp.com [Invoice #402]."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 26,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}
