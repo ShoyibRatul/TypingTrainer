@@ -58,7 +58,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDkyRjAyM0RBMkYwREIxMzkKUldTYldyZmh5U1FvZE9JUXZ2eFpZMVlhS0Vveit4S1R5QTVqSk5PZ25Wc29qekZ5R1o3bkI0LzAK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEFBNTg1NDNGQkU5RUFBQzMKUldURHFwNitQMVJZcWxHREtMKzN6MzcrOC9VenIxcmtURGE0UUE1aXROOXpLN2xSaDdUTTA2OTkK",
       "endpoints": [
         "https://github.com/ShoyibRatul/TypingTrainer/releases/latest/download/latest.json"
       ],
