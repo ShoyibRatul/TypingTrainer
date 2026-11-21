@@ -105,8 +105,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: 'Typing Trainer ${{ github.ref_name }}'
+          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+          releaseName: ${{ startsWith(github.ref, 'refs/tags/v') && format('Typing Trainer {0}', github.ref_name) || '' }}
           releaseBody: |
             ## Typing Trainer Release ${{ github.ref_name }}
             

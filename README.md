@@ -24,17 +24,21 @@
 * **Clean-Room, 100% Original Curriculum**:
   * Independent pedagogical structure starting from the Home Row anchor (`ASDF JKL;`), moving through vowels, reaches, capitalization, numbers, and code syntax.
   * Clean-room design avoiding any copyrighted texts or materials from legacy software.
+* **Universal Pack Architecture (`.ttpack`)**:
+  * Decoupled curriculum, layouts, and wordlists running inside an in-memory zip-safe sandbox with strict path traversal & bomb protection.
+  * Comprehensive built-in English pack with 44 structured progressive lessons across 3 courses (*Fundamentals*, *Programmer Syntax*, *10-Key Numpad*), diagnostic placement assessment, and 4 layout options (*US QWERTY*, *Dvorak*, *Colemak*, *Colemak-DH*).
 * **Vector SVG Virtual Keyboard & Hand Visualizer**:
   * Crisp on 1080p, 4K, and Retina screens.
   * Real-time finger mapping guides and physical home-row tactile bumps on `F` and `J`.
-* **Tactile Mechanical Switch Sound Synthesizer**:
-  * Built using the **Web Audio API** — zero external MP3s needed.
-  * Choose between *Cherry MX Blue*, *Cherry MX Brown*, *Topre Thock*, and *Vintage Typewriter*.
-* **Fine-Grained Telemetry & Weak Key Diagnostics**:
-  * Measures **Inter-Key Latency (IKL)** in milliseconds to diagnose hesitation friction.
-  * Real-time WPM, Raw WPM, CPM, Accuracy %, and Consistency variance.
-* **Arcade Mini-Games**:
-  * Built-in *Word Fall Arena* with falling blocks, combo multipliers, and retro particle effects.
+* **Keyboard Diagnostic Heatmap & Biomechanics**:
+  * Dual-mode ANSI keyboard heatmap visualizing key-by-key error frequency and hesitation latency.
+  * Ergonomic workload balance analysis between Left and Right hands plus 9-way individual finger load distribution.
+  * Printable/exportable **Certificate of Typing Proficiency** acknowledging verified velocity and accuracy.
+* **Multi-Mode Arcade Arena**:
+  * *Word Fall Survival*: Fast-paced falling word defense with combos, difficulty tiers (Easy, Medium, Hard, Developer), and power-ups.
+  * *Zen Rhythm Flow*: Continuous, peaceful flow state exercises maintaining cadence and consistency without failure pressure.
+* **Global Command Palette (`Cmd/Ctrl+K`)**:
+  * Lightning-fast modal switcher for instant keyboard-only navigation across drills, packs, arcade, analytics, settings, and themes.
 * **Automated GitHub Actions CI/CD**:
   * Pushing a tag (e.g. `v1.0.0`) automatically compiles native binaries for Windows, macOS, and Linux, creates a GitHub Release, and publishes the Web app to GitHub Pages.
 
