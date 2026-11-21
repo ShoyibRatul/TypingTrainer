@@ -1,4 +1,4 @@
-export type ActiveTab = 'curriculum' | 'test' | 'arcade' | 'analytics' | 'settings';
+export type ActiveTab = 'curriculum' | 'test' | 'arcade' | 'analytics' | 'settings' | 'packs';
 
 export type Finger = 
   | 1 // Left Pinky

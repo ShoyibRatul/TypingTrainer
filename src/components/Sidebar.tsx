@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProfile } from '../context/ProfileContext';
-import { BookOpen, Timer, Gamepad2, BarChart2, Settings, Lock, Sun, Moon, Monitor, Users, Keyboard } from 'lucide-react';
+import { BookOpen, Timer, Gamepad2, BarChart2, Settings, Lock, Sun, Moon, Monitor, Users, Keyboard, Package } from 'lucide-react';
 import { ActiveTab } from '../types';
 import { applyTheme, ThemeMode } from '../utils/theme';
+import { packRegistry } from '../engine/packs/registry';
 
 interface SidebarProps {
   activeTab: ActiveTab;
@@ -16,7 +17,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onOpenProfiles,
 }) => {
   const { activeProfile, lockProfile } = useProfile();
-  const [themeMode, setThemeMode] = React.useState<ThemeMode>('system');
+  const [themeMode, setThemeMode] = useState<ThemeMode>('system');
+  const [activePackInfo, setActivePackInfo] = useState(() => {
+    const p = packRegistry.getActivePack();
+    const name = p.manifest.name['en'] || Object.values(p.manifest.name)[0] || 'English';
+    const layout = packRegistry.getLayout();
+    return { name, layoutName: layout.name['en'] || Object.values(layout.name)[0] || 'Standard' };
+  });
+
+  useEffect(() => {
+    const update = () => {
+      const p = packRegistry.getActivePack();
+      const name = p.manifest.name['en'] || Object.values(p.manifest.name)[0] || 'English';
+      const layout = packRegistry.getLayout();
+      setActivePackInfo({ name, layoutName: layout.name['en'] || Object.values(layout.name)[0] || 'Standard' });
+    };
+    return packRegistry.subscribe(update);
+  }, []);
 
   const cycleTheme = () => {
     const next: ThemeMode = themeMode === 'system' ? 'dark' : themeMode === 'dark' ? 'light' : 'system';
@@ -26,6 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const navItems: { id: ActiveTab; label: string; icon: React.ElementType }[] = [
     { id: 'curriculum', label: 'Lessons', icon: BookOpen },
+    { id: 'packs', label: 'Packs', icon: Package },
     { id: 'test', label: 'Speed Test', icon: Timer },
     { id: 'arcade', label: 'Arcade', icon: Gamepad2 },
     { id: 'analytics', label: 'Analytics', icon: BarChart2 },
@@ -37,13 +55,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Top: Active Course Badge */}
       <div>
         <div className="p-4 border-b border-border">
-          <div className="flex items-center gap-2.5 px-3 py-2 bg-surface-2 rounded-btn border border-border">
-            <Keyboard className="w-4 h-4 text-accent" />
-            <div>
-              <span className="font-semibold text-xs text-txt block leading-none">English</span>
-              <span className="text-[10px] text-txt-muted block mt-0.5">US QWERTY Standard</span>
+          <button
+            onClick={() => onTabChange('packs')}
+            className="w-full text-left flex items-center gap-2.5 px-3 py-2 bg-surface-2 hover:bg-surface-2/80 rounded-btn border border-border transition-colors cursor-pointer"
+            title="Manage Curriculums & Packs"
+          >
+            <Keyboard className="w-4 h-4 text-accent flex-shrink-0" />
+            <div className="overflow-hidden">
+              <span className="font-semibold text-xs text-txt block leading-none truncate">{activePackInfo.name}</span>
+              <span className="text-[10px] text-txt-muted block mt-0.5 truncate">{activePackInfo.layoutName}</span>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Navigation List */}

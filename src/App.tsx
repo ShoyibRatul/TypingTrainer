@@ -8,6 +8,7 @@ import { SpeedTestView } from './components/SpeedTestView';
 import { ArcadeView } from './components/ArcadeView';
 import { AnalyticsView } from './components/AnalyticsView';
 import { SettingsView } from './components/SettingsView';
+import { PacksView } from './components/PacksView';
 import { ProfileModal } from './components/ProfileModal';
 import { LockScreen } from './components/LockScreen';
 import { applyTheme, initThemeWatcher } from './utils/theme';
@@ -43,6 +44,7 @@ const MainLayout: React.FC = () => {
         <main className="flex-1 overflow-y-auto p-6 bg-bg flex flex-col justify-between">
           <div className="flex-1">
             {activeTab === 'curriculum' && <LessonView />}
+            {activeTab === 'packs' && <PacksView />}
             {activeTab === 'test' && <SpeedTestView />}
             {activeTab === 'arcade' && <ArcadeView />}
             {activeTab === 'analytics' && <AnalyticsView />}

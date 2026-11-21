@@ -16,6 +16,7 @@ Typing Trainer incorporates open-source and permissively licensed software compo
 | `clsx` | MIT | Luke Edwards |
 | `tailwind-merge` | MIT | Dany Castillo |
 | `canvas-confetti` | ISC | Kiril Vatev |
+| `fflate` | MIT | Arjun G |
 
 ## Direct Dependencies (Rust / Tauri Core)
 
