@@ -13,44 +13,43 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
   activeKey,
   targetFinger,
 }) => {
-  // Normalize targetChar for matching
   const normTarget = targetChar === ' ' ? ' ' : (targetChar || '').toLowerCase();
   const requiresShift = targetChar && targetChar !== ' ' && targetChar === targetChar.toUpperCase() && targetChar !== targetChar.toLowerCase();
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 bg-slate-900/90 backdrop-blur-md rounded-2xl border border-slate-800 shadow-2xl">
+    <div className="w-full max-w-4xl mx-auto p-4 bg-surface rounded-card border border-border shadow-sm">
       {/* Finger Legend / Active Target Hint */}
-      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-2 text-xs text-slate-400">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-1 text-xs text-txt-muted">
         <div className="flex items-center gap-3">
-          <span className="font-semibold text-slate-300">Active Finger:</span>
+          <span className="font-medium text-txt">Target Finger:</span>
           {targetFinger ? (
             <span
-              className="px-2.5 py-0.5 rounded-full font-medium text-slate-950 flex items-center gap-1.5 shadow-sm"
-              style={{ backgroundColor: FINGER_NAMES[targetFinger]?.color || '#6366f1' }}
+              className="px-2.5 py-0.5 rounded-full font-medium text-white flex items-center gap-1.5 shadow-sm text-[11px]"
+              style={{ backgroundColor: FINGER_NAMES[targetFinger]?.color || 'var(--accent)' }}
             >
               <span>{FINGER_NAMES[targetFinger]?.hand} {FINGER_NAMES[targetFinger]?.name}</span>
             </span>
           ) : (
-            <span className="text-slate-500 italic">Rest on Home Row</span>
+            <span className="text-txt-muted italic">Rest on Home Row</span>
           )}
         </div>
 
         {/* Hand Color Mini Legend */}
-        <div className="hidden sm:flex items-center gap-2 text-[11px]">
+        <div className="hidden sm:flex items-center gap-2.5 text-[11px] text-txt-muted">
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span> Pinky
+            <span className="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> Pinky
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 inline-block"></span> Ring
+            <span className="w-2 h-2 rounded-full bg-orange-500 inline-block"></span> Ring
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span> Middle
+            <span className="w-2 h-2 rounded-full bg-yellow-500 inline-block"></span> Middle
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span> Index (L)
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> Index (L)
           </span>
           <span className="flex items-center gap-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 inline-block"></span> Index (R)
+            <span className="w-2 h-2 rounded-full bg-teal-500 inline-block"></span> Index (R)
           </span>
         </div>
       </div>
@@ -79,10 +78,8 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
                   (activeKey === 'Enter' && key.code === 'Enter')
                 );
 
-                const fingerColor = FINGER_NAMES[key.finger]?.color || '#6366f1';
+                const fingerColor = FINGER_NAMES[key.finger]?.color || 'var(--accent)';
                 const keyWidth = key.width || 1.0;
-
-                // Relative flex basis calculation
                 const flexBasis = `${keyWidth * 56}px`;
 
                 return (
@@ -92,30 +89,29 @@ export const VirtualKeyboard: React.FC<VirtualKeyboardProps> = ({
                       flexBasis,
                       flexGrow: key.width ? key.width * 0.5 : 1,
                       minWidth: key.width ? `${key.width * 38}px` : '38px',
-                      height: '46px',
+                      height: '44px',
                     }}
-                    className={`relative rounded-lg flex flex-col items-center justify-center transition-all duration-75 text-xs font-semibold border ${
+                    className={`relative rounded-key flex flex-col items-center justify-center transition-all duration-75 text-xs font-semibold border ${
                       isPressed
-                        ? 'bg-indigo-600 text-white border-indigo-400 translate-y-1 shadow-inner'
+                        ? 'bg-accent text-white border-accent-hover translate-y-0.5 shadow-inner'
                         : isTarget || isShiftTarget
-                        ? 'bg-indigo-500/30 text-indigo-200 border-indigo-400 animate-pulse ring-2 ring-indigo-400/50 shadow-lg'
-                        : 'bg-slate-800/80 text-slate-300 border-slate-700/80 hover:border-slate-600 shadow-md'
+                        ? 'bg-accent-soft text-accent border-accent ring-1 ring-accent font-bold'
+                        : 'bg-surface-2 text-txt border-border hover:border-txt-muted/40 shadow-sm'
                     }`}
                   >
-                    {/* Primary & Secondary Key Labels */}
-                    <span className="text-[13px] leading-tight">
-                      {key.labels[1] && <span className="text-[10px] text-slate-400 block -mb-0.5">{key.labels[1]}</span>}
+                    <span className="text-[12px] leading-tight">
+                      {key.labels[1] && <span className="text-[9px] text-txt-muted block -mb-0.5">{key.labels[1]}</span>}
                       {key.labels[0] === ' ' ? 'SPACE' : key.labels[0]}
                     </span>
 
                     {/* Tactile bump marker on F and J */}
                     {key.hasBump && (
-                      <span className="absolute bottom-1 w-3 h-0.5 bg-slate-400 rounded-full"></span>
+                      <span className="absolute bottom-1 w-2.5 h-0.5 bg-txt-muted rounded-full"></span>
                     )}
 
                     {/* Finger color dot indicator on key base */}
                     <span
-                      className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full opacity-60"
+                      className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full opacity-70"
                       style={{ backgroundColor: fingerColor }}
                     ></span>
                   </div>

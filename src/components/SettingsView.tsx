@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { hashPin } from '../utils/crypto';
 import { Settings, Volume2, Shield, Eye, Download, Check, Lock } from 'lucide-react';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
 
 export const SettingsView: React.FC = () => {
   const { activeProfile, updatePreferences } = useProfile();
@@ -16,11 +18,10 @@ export const SettingsView: React.FC = () => {
   const handleSavePin = async (e: React.FormEvent) => {
     e.preventDefault();
     const pinHash = newPin.trim().length > 0 ? await hashPin(newPin.trim()) : undefined;
-    // update profile with pinHash
     activeProfile.pinHash = pinHash;
     setPinSaved(true);
     setNewPin('');
-    setTimeout(() => setPinSaved(false), 2500);
+    setTimeout(() => setPinSaved(false), 2000);
   };
 
   const handleExportData = () => {
@@ -34,53 +35,53 @@ export const SettingsView: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto py-6 px-4 space-y-6">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-2">
-        <h2 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-          <Settings className="w-5 h-5 text-indigo-400" /> Workspace Settings
+    <div className="w-full max-w-3xl mx-auto space-y-5">
+      <div className="bg-surface border border-border rounded-card p-5 shadow-sm space-y-1">
+        <h2 className="text-lg font-bold text-txt flex items-center gap-2">
+          <Settings className="w-4 h-4 text-accent" /> Settings
         </h2>
-        <p className="text-xs text-slate-400">
-          Personalize audio feedback, display elements, and security for {activeProfile.name}
+        <p className="text-xs text-txt-muted">
+          Audio, visual feedback, and security for {activeProfile.name}
         </p>
       </div>
 
       {/* Audio Preferences */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+      <div className="bg-surface border border-border rounded-card p-5 shadow-sm space-y-4">
         <div className="flex items-center gap-2">
-          <Volume2 className="w-5 h-5 text-cyan-400" />
-          <h3 className="font-bold text-slate-100">Tactile Audio Feedback</h3>
+          <Volume2 className="w-4 h-4 text-accent" />
+          <h3 className="font-bold text-sm text-txt">Mechanical Switch Sound</h3>
         </div>
 
-        <div className="space-y-4 pt-2">
+        <div className="space-y-4 pt-1">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-2">Switch Sound Profile</label>
+            <label className="block text-xs font-medium text-txt mb-2">Switch Profile</label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
-                { id: 'cherry-blue', label: 'Cherry MX Blue', desc: 'Crisp & Clicky' },
-                { id: 'cherry-brown', label: 'Cherry MX Brown', desc: 'Gentle Clack' },
+                { id: 'cherry-blue', label: 'Cherry MX Blue', desc: 'Crisp Clicky' },
+                { id: 'cherry-brown', label: 'Cherry MX Brown', desc: 'Tactile Clack' },
                 { id: 'thock', label: 'Topre Thock', desc: 'Deep Resonance' },
                 { id: 'typewriter', label: 'Typewriter', desc: 'Snappy Metal' },
               ].map(opt => (
                 <button
                   key={opt.id}
                   onClick={() => updatePreferences({ soundProfile: opt.id as any })}
-                  className={`p-3 rounded-2xl border text-left transition ${
+                  className={`p-2.5 rounded-btn border text-left transition-colors ${
                     prefs.soundProfile === opt.id
-                      ? 'bg-indigo-600/20 border-indigo-500 text-indigo-200'
-                      : 'bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-accent-soft border-accent text-accent'
+                      : 'bg-surface-2 border-border text-txt-muted hover:border-txt-muted'
                   }`}
                 >
-                  <span className="font-bold text-xs block text-slate-100">{opt.label}</span>
-                  <span className="text-[10px] text-slate-400">{opt.desc}</span>
+                  <span className="font-bold text-xs block text-txt">{opt.label}</span>
+                  <span className="text-[10px] text-txt-muted">{opt.desc}</span>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between items-center text-xs font-semibold text-slate-300 mb-1">
+            <div className="flex justify-between items-center text-xs font-medium text-txt mb-1">
               <span>Keystroke Volume</span>
-              <span className="font-mono text-indigo-400">{Math.round(prefs.soundVolume * 100)}%</span>
+              <span className="font-mono text-accent">{Math.round(prefs.soundVolume * 100)}%</span>
             </div>
             <input
               type="range"
@@ -89,89 +90,83 @@ export const SettingsView: React.FC = () => {
               step="0.05"
               value={prefs.soundVolume}
               onChange={(e) => updatePreferences({ soundVolume: parseFloat(e.target.value) })}
-              className="w-full accent-indigo-500 cursor-pointer"
+              className="w-full accent-accent cursor-pointer"
             />
           </div>
         </div>
       </div>
 
       {/* Visual Toggles */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+      <div className="bg-surface border border-border rounded-card p-5 shadow-sm space-y-3">
         <div className="flex items-center gap-2">
-          <Eye className="w-5 h-5 text-indigo-400" />
-          <h3 className="font-bold text-slate-100">Visual Aids</h3>
+          <Eye className="w-4 h-4 text-accent" />
+          <h3 className="font-bold text-sm text-txt">Visual Aids</h3>
         </div>
 
-        <div className="space-y-3 pt-1">
-          <label className="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800 cursor-pointer">
+        <div className="space-y-2 pt-1">
+          <label className="flex items-center justify-between p-3 bg-surface-2 rounded-btn border border-border cursor-pointer">
             <div>
-              <span className="font-semibold text-xs text-slate-200 block">Show Virtual Vector Keyboard</span>
-              <span className="text-[11px] text-slate-400">Highlights target keys and finger mappings during lessons</span>
+              <span className="font-semibold text-xs text-txt block">Virtual Vector Keyboard</span>
+              <span className="text-[11px] text-txt-muted">Highlights target keys and finger mappings during lessons</span>
             </div>
             <input
               type="checkbox"
               checked={prefs.showKeyboard}
               onChange={(e) => updatePreferences({ showKeyboard: e.target.checked })}
-              className="w-4 h-4 accent-indigo-600 cursor-pointer"
+              className="w-4 h-4 accent-accent cursor-pointer"
             />
           </label>
 
-          <label className="flex items-center justify-between p-3 bg-slate-950 rounded-2xl border border-slate-800 cursor-pointer">
+          <label className="flex items-center justify-between p-3 bg-surface-2 rounded-btn border border-border cursor-pointer">
             <div>
-              <span className="font-semibold text-xs text-slate-200 block">Show Ergonomic Hand Guide</span>
-              <span className="text-[11px] text-slate-400">Shows which finger should be moved in real-time</span>
+              <span className="font-semibold text-xs text-txt block">Ergonomic Hand Guide</span>
+              <span className="text-[11px] text-txt-muted">Shows active finger movements in real-time</span>
             </div>
             <input
               type="checkbox"
               checked={prefs.showHands}
               onChange={(e) => updatePreferences({ showHands: e.target.checked })}
-              className="w-4 h-4 accent-indigo-600 cursor-pointer"
+              className="w-4 h-4 accent-accent cursor-pointer"
             />
           </label>
         </div>
       </div>
 
       {/* Profile PIN Security */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl space-y-4">
+      <div className="bg-surface border border-border rounded-card p-5 shadow-sm space-y-3">
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-amber-400" />
-          <h3 className="font-bold text-slate-100">Profile Security (PIN Lock)</h3>
+          <Shield className="w-4 h-4 text-warning" />
+          <h3 className="font-bold text-sm text-txt">Profile PIN Lock</h3>
         </div>
-        <p className="text-xs text-slate-400">
-          Prevent other users from viewing or altering your learning progress on shared computers.
+        <p className="text-xs text-txt-muted">
+          Protect your training history on shared computers with a secret PIN.
         </p>
 
         <form onSubmit={handleSavePin} className="flex gap-2">
-          <input
+          <Input
             type="password"
             maxLength={16}
             value={newPin}
             onChange={(e) => setNewPin(e.target.value)}
-            placeholder={activeProfile.pinHash ? "Change PIN (leave blank to remove)" : "Set new PIN / password"}
-            className="flex-1 bg-slate-950 border border-slate-700 rounded-2xl px-4 py-2.5 text-xs text-slate-100 focus:border-indigo-500 focus:outline-none"
+            placeholder={activeProfile.pinHash ? "Change PIN (blank to remove)" : "Set new PIN / password"}
+            className="flex-1"
           />
-          <button
-            type="submit"
-            className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs rounded-2xl transition shadow-md flex items-center gap-1.5"
-          >
-            {pinSaved ? <Check className="w-4 h-4 text-emerald-300" /> : <Lock className="w-4 h-4" />}
-            <span>{pinSaved ? 'Updated!' : 'Save PIN'}</span>
-          </button>
+          <Button type="submit" variant="primary">
+            {pinSaved ? <Check className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
+            <span>{pinSaved ? 'Saved' : 'Save PIN'}</span>
+          </Button>
         </form>
       </div>
 
       {/* Backup and Data Export */}
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl flex items-center justify-between">
+      <div className="bg-surface border border-border rounded-card p-4 shadow-sm flex items-center justify-between">
         <div>
-          <h3 className="font-bold text-xs text-slate-200">Export Learning Records</h3>
-          <p className="text-[11px] text-slate-400">Download your stats, test certificates, and latency logs</p>
+          <h3 className="font-bold text-xs text-txt">Export Learning Records</h3>
+          <p className="text-[11px] text-txt-muted">Download your stats and test history as JSON</p>
         </div>
-        <button
-          onClick={handleExportData}
-          className="flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-2xl transition border border-slate-700"
-        >
-          <Download className="w-4 h-4" /> Export JSON
-        </button>
+        <Button variant="outline" size="sm" onClick={handleExportData}>
+          <Download className="w-3.5 h-3.5" /> Export JSON
+        </Button>
       </div>
     </div>
   );

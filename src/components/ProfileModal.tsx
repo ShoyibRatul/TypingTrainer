@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { UserProfile } from '../types';
 import { Lock, Unlock, Plus, Trash2, KeyRound, Check, X } from 'lucide-react';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -18,7 +20,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   const [inputPin, setInputPin] = useState('');
   const [pinError, setPinError] = useState('');
 
-  // Form state for creating user
   const [newName, setNewName] = useState('');
   const [newAvatar, setNewAvatar] = useState('🚀');
   const [newPin, setNewPin] = useState('');
@@ -67,56 +68,53 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 shadow-2xl relative text-slate-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+      <div className="bg-surface border border-border w-full max-w-sm rounded-card p-6 shadow-lg relative text-txt">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition"
+          className="absolute top-4 right-4 p-1.5 text-txt-muted hover:text-txt rounded-btn hover:bg-surface-2 transition-colors"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
 
         {mode === 'list' && (
           <div>
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-xl font-bold">User Profiles</h3>
-                <p className="text-xs text-slate-400">Switch user or manage accounts</p>
+                <h3 className="text-lg font-bold">User Profiles</h3>
+                <p className="text-xs text-txt-muted">Switch or add profiles</p>
               </div>
-              <button
-                onClick={() => setMode('create')}
-                className="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition shadow-md"
-              >
-                <Plus className="w-4 h-4" /> Add User
-              </button>
+              <Button size="sm" variant="primary" onClick={() => setMode('create')}>
+                <Plus className="w-3.5 h-3.5" /> Add
+              </Button>
             </div>
 
-            <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
+            <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
               {profiles.map(p => {
                 const isActive = p.id === activeProfile?.id;
                 return (
                   <div
                     key={p.id}
                     onClick={() => handleSelectProfile(p)}
-                    className={`flex items-center justify-between p-3 rounded-xl border transition cursor-pointer ${
+                    className={`flex items-center justify-between p-3 rounded-btn border transition-colors cursor-pointer ${
                       isActive
-                        ? 'bg-indigo-950/40 border-indigo-500/80 ring-1 ring-indigo-500/40'
-                        : 'bg-slate-800/60 border-slate-700/60 hover:bg-slate-800 hover:border-slate-600'
+                        ? 'bg-accent-soft border-accent ring-1 ring-accent'
+                        : 'bg-surface-2 border-border hover:border-txt-muted/50'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-2xl p-1 bg-slate-800 rounded-lg shadow-sm">{p.avatar}</span>
+                      <span className="text-2xl p-1 bg-surface rounded-md shadow-sm border border-border">{p.avatar}</span>
                       <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-sm text-slate-100">{p.name}</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="font-semibold text-xs text-txt">{p.name}</span>
                           {isActive && (
-                            <span className="text-[10px] bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 rounded-full font-medium">
+                            <span className="text-[9px] bg-accent text-white px-1.5 py-0.2 rounded-full font-semibold">
                               Active
                             </span>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 text-xs text-slate-400 mt-0.5">
-                          <span>{p.stats.completedLessons.length} lessons completed</span>
+                        <div className="flex items-center gap-2 text-[10px] text-txt-muted mt-0.5">
+                          <span>{p.stats.completedLessons.length} lessons</span>
                           <span>•</span>
                           <span>{p.stats.testHistory.length} tests</span>
                         </div>
@@ -125,12 +123,12 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
 
                     <div className="flex items-center gap-2">
                       {p.pinHash ? (
-                        <span title="PIN Protected Profile" className="p-1.5 text-amber-400 bg-amber-400/10 rounded-lg">
-                          <Lock className="w-4 h-4" />
+                        <span title="PIN Protected Profile" className="p-1 text-warning">
+                          <Lock className="w-3.5 h-3.5" />
                         </span>
                       ) : (
-                        <span title="Open Profile" className="p-1.5 text-slate-500">
-                          <Unlock className="w-4 h-4" />
+                        <span title="Open Profile" className="p-1 text-txt-muted">
+                          <Unlock className="w-3.5 h-3.5" />
                         </span>
                       )}
 
@@ -138,14 +136,14 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            if (confirm(`Are you sure you want to delete profile "${p.name}"?`)) {
+                            if (confirm(`Delete profile "${p.name}"?`)) {
                               deleteProfile(p.id);
                             }
                           }}
-                          className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition"
+                          className="p-1 text-txt-muted hover:text-danger rounded transition-colors"
                           title="Delete profile"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       )}
                     </div>
@@ -159,17 +157,16 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
         {mode === 'pin-prompt' && selectedTarget && (
           <form onSubmit={handleVerifyPinSubmit} className="space-y-4">
             <div className="text-center">
-              <span className="text-4xl inline-block p-2 bg-slate-800 rounded-2xl mb-2 shadow-md">
+              <span className="text-4xl inline-block p-2 bg-surface-2 rounded-card mb-2 border border-border">
                 {selectedTarget.avatar}
               </span>
-              <h3 className="text-lg font-bold">Unlock {selectedTarget.name}</h3>
-              <p className="text-xs text-slate-400">This profile is secured with a PIN or password</p>
+              <h3 className="text-base font-bold text-txt">Unlock {selectedTarget.name}</h3>
+              <p className="text-xs text-txt-muted">This profile is protected with a PIN</p>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Enter PIN / Password</label>
               <div className="relative">
-                <input
+                <Input
                   type="password"
                   autoFocus
                   value={inputPin}
@@ -177,52 +174,44 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
                     setInputPin(e.target.value);
                     setPinError('');
                   }}
-                  className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-center tracking-widest text-lg focus:border-indigo-500 focus:outline-none"
+                  className="text-center tracking-widest text-base py-2.5"
                   placeholder="••••"
                 />
-                <KeyRound className="absolute left-3 top-3 w-5 h-5 text-slate-500" />
+                <KeyRound className="absolute left-3 top-3 w-4 h-4 text-txt-muted" />
               </div>
-              {pinError && <p className="text-xs text-rose-400 mt-1.5 text-center">{pinError}</p>}
+              {pinError && <p className="text-xs text-danger mt-1 text-center font-medium">{pinError}</p>}
             </div>
 
-            <div className="flex gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setMode('list')}
-                className="flex-1 py-2 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl transition"
-              >
+            <div className="flex gap-2 pt-1">
+              <Button type="button" variant="outline" className="flex-1" onClick={() => setMode('list')}>
                 Back
-              </button>
-              <button
-                type="submit"
-                className="flex-1 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition shadow-md"
-              >
+              </Button>
+              <Button type="submit" variant="primary" className="flex-1">
                 Unlock
-              </button>
+              </Button>
             </div>
           </form>
         )}
 
         {mode === 'create' && (
-          <form onSubmit={handleCreateSubmit} className="space-y-4">
+          <form onSubmit={handleCreateSubmit} className="space-y-3.5">
             <div>
-              <h3 className="text-lg font-bold">Create New Profile</h3>
-              <p className="text-xs text-slate-400">Add a new user with their own learning history</p>
+              <h3 className="text-base font-bold text-txt">Create New Profile</h3>
+              <p className="text-xs text-txt-muted">Add a new user with their own learning records</p>
             </div>
 
-            {/* Avatar picker */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-2">Choose Avatar</label>
-              <div className="grid grid-cols-6 gap-2">
+              <label className="block text-[11px] font-semibold text-txt mb-1.5">Choose Avatar</label>
+              <div className="grid grid-cols-6 gap-1.5">
                 {AVATAR_OPTIONS.map(emoji => (
                   <button
                     key={emoji}
                     type="button"
                     onClick={() => setNewAvatar(emoji)}
-                    className={`text-2xl p-2 rounded-xl transition text-center ${
+                    className={`text-xl p-1.5 rounded-btn transition-colors text-center border ${
                       newAvatar === emoji
-                        ? 'bg-indigo-600/30 border border-indigo-500 scale-105'
-                        : 'bg-slate-800 hover:bg-slate-700 border border-transparent'
+                        ? 'bg-accent-soft border-accent scale-105'
+                        : 'bg-surface-2 border-border hover:border-txt-muted'
                     }`}
                   >
                     {emoji}
@@ -231,50 +220,39 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ isOpen, onClose }) =
               </div>
             </div>
 
-            {/* Name Input */}
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Display Name</label>
-              <input
+              <label className="block text-[11px] font-semibold text-txt mb-1">Display Name</label>
+              <Input
                 type="text"
                 required
                 maxLength={24}
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-slate-100 text-sm focus:border-indigo-500 focus:outline-none"
-                placeholder="e.g. Alice, Bob, Junior..."
+                placeholder="e.g. Alice, Bob, David..."
               />
             </div>
 
-            {/* Optional PIN Input */}
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs font-semibold text-slate-300">Lock PIN (Optional)</label>
-                <span className="text-[10px] text-slate-500">Leave blank if no PIN desired</span>
+                <label className="block text-[11px] font-semibold text-txt">Lock PIN (Optional)</label>
+                <span className="text-[10px] text-txt-muted">Leave blank for open profile</span>
               </div>
-              <input
+              <Input
                 type="password"
                 maxLength={16}
                 value={newPin}
                 onChange={(e) => setNewPin(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2 text-slate-100 text-sm focus:border-indigo-500 focus:outline-none"
-                placeholder="Optional PIN / Password"
+                placeholder="Optional PIN"
               />
             </div>
 
-            <div className="flex gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setMode('list')}
-                className="flex-1 py-2 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl transition"
-              >
+            <div className="flex gap-2 pt-1">
+              <Button type="button" variant="outline" className="flex-1" onClick={() => setMode('list')}>
                 Cancel
-              </button>
-              <button
-                type="submit"
-                className="flex-1 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition shadow-md flex items-center justify-center gap-1.5"
-              >
-                <Check className="w-4 h-4" /> Create Profile
-              </button>
+              </Button>
+              <Button type="submit" variant="primary" className="flex-1">
+                <Check className="w-3.5 h-3.5" /> Create
+              </Button>
             </div>
           </form>
         )}

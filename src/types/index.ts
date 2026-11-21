@@ -1,3 +1,5 @@
+export type ActiveTab = 'curriculum' | 'test' | 'arcade' | 'analytics' | 'settings';
+
 export type Finger = 
   | 1 // Left Pinky
   | 2 // Left Ring

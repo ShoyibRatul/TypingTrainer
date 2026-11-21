@@ -8,38 +8,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+        border: 'var(--border)',
+        txt: 'var(--text)',
+        'txt-muted': 'var(--text-muted)',
+        accent: {
+          DEFAULT: 'var(--accent)',
+          soft: 'var(--accent-soft)',
+          hover: 'var(--accent-hover)',
+        },
+        danger: {
+          DEFAULT: 'var(--danger)',
+          soft: 'var(--danger-soft)',
+        },
+        warning: {
+          DEFAULT: 'var(--warning)',
+          soft: 'var(--warning-soft)',
         },
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'Consolas', 'monospace'],
+        mono: ['"JetBrains Mono"', 'Consolas', 'monospace'],
         sans: ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
       },
+      borderRadius: {
+        card: '10px',
+        btn: '8px',
+        key: '6px',
+      },
       keyframes: {
-        pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)' },
-          '50%': { boxShadow: '0 0 25px rgba(99, 102, 241, 0.8)' },
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '20%, 60%': { transform: 'translateX(-4px)' },
+          '40%, 80%': { transform: 'translateX(4px)' },
         },
-        keyPress: {
-          '0%': { transform: 'scale(1)', filter: 'brightness(1)' },
-          '50%': { transform: 'scale(0.92) translateY(2px)', filter: 'brightness(1.3)' },
-          '100%': { transform: 'scale(1)', filter: 'brightness(1)' },
+        fadeIn: {
+          from: { opacity: '0', transform: 'scale(0.98)' },
+          to: { opacity: '1', transform: 'scale(1)' },
         }
       },
       animation: {
-        pulseGlow: 'pulseGlow 2s infinite',
-        keyPress: 'keyPress 0.12s ease-in-out',
+        shake: 'shake 0.25s ease-in-out',
+        fadeIn: 'fadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards',
       }
     },
   },

@@ -7,19 +7,20 @@ import { useProfile } from '../context/ProfileContext';
 import { soundEngine } from '../utils/audio';
 import confetti from 'canvas-confetti';
 import { ChevronRight, RotateCcw, Star, Award, Zap, Target } from 'lucide-react';
+import { Button } from './ui/Button';
 
 export const LessonView: React.FC = () => {
   const { activeProfile, recordLessonCompletion, recordKeyTelemetry } = useProfile();
 
   const [selectedLesson, setSelectedLesson] = useState<Lesson>(CURRICULUM_MODULES[0].lessons[0]);
   const [exerciseIndex, setExerciseIndex] = useState<number>(0);
+
   const [inputBuffer, setInputBuffer] = useState<string>('');
   const [errorCount, setErrorCount] = useState<number>(0);
   const [lastActiveKey, setLastActiveKey] = useState<string>('');
   const [startTime, setStartTime] = useState<number | null>(null);
   const [completedResult, setCompletedResult] = useState<TypingResult | null>(null);
 
-  // Fine-grained key metrics (errors and latency tracking)
   const lastKeyTimeRef = useRef<number>(Date.now());
   const keyErrorsRef = useRef<Record<string, number>>({});
   const keyLatenciesRef = useRef<Record<string, number>>({});
@@ -31,7 +32,6 @@ export const LessonView: React.FC = () => {
   const currentChar = targetText[inputBuffer.length] || '';
   const currentFinger = activeExercise.targetFingers[0] || 4;
 
-  // Focus input automatically
   const focusInput = () => {
     hiddenInputRef.current?.focus();
   };
@@ -53,7 +53,6 @@ export const LessonView: React.FC = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setLastActiveKey(e.key);
 
-    // Ignore modifier presses alone
     if (['Shift', 'Control', 'Alt', 'Meta', 'CapsLock', 'Tab'].includes(e.key)) {
       return;
     }
@@ -71,30 +70,22 @@ export const LessonView: React.FC = () => {
     const soundVolume = activeProfile?.preferences.soundVolume ?? 0.6;
 
     if (e.key === 'Backspace') {
-      // allow backspace if desired, or skip
       return;
     }
 
     if (e.key === expected) {
-      // Correct keystroke
       soundEngine.playKeystroke(soundProfile, soundVolume);
-
-      // Track latency for this character
       keyLatenciesRef.current[expected] = latency;
 
       const nextBuffer = inputBuffer + e.key;
       setInputBuffer(nextBuffer);
 
-      // Check if finished
       if (nextBuffer.length >= targetText.length) {
         finishExercise(nextBuffer, startTime ? (now - startTime) / 1000 : 1);
       }
     } else {
-      // Incorrect keystroke
       soundEngine.playError(soundVolume);
       setErrorCount(prev => prev + 1);
-
-      // Track error for expected character
       keyErrorsRef.current[expected] = (keyErrorsRef.current[expected] || 0) + 1;
     }
   };
@@ -125,12 +116,11 @@ export const LessonView: React.FC = () => {
     setCompletedResult(result);
     soundEngine.playSuccess();
     confetti({
-      particleCount: 80,
-      spread: 70,
+      particleCount: 70,
+      spread: 60,
       origin: { y: 0.6 }
     });
 
-    // Record into user profile
     recordLessonCompletion(selectedLesson.id, result);
     recordKeyTelemetry(keyErrorsRef.current, keyLatenciesRef.current);
   };
@@ -139,7 +129,6 @@ export const LessonView: React.FC = () => {
     if (exerciseIndex + 1 < selectedLesson.exercises.length) {
       setExerciseIndex(prev => prev + 1);
     } else {
-      // Find next lesson
       const allLessons = CURRICULUM_MODULES.flatMap(m => m.lessons);
       const currIdx = allLessons.findIndex(l => l.id === selectedLesson.id);
       if (currIdx + 1 < allLessons.length) {
@@ -152,18 +141,18 @@ export const LessonView: React.FC = () => {
   const progressPercent = Math.round((inputBuffer.length / targetText.length) * 100);
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 px-4 space-y-6">
+    <div className="w-full max-w-5xl mx-auto space-y-5">
       {/* Top Banner: Module & Lesson Picker */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-900/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-800">
+      <div className="flex flex-wrap items-center justify-between gap-4 bg-surface p-4 rounded-card border border-border shadow-sm">
         <div>
-          <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wider">
-            Curriculum Navigator
+          <span className="text-[11px] font-semibold text-accent uppercase tracking-wider">
+            English QWERTY Curriculum
           </span>
-          <h2 className="text-xl font-bold text-slate-100 mt-0.5">{selectedLesson.title}</h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-xl">{selectedLesson.description}</p>
+          <h2 className="text-lg font-bold text-txt mt-0.5">{selectedLesson.title}</h2>
+          <p className="text-xs text-txt-muted mt-0.5 max-w-xl">{selectedLesson.description}</p>
         </div>
 
-        {/* Lesson selector dropdown / pills */}
+        {/* Lesson selector */}
         <div className="flex items-center gap-2">
           <select
             value={selectedLesson.id}
@@ -174,7 +163,7 @@ export const LessonView: React.FC = () => {
                 setExerciseIndex(0);
               }
             }}
-            className="bg-slate-950 border border-slate-700 text-slate-200 text-xs font-medium rounded-xl px-3 py-2 focus:border-indigo-500 focus:outline-none"
+            className="bg-surface-2 border border-border text-txt text-xs font-medium rounded-btn px-3 py-1.5 focus:border-accent focus:outline-none"
           >
             {CURRICULUM_MODULES.map(m => (
               <optgroup key={m.id} label={`${m.title} (${m.level})`}>
@@ -191,30 +180,30 @@ export const LessonView: React.FC = () => {
 
       {/* Exercise Step Indicators */}
       <div className="flex items-center justify-between gap-2 px-1">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {selectedLesson.exercises.map((ex, idx) => (
             <button
               key={ex.id}
               onClick={() => setExerciseIndex(idx)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition ${
+              className={`px-3 py-1.5 rounded-btn text-xs font-medium transition-colors ${
                 idx === exerciseIndex
-                  ? 'bg-indigo-600 text-white shadow-md'
-                  : 'bg-slate-800/80 text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  ? 'bg-accent text-white font-semibold shadow-sm'
+                  : 'bg-surface-2 text-txt-muted hover:text-txt'
               }`}
             >
               <span>Part {idx + 1}</span>
-              <span className="text-[10px] opacity-75 hidden sm:inline">({ex.type})</span>
+              <span className="text-[10px] opacity-75 hidden sm:inline ml-1">({ex.type})</span>
             </button>
           ))}
         </div>
 
         {/* Accuracy and Progress Ticker */}
-        <div className="flex items-center gap-4 text-xs font-semibold">
-          <span className="text-slate-400 flex items-center gap-1">
-            <Target className="w-3.5 h-3.5 text-indigo-400" /> Errors: <span className="text-rose-400">{errorCount}</span>
+        <div className="flex items-center gap-4 text-xs font-medium">
+          <span className="text-txt-muted flex items-center gap-1">
+            <Target className="w-3.5 h-3.5 text-danger" /> Mistakes: <span className="text-danger font-semibold">{errorCount}</span>
           </span>
-          <span className="text-slate-400 flex items-center gap-1">
-            <Zap className="w-3.5 h-3.5 text-amber-400" /> Progress: <span className="text-slate-200">{progressPercent}%</span>
+          <span className="text-txt-muted flex items-center gap-1">
+            <Zap className="w-3.5 h-3.5 text-accent" /> Progress: <span className="text-txt font-semibold">{progressPercent}%</span>
           </span>
         </div>
       </div>
@@ -222,9 +211,8 @@ export const LessonView: React.FC = () => {
       {/* Main Interactive Typing Canvas */}
       <div
         onClick={focusInput}
-        className="relative bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl cursor-text transition-all duration-150 focus-within:border-indigo-500/80 focus-within:ring-2 focus-within:ring-indigo-500/20"
+        className="relative bg-surface border border-border rounded-card p-6 shadow-sm cursor-text focus-within:border-accent focus-within:ring-1 focus-within:ring-accent transition-colors"
       >
-        {/* Hidden Input field capturing real keystrokes */}
         <input
           ref={hiddenInputRef}
           type="text"
@@ -234,13 +222,13 @@ export const LessonView: React.FC = () => {
         />
 
         {/* Instructions banner */}
-        <div className="mb-4 text-xs text-indigo-300/80 bg-indigo-950/40 border border-indigo-500/20 px-4 py-2 rounded-xl flex items-center justify-between">
+        <div className="mb-4 text-xs text-txt-muted bg-surface-2 border border-border px-3.5 py-2 rounded-btn flex items-center justify-between">
           <span>💡 {activeExercise.instructions}</span>
-          <span className="text-[11px] text-slate-400 italic">Click here & start typing</span>
+          <span className="text-[10px] text-txt-muted italic">Click & type</span>
         </div>
 
-        {/* Interactive Text Display Stream */}
-        <div className="font-mono text-2xl sm:text-3xl tracking-wide leading-relaxed p-6 bg-slate-950/80 rounded-2xl border border-slate-800/80 min-h-[140px] flex flex-wrap items-center">
+        {/* Text Display Stream */}
+        <div className="font-mono text-2xl sm:text-3xl tracking-wide leading-relaxed p-6 bg-surface-2 rounded-btn border border-border min-h-[130px] flex flex-wrap items-center">
           {targetText.split('').map((char, index) => {
             const isTyped = index < inputBuffer.length;
             const isCurrent = index === inputBuffer.length;
@@ -250,15 +238,15 @@ export const LessonView: React.FC = () => {
                 key={index}
                 className={`relative inline-block transition-colors duration-75 ${
                   isTyped
-                    ? 'text-emerald-400 font-medium'
+                    ? 'text-accent font-medium'
                     : isCurrent
-                    ? 'text-indigo-300 font-bold bg-indigo-500/30 px-1 rounded ring-1 ring-indigo-400 animate-pulse'
-                    : 'text-slate-600'
+                    ? 'text-accent font-bold bg-accent-soft px-1 rounded-sm ring-1 ring-accent'
+                    : 'text-txt-muted/50'
                 }`}
               >
                 {char === ' ' ? '␣' : char}
                 {isCurrent && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-400 animate-bounce"></span>
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent"></span>
                 )}
               </span>
             );
@@ -266,21 +254,18 @@ export const LessonView: React.FC = () => {
         </div>
 
         {/* Bottom controls */}
-        <div className="mt-4 flex items-center justify-between text-xs text-slate-400">
-          <button
-            onClick={resetExercise}
-            className="flex items-center gap-1.5 text-slate-400 hover:text-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-800 transition"
-          >
+        <div className="mt-4 flex items-center justify-between text-xs text-txt-muted">
+          <Button variant="ghost" size="sm" onClick={resetExercise}>
             <RotateCcw className="w-3.5 h-3.5" /> Restart Part
-          </button>
+          </Button>
 
-          <span className="text-slate-500 text-[11px]">
-            Target Keys: <span className="font-mono text-slate-300 font-bold">{activeExercise.targetKeys.join(' ')}</span>
+          <span className="text-[11px]">
+            Target Keys: <span className="font-mono text-txt font-bold">{activeExercise.targetKeys.join(' ')}</span>
           </span>
         </div>
       </div>
 
-      {/* Visual Hand Ergonomic Guide */}
+      {/* Visual Hand Guide */}
       {activeProfile?.preferences.showHands && (
         <HandGuide activeFinger={currentFinger} />
       )}
@@ -296,68 +281,63 @@ export const LessonView: React.FC = () => {
 
       {/* Completed Modal */}
       {completedResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-6">
-            <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 flex items-center justify-center mx-auto text-3xl shadow-inner">
-              <Award className="w-8 h-8" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-surface border border-border rounded-card p-6 max-w-sm w-full shadow-lg text-center space-y-5">
+            <div className="w-12 h-12 rounded-full bg-accent-soft text-accent flex items-center justify-center mx-auto text-2xl">
+              <Award className="w-6 h-6" />
             </div>
 
             <div>
-              <h3 className="text-2xl font-black text-slate-100">Exercise Completed!</h3>
-              <p className="text-xs text-slate-400 mt-1">Excellent progress! Your muscle memory is locking in.</p>
+              <h3 className="text-xl font-bold text-txt">Exercise Completed</h3>
+              <p className="text-xs text-txt-muted mt-1">Muscle memory progress updated.</p>
             </div>
 
             {/* Star Rating */}
-            <div className="flex justify-center gap-2">
+            <div className="flex justify-center gap-1.5">
               {[1, 2, 3].map(s => (
                 <Star
                   key={s}
-                  className={`w-7 h-7 ${
+                  className={`w-6 h-6 ${
                     s <= completedResult.stars
-                      ? 'text-amber-400 fill-amber-400'
-                      : 'text-slate-700'
+                      ? 'text-warning fill-warning'
+                      : 'text-border'
                   }`}
                 />
               ))}
             </div>
 
             {/* Score Cards */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-                <span className="text-xs text-slate-400 block">Net Speed</span>
-                <span className="text-2xl font-black text-indigo-400 font-mono">{completedResult.wpm}</span>
-                <span className="text-[10px] text-slate-500 block">WPM</span>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="bg-surface-2 p-2.5 rounded-btn border border-border">
+                <span className="text-[10px] text-txt-muted block">Net WPM</span>
+                <span className="text-xl font-black text-accent font-mono">{completedResult.wpm}</span>
               </div>
-              <div className="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-                <span className="text-xs text-slate-400 block">Accuracy</span>
-                <span className="text-2xl font-black text-emerald-400 font-mono">{completedResult.accuracy}%</span>
-                <span className="text-[10px] text-slate-500 block">{completedResult.errors} errors</span>
+              <div className="bg-surface-2 p-2.5 rounded-btn border border-border">
+                <span className="text-[10px] text-txt-muted block">Accuracy</span>
+                <span className="text-xl font-black text-txt font-mono">{completedResult.accuracy}%</span>
               </div>
-              <div className="bg-slate-950 p-3 rounded-2xl border border-slate-800">
-                <span className="text-xs text-slate-400 block">Raw Speed</span>
-                <span className="text-2xl font-black text-slate-300 font-mono">{completedResult.rawWpm}</span>
-                <span className="text-[10px] text-slate-500 block">WPM</span>
+              <div className="bg-surface-2 p-2.5 rounded-btn border border-border">
+                <span className="text-[10px] text-txt-muted block">Raw WPM</span>
+                <span className="text-xl font-black text-txt-muted font-mono">{completedResult.rawWpm}</span>
               </div>
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-3 pt-2">
-              <button
-                onClick={resetExercise}
-                className="flex-1 py-3 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-xl transition flex items-center justify-center gap-1.5"
-              >
-                <RotateCcw className="w-4 h-4" /> Try Again
-              </button>
-              <button
+            <div className="flex gap-2 pt-1">
+              <Button variant="outline" className="flex-1" onClick={resetExercise}>
+                <RotateCcw className="w-3.5 h-3.5" /> Retry
+              </Button>
+              <Button
+                variant="primary"
+                className="flex-1"
                 onClick={() => {
                   setCompletedResult(null);
                   nextExercise();
                 }}
-                className="flex-1 py-3 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition shadow-lg flex items-center justify-center gap-1.5"
               >
                 <span>Continue</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </Button>
             </div>
           </div>
         </div>

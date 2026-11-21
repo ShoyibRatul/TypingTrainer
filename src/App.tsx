@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProfileProvider, useProfile } from './context/ProfileContext';
-import { Navbar, ActiveTab } from './components/Navbar';
+import { ActiveTab } from './types';
+import { TitleBar } from './components/TitleBar';
+import { Sidebar } from './components/Sidebar';
 import { LessonView } from './components/LessonView';
 import { SpeedTestView } from './components/SpeedTestView';
 import { ArcadeView } from './components/ArcadeView';
@@ -8,44 +10,44 @@ import { AnalyticsView } from './components/AnalyticsView';
 import { SettingsView } from './components/SettingsView';
 import { ProfileModal } from './components/ProfileModal';
 import { LockScreen } from './components/LockScreen';
+import { applyTheme, initThemeWatcher } from './utils/theme';
 
 const MainLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('curriculum');
   const [isProfilesOpen, setIsProfilesOpen] = useState<boolean>(false);
   const { isLocked } = useProfile();
 
+  useEffect(() => {
+    // Apply initial system/profile theme
+    applyTheme('system');
+    const cleanup = initThemeWatcher(() => 'system');
+    return cleanup;
+  }, []);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-bg text-txt flex flex-col font-sans selection:bg-accent selection:text-white antialiased">
+      {/* Title Bar (Draggable region in native window) */}
+      <TitleBar />
+
       {/* Lock screen overlay when profile is locked with PIN */}
       {isLocked && <LockScreen />}
 
-      {/* Main Top Navigation */}
-      <Navbar
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        onOpenProfiles={() => setIsProfilesOpen(true)}
-      />
+      {/* Main Workspace with Sidebar + Content */}
+      <div className="flex-1 flex overflow-hidden">
+        <Sidebar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          onOpenProfiles={() => setIsProfilesOpen(true)}
+        />
 
-      {/* Active Tab Content Area */}
-      <main className="flex-1 pb-16">
-        {activeTab === 'curriculum' && <LessonView />}
-        {activeTab === 'test' && <SpeedTestView />}
-        {activeTab === 'arcade' && <ArcadeView />}
-        {activeTab === 'analytics' && <AnalyticsView />}
-        {activeTab === 'settings' && <SettingsView />}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>
-            <strong className="text-slate-400">Typing Trainer</strong> • Free & Open Source Touch Typing Suite
-          </span>
-          <span className="text-[11px] text-slate-600">
-            Engineered for Windows, macOS, Linux & Web • 100% Privacy Preserving
-          </span>
-        </div>
-      </footer>
+        <main className="flex-1 overflow-y-auto p-6 bg-bg">
+          {activeTab === 'curriculum' && <LessonView />}
+          {activeTab === 'test' && <SpeedTestView />}
+          {activeTab === 'arcade' && <ArcadeView />}
+          {activeTab === 'analytics' && <AnalyticsView />}
+          {activeTab === 'settings' && <SettingsView />}
+        </main>
+      </div>
 
       {/* User Profiles Management Modal */}
       <ProfileModal

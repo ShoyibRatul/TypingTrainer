@@ -87,5 +87,5 @@ export const FINGER_NAMES: Record<number, { name: string; hand: 'Left' | 'Right'
   6: { name: 'Middle', hand: 'Right', color: '#3b82f6' },  // blue-500
   7: { name: 'Ring', hand: 'Right', color: '#a855f7' },    // purple-500
   8: { name: 'Pinky', hand: 'Right', color: '#ec4899' },   // pink-500
-  9: { name: 'Thumbs', hand: 'Both', color: '#6366f1' },   // indigo-500
+  9: { name: 'Thumbs', hand: 'Both', color: '#16a34a' },   // green-600 / accent
 };

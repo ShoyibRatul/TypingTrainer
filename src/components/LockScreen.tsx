@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { Lock, KeyRound, ArrowRight } from 'lucide-react';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
 
 export const LockScreen: React.FC = () => {
   const { activeProfile, isLocked, unlockActiveProfile } = useProfile();
@@ -22,25 +24,25 @@ export const LockScreen: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 backdrop-blur-lg animate-fadeIn text-slate-100">
-      <div className="w-full max-w-sm bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center shadow-2xl space-y-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-bg/95 backdrop-blur-md animate-fadeIn text-txt">
+      <div className="w-full max-w-xs bg-surface border border-border rounded-card p-6 text-center shadow-lg space-y-5">
         <div className="relative inline-block">
-          <span className="text-6xl inline-block p-4 bg-slate-800/80 rounded-3xl shadow-inner">
+          <span className="text-5xl inline-block p-3 bg-surface-2 rounded-card border border-border shadow-inner">
             {activeProfile.avatar}
           </span>
-          <span className="absolute -bottom-2 -right-2 p-2 bg-indigo-600 rounded-xl text-white shadow-lg">
-            <Lock className="w-4 h-4" />
+          <span className="absolute -bottom-1 -right-1 p-1.5 bg-accent rounded-full text-white shadow-sm">
+            <Lock className="w-3.5 h-3.5" />
           </span>
         </div>
 
         <div>
-          <h2 className="text-2xl font-bold">{activeProfile.name}</h2>
-          <p className="text-xs text-slate-400 mt-1">This workspace is locked with a PIN</p>
+          <h2 className="text-lg font-bold">{activeProfile.name}</h2>
+          <p className="text-xs text-txt-muted mt-0.5">Workspace is locked</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative">
-            <input
+            <Input
               type="password"
               autoFocus
               value={pin}
@@ -49,24 +51,21 @@ export const LockScreen: React.FC = () => {
                 setError(false);
               }}
               placeholder="Enter PIN"
-              className={`w-full bg-slate-950 border rounded-2xl px-4 py-3 text-center tracking-widest text-lg font-mono text-slate-100 focus:outline-none transition ${
-                error ? 'border-rose-500 animate-shake ring-2 ring-rose-500/30' : 'border-slate-700 focus:border-indigo-500'
+              className={`text-center tracking-widest text-base font-mono ${
+                error ? 'border-danger ring-1 ring-danger' : ''
               }`}
             />
-            <KeyRound className="absolute left-4 top-3.5 w-5 h-5 text-slate-500" />
+            <KeyRound className="absolute left-3 top-3 w-4 h-4 text-txt-muted" />
           </div>
 
           {error && (
-            <p className="text-xs text-rose-400 font-medium">Incorrect PIN. Please try again.</p>
+            <p className="text-xs text-danger font-medium">Incorrect PIN. Try again.</p>
           )}
 
-          <button
-            type="submit"
-            className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-2xl transition shadow-lg flex items-center justify-center gap-2"
-          >
+          <Button type="submit" variant="primary" className="w-full">
             <span>Unlock Workspace</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Button>
         </form>
       </div>
     </div>

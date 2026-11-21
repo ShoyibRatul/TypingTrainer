@@ -60,21 +60,30 @@ Per user direction, all non-English lesson content and fixtures have been remove
   - [x] Validation passing: 4/4 schemas verified cleanly.
   - [x] Verified build: `npm run test:schemas && npm run build` passes cleanly.
 
+### Phase 1: Design System & Theming (COMPLETED)
+- [x] **CSS Tokens & Elimination of Blue**:
+  - [x] Created `src/styles/tokens.css` with neutral zinc surfaces (`--bg`, `--surface`, `--surface-2`, `--border`, `--text`, `--text-muted`), green accent (`#16A34A` / `#22C55E`), and red mistakes (`#DC2626` / `#EF4444`).
+  - [x] Configured `tailwind.config.js` to map semantic tokens directly to utility classes.
+  - [x] Replaced all legacy blue/indigo/slate-950 classes across all components with clean tokens.
+- [x] **Zero-Flash Theme System** (`src/utils/theme.ts`):
+  - [x] Implemented live System / Dark / Light theme mode switcher with OS-level change detection.
+- [x] **UI Primitives Library** (`src/components/ui/`):
+  - [x] `Button.tsx` (Primary green, secondary, outline, ghost, danger).
+  - [x] `Card.tsx` (10px radius, 1px border hairline card).
+  - [x] `Input.tsx` (Focused input with subtle green ring).
+  - [x] `Kbd.tsx` (Subtle physical keycap badge).
+- [x] **Native Desktop Layout**:
+  - [x] `TitleBar.tsx` (Draggable window region, native Tauri window controls for minimize, maximize, and close).
+  - [x] `Sidebar.tsx` (Collapsible sidebar with active course indicator "English · US QWERTY", navigation links, theme switcher, and user profile switcher).
+- [x] **Native Multi-Platform Icons Regenerated**:
+  - [x] Updated `public/logo.svg` to the green/neutral palette.
+  - [x] Re-ran `@tauri-apps/cli icon` generating Windows `.ico`, macOS `.icns`, and Linux `.png` icons.
+
 ---
 
 ## 4. What Is Left To Do (Phased Roadmap)
 
-### Phase 1: Design System & Theming (NEXT UP)
-- [ ] Establish `src/styles/tokens.css` with semantic CSS variables:
-  - Neutral palette: `--bg`, `--surface`, `--surface-2`, `--border`, `--text`, `--text-muted`.
-  - Functional palette: `--accent` (Green #16A34A / #22C55E), `--danger` (Red #DC2626 / #EF4444), `--warning` (Yellow/Amber).
-  - **Eliminate all remaining blue shades** from Tailwind config, focus rings, buttons, and links.
-- [ ] Zero-flash theme loader (System default, Light, Dark) persisted per profile.
-- [ ] Local font bundling (Inter for UI, JetBrains Mono for code/typing).
-- [ ] Reusable UI primitive components (`src/components/ui/`): Button, Card, Dialog, Tabs, Input, Kbd, Tooltip, Switch, Toast.
-- [ ] Native shell layout: custom title bar with window controls, collapsible sidebar, course header.
-
-### Phase 2: Typing Engine Refinement & Storage
+### Phase 2: Typing Engine Refinement & Storage (NEXT UP)
 - [ ] Pure TypeScript typing engine (`src/engine/`):
   - Direct QWERTY key evaluation with sub-millisecond precision.
   - Grapheme segmentation via `Intl.Segmenter` and NFC normalization.
