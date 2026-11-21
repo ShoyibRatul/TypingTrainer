@@ -47,11 +47,6 @@
       "../LICENSE",
       "../COMMERCIAL.md",
       "../THIRD_PARTY_NOTICES.md"
-    ],
-    "windows": {
-      "nsis": {
-        "license": "../LICENSE"
-      }
-    }
+    ]
   }
 }
