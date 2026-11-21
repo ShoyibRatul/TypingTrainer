@@ -1,7 +1,11 @@
 import React from 'react';
-import { Minus, Square, X } from 'lucide-react';
+import { Minus, Square, X, Search } from 'lucide-react';
 
-export const TitleBar: React.FC = () => {
+interface TitleBarProps {
+  onOpenCommandPalette?: () => void;
+}
+
+export const TitleBar: React.FC<TitleBarProps> = ({ onOpenCommandPalette }) => {
   // Check if running in Tauri desktop environment
   const isTauri = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
 
@@ -36,6 +40,17 @@ export const TitleBar: React.FC = () => {
         <span className="font-semibold text-[11px] text-txt tracking-tight">Typing Trainer</span>
         <span className="text-[10px] text-txt-muted font-normal">• English QWERTY</span>
       </div>
+
+      {/* Center: Command Palette Trigger */}
+      <button
+        onClick={onOpenCommandPalette}
+        className="hidden sm:flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-border/80 bg-surface/70 hover:bg-surface text-[10px] text-txt-muted hover:text-txt transition-colors cursor-pointer"
+        title="Open Command Palette (Ctrl+K)"
+      >
+        <Search className="w-2.5 h-2.5 text-accent" />
+        <span>Search commands...</span>
+        <span className="font-mono text-[9px] px-1 rounded bg-surface-2 border border-border">Ctrl+K</span>
+      </button>
 
       {isTauri && (
         <div className="flex items-center gap-1">

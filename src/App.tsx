@@ -11,11 +11,15 @@ import { SettingsView } from './components/SettingsView';
 import { PacksView } from './components/PacksView';
 import { ProfileModal } from './components/ProfileModal';
 import { LockScreen } from './components/LockScreen';
+import { CommandPalette } from './components/CommandPalette';
+import { PackImportModal } from './components/PackImportModal';
 import { applyTheme, initThemeWatcher } from './utils/theme';
 
 const MainLayout: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('curriculum');
   const [isProfilesOpen, setIsProfilesOpen] = useState<boolean>(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
+  const [isImportPackOpen, setIsImportPackOpen] = useState<boolean>(false);
   const { isLocked } = useProfile();
 
   useEffect(() => {
@@ -25,10 +29,23 @@ const MainLayout: React.FC = () => {
     return cleanup;
   }, []);
 
+  // Global Keyboard Shortcuts (Cmd/Ctrl+K for Command Palette)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
   return (
     <div className="min-h-screen bg-bg text-txt flex flex-col font-sans selection:bg-accent selection:text-white antialiased">
-      {/* Title Bar (Draggable region in native window) */}
-      <TitleBar />
+      {/* Title Bar (Draggable region in native window with search trigger) */}
+      <TitleBar onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />
 
       {/* Lock screen overlay when profile is locked with PIN */}
       {isLocked && <LockScreen />}
@@ -62,6 +79,22 @@ const MainLayout: React.FC = () => {
       <ProfileModal
         isOpen={isProfilesOpen}
         onClose={() => setIsProfilesOpen(false)}
+      />
+
+      {/* Command Palette (Ctrl+K / Cmd+K) */}
+      <CommandPalette
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onNavigate={setActiveTab}
+        onOpenProfiles={() => setIsProfilesOpen(true)}
+        onOpenImportPack={() => setIsImportPackOpen(true)}
+      />
+
+      {/* Pack Import Dialog */}
+      <PackImportModal
+        isOpen={isImportPackOpen}
+        onClose={() => setIsImportPackOpen(false)}
+        onPackInstalled={() => setActiveTab('packs')}
       />
     </div>
   );

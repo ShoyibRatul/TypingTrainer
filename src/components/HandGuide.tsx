@@ -1,12 +1,27 @@
 import React from 'react';
 import { Finger } from '../types';
-import { FINGER_NAMES } from '../data/keyboards';
+import { FingerAssignment } from '../engine/packs/types';
 
 interface HandGuideProps {
-  activeFinger?: Finger;
+  activeFinger?: Finger | FingerAssignment | string;
 }
 
 export const HandGuide: React.FC<HandGuideProps> = ({ activeFinger }) => {
+  // Normalize to string
+  const norm = typeof activeFinger === 'number'
+    ? {
+        1: 'left-pinky',
+        2: 'left-ring',
+        3: 'left-middle',
+        4: 'left-index',
+        5: 'right-index',
+        6: 'right-middle',
+        7: 'right-ring',
+        8: 'right-pinky',
+        9: 'thumb',
+      }[activeFinger] || ''
+    : activeFinger || '';
+
   return (
     <div className="flex items-center justify-center gap-12 my-2 py-1 select-none">
       {/* Left Hand Diagram */}
@@ -14,37 +29,32 @@ export const HandGuide: React.FC<HandGuideProps> = ({ activeFinger }) => {
         <div className="flex items-end gap-1.5 h-14">
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 1 ? 'h-10 ring-2 ring-rose-400 -translate-y-0.5' : 'h-8 opacity-30'
+              norm === 'left-pinky' ? 'h-10 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-8 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[1].color }}
             title="Left Pinky"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 2 ? 'h-13 ring-2 ring-orange-400 -translate-y-0.5' : 'h-11 opacity-30'
+              norm === 'left-ring' ? 'h-13 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-11 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[2].color }}
             title="Left Ring"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 3 ? 'h-14 ring-2 ring-yellow-400 -translate-y-0.5' : 'h-12 opacity-30'
+              norm === 'left-middle' ? 'h-14 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-12 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[3].color }}
             title="Left Middle"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 4 ? 'h-12 ring-2 ring-emerald-400 -translate-y-0.5' : 'h-10 opacity-30'
+              norm === 'left-index' ? 'h-12 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-10 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[4].color }}
             title="Left Index"
           ></div>
           <div
             className={`w-3.5 h-6 rounded-t-full origin-bottom-left rotate-12 transition-all duration-150 ${
-              activeFinger === 9 ? 'ring-2 ring-accent -translate-y-0.5' : 'opacity-30'
+              norm === 'thumb' ? 'ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: 'var(--accent)' }}
             title="Thumb (Space)"
           ></div>
         </div>
@@ -58,37 +68,32 @@ export const HandGuide: React.FC<HandGuideProps> = ({ activeFinger }) => {
         <div className="flex items-end gap-1.5 h-14">
           <div
             className={`w-3.5 h-6 rounded-t-full origin-bottom-right -rotate-12 transition-all duration-150 ${
-              activeFinger === 9 ? 'ring-2 ring-accent -translate-y-0.5' : 'opacity-30'
+              norm === 'thumb' ? 'ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: 'var(--accent)' }}
             title="Thumb (Space)"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 5 ? 'h-12 ring-2 ring-teal-400 -translate-y-0.5' : 'h-10 opacity-30'
+              norm === 'right-index' ? 'h-12 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-10 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[5].color }}
             title="Right Index"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 6 ? 'h-14 ring-2 ring-blue-400 -translate-y-0.5' : 'h-12 opacity-30'
+              norm === 'right-middle' ? 'h-14 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-12 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[6].color }}
             title="Right Middle"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 7 ? 'h-13 ring-2 ring-purple-400 -translate-y-0.5' : 'h-11 opacity-30'
+              norm === 'right-ring' ? 'h-13 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-11 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[7].color }}
             title="Right Ring"
           ></div>
           <div
             className={`w-3 rounded-t-full transition-all duration-150 ${
-              activeFinger === 8 ? 'h-10 ring-2 ring-pink-400 -translate-y-0.5' : 'h-8 opacity-30'
+              norm === 'right-pinky' ? 'h-10 ring-2 ring-accent -translate-y-0.5 bg-accent opacity-100' : 'h-8 bg-txt-muted/30 opacity-40'
             }`}
-            style={{ backgroundColor: FINGER_NAMES[8].color }}
             title="Right Pinky"
           ></div>
         </div>
