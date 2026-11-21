@@ -1,0 +1,28 @@
+# Proprietary legacy reference folder (DO NOT COMMIT - AVOID COPYRIGHT ISSUES)
+TypingMaster12/
+typingmaster12/
+TypingMaster*/
+
+# Node & Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Tauri & Rust
+src-tauri/target/
+target/
+*.pdb
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

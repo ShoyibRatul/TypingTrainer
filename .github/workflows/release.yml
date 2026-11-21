@@ -1,0 +1,122 @@
+name: "Release & Multi-Platform Auto-Build"
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # -------------------------------------------------------------
+  # Job 1: Build & Deploy Web / PWA version to GitHub Pages
+  # -------------------------------------------------------------
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Upload Web Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+  deploy-pages:
+    needs: build-web
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # -------------------------------------------------------------
+  # Job 2: Build Native Binaries for Windows, macOS, and Linux
+  # -------------------------------------------------------------
+  build-tauri:
+    needs: build-web
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: '--target universal-apple-darwin'
+          - platform: 'ubuntu-22.04'
+            args: ''
+          - platform: 'windows-latest'
+            args: ''
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Rust Stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Rust Cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install Linux Dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libssl-dev
+
+      - name: Install Frontend Dependencies
+        run: npm ci
+
+      - name: Build Tauri Application
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'Typing Trainer ${{ github.ref_name }}'
+          releaseBody: |
+            ## Typing Trainer Release ${{ github.ref_name }}
+            
+            Welcome to the latest release of **Typing Trainer**, the 100% free and open-source multi-platform touch typing tutor!
+            
+            ### Included Assets:
+            - **Windows**: `.msi` installer & `.exe` setup
+            - **macOS**: Universal `.dmg` (Supports both Apple Silicon M1/M2/M3/M4 & Intel Macs)
+            - **Linux**: `.AppImage` (Run anywhere) & `.deb` (Debian/Ubuntu/Mint)
+            - **Web**: Live at GitHub Pages
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}
