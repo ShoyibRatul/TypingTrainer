@@ -16,6 +16,7 @@ interface ProfileContextType {
   recordLessonCompletion: (lessonId: string, result: TypingResult) => void;
   recordTestResult: (title: string, durationSeconds: number, result: TypingResult) => void;
   recordKeyTelemetry: (keyErrors: Record<string, number>, keyLatencies: Record<string, number>) => void;
+  recordArcadeScore: (score: number) => void;
 }
 
 const ACTIVE_ID_KEY = 'typing_trainer_active_id';
@@ -199,6 +200,21 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   };
 
+  const recordArcadeScore = async (score: number) => {
+    if (!activeProfile) return;
+    if (score <= (activeProfile.stats.arcadeHighScore || 0)) return;
+    const updated: UserProfile = {
+      ...activeProfile,
+      lastActiveAt: Date.now(),
+      stats: {
+        ...activeProfile.stats,
+        arcadeHighScore: score,
+      },
+    };
+    await profileRepository.save(updated);
+    setProfiles((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+  };
+
   if (!isLoaded) return null;
 
   return (
@@ -216,6 +232,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
         recordLessonCompletion,
         recordTestResult,
         recordKeyTelemetry,
+        recordArcadeScore,
       }}
     >
       {children}

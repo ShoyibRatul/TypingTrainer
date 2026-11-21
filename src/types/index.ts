@@ -45,6 +45,7 @@ export interface UserStats {
   }[];
   keyErrors: Record<string, number>; // char -> count
   keyLatencies: Record<string, { totalMs: number; count: number }>; // char -> avg latency
+  arcadeHighScore?: number;
 }
 
 export interface UserProfile {
