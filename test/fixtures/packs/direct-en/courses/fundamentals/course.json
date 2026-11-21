@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "fundamentals",
+  "title": { "en": "Home Row Fundamentals" },
+  "description": { "en": "Mastering the home row keys" },
+  "layout": "en-qwerty",
+  "levels": [
+    {
+      "id": "home-row",
+      "title": { "en": "Home Row" },
+      "lessons": ["001-home"]
+    }
+  ],
+  "unlock": "sequential"
+}

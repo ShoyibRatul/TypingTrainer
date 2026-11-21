@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "org.typingtrainer.golden.en",
+  "name": { "en": "English (US Golden Test)" },
+  "version": "1.0.0",
+  "description": { "en": "Golden test fixture for direct physical input" },
+  "language": "en",
+  "region": "US",
+  "script": "Latn",
+  "direction": "ltr",
+  "authors": [{ "name": "Typing Trainer Core Team" }],
+  "license": "MIT",
+  "minAppVersion": "1.0.0",
+  "dependencies": [],
+  "defaults": {
+    "layout": "en-qwerty",
+    "course": "fundamentals"
+  },
+  "unitOfLength": { "type": "grapheme", "charsPerWord": 5 },
+  "contents": {
+    "layouts": ["layouts/en-qwerty.json"],
+    "courses": ["courses/fundamentals/course.json"]
+  }
+}

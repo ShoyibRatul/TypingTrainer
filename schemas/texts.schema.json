@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/texts.schema.json",
+  "title": "Typing Trainer Passages Schema",
+  "description": "Defines typing test passages and quotes within a pack (texts/*.json)",
+  "type": "object",
+  "required": ["schemaVersion", "passages"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "passages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "content", "category"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "object", "additionalProperties": { "type": "string" } },
+          "content": { "type": "string", "minLength": 20 },
+          "author": { "type": "string" },
+          "source": { "type": "string" },
+          "license": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["literature", "technology", "science", "history", "philosophy", "code", "quotes"]
+          },
+          "difficulty": {
+            "type": "string",
+            "enum": ["beginner", "intermediate", "advanced"]
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "bn-avro",
+  "name": { "en": "Bengali Avro Phonetic" },
+  "type": "physical",
+  "geometry": "ansi",
+  "direction": "ltr",
+  "inputMethod": "transliteration",
+  "keys": {
+    "KeyA": { "base": "a", "shift": "A", "finger": "L-pinky" },
+    "KeyK": { "base": "k", "shift": "K", "finger": "R-middle" },
+    "KeyH": { "base": "h", "shift": "H", "finger": "R-index" },
+    "Space": { "base": " ", "shift": " ", "finger": "R-thumb" }
+  },
+  "deadKeys": [],
+  "transliteration": {
+    "rules": [
+      { "in": "kkh", "out": "ক্ষ", "context": "anywhere" },
+      { "in": "kh", "out": "খ", "context": "anywhere" },
+      { "in": "k", "out": "ক", "context": "anywhere" },
+      { "in": "a", "out": "া", "context": "afterConsonant" },
+      { "in": "a", "out": "অ", "context": "startOfWord" }
+    ]
+  }
+}

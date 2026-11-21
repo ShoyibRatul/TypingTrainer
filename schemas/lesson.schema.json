@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/lesson.schema.json",
+  "title": "Typing Trainer Lesson Schema",
+  "description": "Defines an individual practice lesson (courses/*/lessons/*.json)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "objective",
+    "steps",
+    "pass"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "Stable unique lesson id across pack versions"
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "newKeys": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "tips": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": { "type": "string" }
+      },
+      "default": []
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "keys",
+              "words",
+              "sentence",
+              "paragraph",
+              "generated",
+              "numpad",
+              "code",
+              "reading",
+              "tipCard"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "readingItems": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text", "reading"],
+              "properties": {
+                "text": { "type": "string" },
+                "reading": { "type": "string" },
+                "readingType": { "type": "string", "enum": ["romaji", "pinyin", "kana"] }
+              }
+            }
+          },
+          "repeat": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 1
+          },
+          "source": {
+            "type": "string",
+            "enum": ["wordlist", "weakKeys", "bigrams"]
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "instructions": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "pass": {
+      "type": "object",
+      "required": ["minWpm", "minAccuracy"],
+      "properties": {
+        "minWpm": { "type": "number", "minimum": 0 },
+        "minAccuracy": { "type": "number", "minimum": 0, "maximum": 100 },
+        "maxErrorsPerStep": { "type": ["integer", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "estimatedMinutes": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "additionalProperties": false
+}

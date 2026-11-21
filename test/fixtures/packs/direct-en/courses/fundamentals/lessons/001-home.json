@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "001-home",
+  "title": { "en": "Home Row Anchor" },
+  "objective": { "en": "Locate F and J tactile markers" },
+  "newKeys": ["KeyF", "KeyJ"],
+  "tips": [{ "en": "Rest lightly on home keys" }],
+  "steps": [
+    {
+      "type": "keys",
+      "items": ["f", "j", "f", "j"],
+      "repeat": 2
+    }
+  ],
+  "pass": {
+    "minWpm": 10,
+    "minAccuracy": 90,
+    "maxErrorsPerStep": null
+  },
+  "estimatedMinutes": 3
+}

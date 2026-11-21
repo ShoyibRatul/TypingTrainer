@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/placement.schema.json",
+  "title": "Typing Trainer Placement Assessment Schema",
+  "description": "Defines an initial diagnostic placement test to evaluate typist skill level",
+  "type": "object",
+  "required": ["schemaVersion", "stages", "evaluations"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "content", "durationSeconds"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["homeRow", "allLetters", "punctuation", "paragraph"] },
+          "content": { "type": "string" },
+          "durationSeconds": { "type": "integer", "minimum": 15 }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["minWpm", "minAccuracy", "recommendCourseId", "recommendLessonId"],
+        "properties": {
+          "minWpm": { "type": "number" },
+          "minAccuracy": { "type": "number" },
+          "recommendCourseId": { "type": "string" },
+          "recommendLessonId": { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "001-hangul",
+  "title": { "en": "Ga and Gan" },
+  "objective": { "en": "Combine ㄱ + ㅏ into 가, and ㄱ + ㅏ + ㄴ into 간" },
+  "newKeys": ["KeyR", "KeyK", "KeyS"],
+  "tips": [{ "en": "Type consonants on the left hand, vowels on the right hand" }],
+  "steps": [
+    {
+      "type": "words",
+      "items": ["가", "간", "가", "간"],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 10,
+    "minAccuracy": 90,
+    "maxErrorsPerStep": null
+  },
+  "estimatedMinutes": 3
+}

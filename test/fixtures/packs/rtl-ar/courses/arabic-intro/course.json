@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "arabic-intro",
+  "title": { "en": "Arabic Home Row" },
+  "description": { "en": "Master right-to-left typing" },
+  "layout": "ar-standard",
+  "levels": [
+    {
+      "id": "level-1",
+      "title": { "en": "Home Keys" },
+      "lessons": ["001-rtl"]
+    }
+  ],
+  "unlock": "sequential"
+}

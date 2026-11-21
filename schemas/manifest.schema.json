@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/manifest.schema.json",
+  "title": "Typing Trainer Pack Manifest",
+  "description": "Schema definition for a Typing Trainer universal lesson pack manifest (manifest.json)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "version",
+    "description",
+    "language",
+    "script",
+    "direction",
+    "authors",
+    "license",
+    "minAppVersion",
+    "defaults",
+    "contents"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9_-]+)+$",
+      "description": "Globally unique reverse-DNS identifier (e.g. org.typingtrainer.en-us)"
+    },
+    "name": {
+      "type": "object",
+      "description": "Localised display names for the pack, keyed by BCP-47 tag",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+      "description": "SemVer 2.0 string"
+    },
+    "description": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2,3}(-[A-Z]{2}|-[0-9]{3})?$",
+      "description": "BCP-47 language tag (e.g. 'en', 'bn', 'hi', 'ja')"
+    },
+    "region": {
+      "type": "string",
+      "pattern": "^[A-Z]{2}|[0-9]{3}$"
+    },
+    "script": {
+      "type": "string",
+      "pattern": "^[A-Z][a-z]{3}$",
+      "description": "ISO 15924 script code (e.g. 'Latn', 'Beng', 'Deva', 'Arab', 'Jpan')"
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["ltr", "rtl"]
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      },
+      "minItems": 1
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX licence identifier or declared licence (e.g. MIT, CC-BY-4.0, Public Domain)"
+    },
+    "minAppVersion": {
+      "type": "string",
+      "description": "Minimum Typing Trainer version required"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "version"],
+        "properties": {
+          "id": { "type": "string" },
+          "version": { "type": "string" }
+        }
+      },
+      "default": []
+    },
+    "defaults": {
+      "type": "object",
+      "required": ["layout", "course"],
+      "properties": {
+        "layout": { "type": "string" },
+        "course": { "type": "string" }
+      }
+    },
+    "unitOfLength": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["grapheme", "word", "character"]
+        },
+        "charsPerWord": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 5
+        }
+      },
+      "default": { "type": "grapheme", "charsPerWord": 5 }
+    },
+    "contents": {
+      "type": "object",
+      "required": ["layouts", "courses"],
+      "properties": {
+        "layouts": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^layouts\\/[a-z0-9_.-]+\\.json$" },
+          "minItems": 1
+        },
+        "courses": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^courses\\/[a-z0-9_.-]+\\/course\\.json$" },
+          "minItems": 1
+        },
+        "wordlists": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^wordlists\\/[a-z0-9_.-]+\\.txt$" }
+        },
+        "texts": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^texts\\/[a-z0-9_.-]+\\.json$" }
+        },
+        "fonts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["file", "family", "license"],
+            "properties": {
+              "file": { "type": "string", "pattern": "^fonts\\/[a-zA-Z0-9_.-]+\\.(woff2|ttf|otf)$" },
+              "family": { "type": "string" },
+              "license": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "checksums": {
+      "type": "object",
+      "properties": {
+        "algorithm": { "type": "string", "enum": ["sha256"] },
+        "files": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      }
+    },
+    "signature": {
+      "type": ["string", "null"],
+      "description": "Ed25519 signature of checksums manifest for verified packs"
+    }
+  },
+  "additionalProperties": false
+}

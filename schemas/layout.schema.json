@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/layout.schema.json",
+  "title": "Typing Trainer Keyboard Layout Schema",
+  "description": "Defines keyboard key mapping, layers, finger assignments, and input method rules",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "geometry",
+    "direction",
+    "inputMethod",
+    "keys"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "Unique layout id within the pack (e.g. en-us-qwerty, bangla-bijoy)"
+    },
+    "name": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["physical", "virtual", "custom"],
+      "default": "physical"
+    },
+    "geometry": {
+      "type": "string",
+      "enum": ["ansi", "iso", "jis", "abnt", "ks", "numpad"]
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["ltr", "rtl"],
+      "default": "ltr"
+    },
+    "inputMethod": {
+      "type": "string",
+      "enum": ["direct", "transliteration", "composition", "ime"],
+      "description": "Method used to produce target characters from physical keys"
+    },
+    "keys": {
+      "type": "object",
+      "description": "Mapping from standard physical KeyCodes (e.g. KeyA, Digit1) to key properties",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["base", "finger"],
+        "properties": {
+          "base": { "type": "string", "description": "Character produced by unshifted press" },
+          "shift": { "type": "string", "description": "Character produced with Shift modifier" },
+          "altgr": { "type": "string", "description": "Character produced with AltGr modifier" },
+          "shiftAltgr": { "type": "string", "description": "Character produced with Shift+AltGr" },
+          "finger": {
+            "type": "string",
+            "enum": [
+              "L-pinky",
+              "L-ring",
+              "L-middle",
+              "L-index",
+              "L-thumb",
+              "R-thumb",
+              "R-index",
+              "R-middle",
+              "R-ring",
+              "R-pinky"
+            ]
+          },
+          "homeBump": { "type": "boolean", "default": false },
+          "style": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "deadKeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["accentKey", "combinations"],
+        "properties": {
+          "accentKey": { "type": "string" },
+          "combinations": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        }
+      },
+      "default": []
+    },
+    "transliteration": {
+      "type": ["object", "null"],
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["in", "out"],
+            "properties": {
+              "in": { "type": "string" },
+              "out": { "type": "string" },
+              "context": {
+                "type": "string",
+                "enum": ["startOfWord", "afterConsonant", "afterVowel", "anywhere"],
+                "default": "anywhere"
+              }
+            }
+          }
+        }
+      }
+    },
+    "composition": {
+      "type": ["string", "null"],
+      "enum": ["hangul-dubeolsik", null]
+    }
+  },
+  "additionalProperties": false
+}

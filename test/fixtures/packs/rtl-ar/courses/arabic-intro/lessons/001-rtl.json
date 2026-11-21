@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "001-rtl",
+  "title": { "en": "Ba and Ta" },
+  "objective": { "en": "Type index keys in Arabic" },
+  "newKeys": ["KeyF", "KeyJ"],
+  "tips": [{ "en": "Notice the text flows from right to left" }],
+  "steps": [
+    {
+      "type": "keys",
+      "items": ["ب", "ت", "ب", "ت"],
+      "repeat": 2
+    }
+  ],
+  "pass": {
+    "minWpm": 8,
+    "minAccuracy": 85,
+    "maxErrorsPerStep": null
+  },
+  "estimatedMinutes": 3
+}

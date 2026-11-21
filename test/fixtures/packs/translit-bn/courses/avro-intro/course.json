@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "avro-intro",
+  "title": { "en": "Avro Phonetic Basics" },
+  "description": { "en": "Type Bengali phonetically using English keys" },
+  "layout": "bn-avro",
+  "levels": [
+    {
+      "id": "level-1",
+      "title": { "en": "First Letters" },
+      "lessons": ["001-avro"]
+    }
+  ],
+  "unlock": "sequential"
+}

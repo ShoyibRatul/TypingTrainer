@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/course.schema.json",
+  "title": "Typing Trainer Course Schema",
+  "description": "Defines an educational course within a pack (courses/*/course.json)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "description",
+    "layout",
+    "levels"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "Unique course id inside the pack (e.g. beginner, numpad, advanced)"
+    },
+    "title": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "description": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "minProperties": 1
+    },
+    "layout": {
+      "type": "string",
+      "description": "Default layout id associated with this course"
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "lessons"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_-]+$" },
+          "title": {
+            "type": "object",
+            "additionalProperties": { "type": "string" },
+            "minProperties": 1
+          },
+          "description": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "lessons": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "unlock": {
+      "type": "string",
+      "enum": ["sequential", "open", "scoreThreshold"],
+      "default": "sequential"
+    }
+  },
+  "additionalProperties": false
+}

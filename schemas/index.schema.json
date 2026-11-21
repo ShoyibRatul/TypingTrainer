@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://typingtrainer.org/schemas/index.schema.json",
+  "title": "Typing Trainer Pack Store Index Catalog Schema",
+  "description": "Defines the index.json manifest served by community and official pack repositories",
+  "type": "object",
+  "required": ["schemaVersion", "updatedAt", "packs"],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repository": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "version",
+          "description",
+          "language",
+          "script",
+          "sizeBytes",
+          "sha256",
+          "downloadUrl",
+          "license",
+          "verified"
+        ],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "object", "additionalProperties": { "type": "string" } },
+          "version": { "type": "string" },
+          "description": { "type": "object", "additionalProperties": { "type": "string" } },
+          "language": { "type": "string" },
+          "script": { "type": "string" },
+          "sizeBytes": { "type": "integer" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "downloadUrl": { "type": "string", "format": "uri" },
+          "license": { "type": "string" },
+          "verified": { "type": "boolean" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "minAppVersion": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

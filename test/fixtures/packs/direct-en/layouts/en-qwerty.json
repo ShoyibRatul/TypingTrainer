@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "en-qwerty",
+  "name": { "en": "US QWERTY" },
+  "type": "physical",
+  "geometry": "ansi",
+  "direction": "ltr",
+  "inputMethod": "direct",
+  "keys": {
+    "KeyA": { "base": "a", "shift": "A", "finger": "L-pinky" },
+    "KeyS": { "base": "s", "shift": "S", "finger": "L-ring" },
+    "KeyD": { "base": "d", "shift": "D", "finger": "L-middle" },
+    "KeyF": { "base": "f", "shift": "F", "finger": "L-index", "homeBump": true },
+    "KeyJ": { "base": "j", "shift": "J", "finger": "R-index", "homeBump": true },
+    "KeyK": { "base": "k", "shift": "K", "finger": "R-middle" },
+    "KeyL": { "base": "l", "shift": "L", "finger": "R-ring" },
+    "Semicolon": { "base": ";", "shift": ":", "finger": "R-pinky" },
+    "Space": { "base": " ", "shift": " ", "finger": "R-thumb" }
+  },
+  "deadKeys": []
+}

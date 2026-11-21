@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "org.typingtrainer.golden.bn",
+  "name": { "en": "Bengali Avro (Golden Test)", "bn": "বাংলা অভ্র (পরীক্ষা)" },
+  "version": "1.0.0",
+  "description": { "en": "Golden test fixture for transliteration input method" },
+  "language": "bn",
+  "region": "BD",
+  "script": "Beng",
+  "direction": "ltr",
+  "authors": [{ "name": "Typing Trainer Core Team" }],
+  "license": "CC-BY-4.0",
+  "minAppVersion": "1.0.0",
+  "dependencies": [],
+  "defaults": {
+    "layout": "bn-avro",
+    "course": "avro-intro"
+  },
+  "unitOfLength": { "type": "grapheme", "charsPerWord": 5 },
+  "contents": {
+    "layouts": ["layouts/bn-avro.json"],
+    "courses": ["courses/avro-intro/course.json"]
+  }
+}
