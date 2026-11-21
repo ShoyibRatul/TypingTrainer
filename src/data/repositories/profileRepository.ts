@@ -3,7 +3,7 @@ import { IProfileRepository, IProgressRepository, IStatsRepository } from './typ
 
 const STORAGE_PROFILES_KEY = 'tt_profiles_v2';
 const SCHEMA_VERSION_KEY = 'tt_schema_version';
-const CURRENT_SCHEMA_VERSION = 2;
+const CURRENT_SCHEMA_VERSION = 3;
 
 export class LocalProfileRepository implements IProfileRepository, IProgressRepository, IStatsRepository {
   constructor() {
@@ -26,11 +26,42 @@ export class LocalProfileRepository implements IProfileRepository, IProgressRepo
     }
   }
 
+  private migrateProfileData(raw: any): UserProfile {
+    return {
+      id: raw.id,
+      name: raw.name || 'Learner',
+      avatar: raw.avatar || '🚀',
+      pinHash: raw.pinHash,
+      createdAt: raw.createdAt || Date.now(),
+      lastActiveAt: raw.lastActiveAt || Date.now(),
+      preferences: {
+        theme: raw.preferences?.theme || 'dark',
+        soundProfile: raw.preferences?.soundProfile || 'cherry-blue',
+        soundVolume: typeof raw.preferences?.soundVolume === 'number' ? raw.preferences.soundVolume : 0.6,
+        wpmGoal: raw.preferences?.wpmGoal || 50,
+        showHands: raw.preferences?.showHands !== false,
+        showKeyboard: raw.preferences?.showKeyboard !== false,
+      },
+      stats: {
+        totalKeystrokes: raw.stats?.totalKeystrokes || 0,
+        totalTimeSeconds: raw.stats?.totalTimeSeconds || 0,
+        completedLessons: raw.stats?.completedLessons || [],
+        lessonScores: raw.stats?.lessonScores || {},
+        testHistory: raw.stats?.testHistory || [],
+        keyErrors: raw.stats?.keyErrors || {},
+        keyLatencies: raw.stats?.keyLatencies || {},
+      },
+    };
+  }
+
   async getAll(): Promise<UserProfile[]> {
     try {
       const data = localStorage.getItem(STORAGE_PROFILES_KEY);
       if (data) {
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed)) {
+          return parsed.map((p) => this.migrateProfileData(p));
+        }
       }
     } catch (e) {
       console.error('Failed to read profiles:', e);

@@ -1,5 +1,9 @@
 # ⌨️ Typing Trainer
 
+<p align="center">
+  <img src="branding/github-banner.png" alt="Typing Trainer Banner" width="100%" />
+</p>
+
 > **Next-Generation Multi-Platform Touch Typing Suite**  
 > Engineered for **Windows, macOS (Apple Silicon & Intel), Linux & Modern Web Browsers**.
 

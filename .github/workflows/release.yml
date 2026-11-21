@@ -59,6 +59,8 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
           releaseName: ${{ startsWith(github.ref, 'refs/tags/v') && format('Typing Trainer {0}', github.ref_name) || '' }}
@@ -68,7 +70,29 @@ jobs:
             Welcome to the latest release of **Typing Trainer**, the modern multi-platform touch typing tutor!
             
             ### Included Assets:
-            - **Windows**: `.msi` installer & `.exe` setup
+            - **Windows**: `.msi` installer, `.exe` setup & Windows Portable `.zip`
             - **macOS**: Universal `.dmg` (Supports both Apple Silicon M1/M2/M3/M4 & Intel Macs)
             - **Linux**: `.AppImage` (Run anywhere) & `.deb` (Debian/Ubuntu/Mint)
             - **Web**: Live at GitHub Pages
+
+      - name: Package Windows Portable ZIP
+        if: matrix.platform == 'windows-latest'
+        shell: pwsh
+        run: |
+          $version = (Get-Content package.json | ConvertFrom-Json).version
+          $exe = Get-ChildItem -Path "src-tauri/target/release" -Filter "*.exe" -Recurse | Where-Object { $_.Name -notlike "*uninstall*" } | Select-Object -First 1
+          if ($exe) {
+            New-Item -ItemType Directory -Force -Path portable-stage | Out-Null
+            Copy-Item $exe.FullName "portable-stage/TypingTrainer.exe"
+            New-Item -ItemType File -Force -Path "portable-stage/portable.flag" | Out-Null
+            Compress-Archive -Path "portable-stage/*" -DestinationPath "TypingTrainer-v$version-windows-x64-portable.zip" -Force
+            echo "PORTABLE_ZIP=TypingTrainer-v$version-windows-x64-portable.zip" >> $env:GITHUB_ENV
+          }
+
+      - name: Upload Windows Portable ZIP to Release
+        if: matrix.platform == 'windows-latest' && env.PORTABLE_ZIP != ''
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: ${{ env.PORTABLE_ZIP }}

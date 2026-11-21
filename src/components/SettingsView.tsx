@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useProfile } from '../context/ProfileContext';
 import { hashPin } from '../utils/crypto';
-import { Settings, Volume2, Shield, Eye, Download, Check, Lock, Info, Palette, Play } from 'lucide-react';
+import { Settings, Volume2, Shield, Eye, Download, Upload, Check, Lock, Info, Palette, Play, Sparkles, RefreshCw } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Input } from './ui/Input';
 import { THEMES, ThemeMode, applyTheme, getSavedTheme } from '../utils/theme';
 import { soundEngine, SOUND_SETS, SoundSetId } from '../utils/audio';
+import { useUpdater } from '../hooks/useUpdater';
 
 export const SettingsView: React.FC = () => {
   const { activeProfile, updatePreferences } = useProfile();
+  const { status, updateInfo, isPortable, checkForUpdates, installUpdate } = useUpdater();
 
   const [currentTheme, setCurrentTheme] = useState<ThemeMode>(() => getSavedTheme());
   const [activeSoundSet, setActiveSoundSet] = useState<SoundSetId>(() => soundEngine.getSoundSet());
@@ -54,6 +56,29 @@ export const SettingsView: React.FC = () => {
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
+  };
+
+  const handleImportData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const parsed = JSON.parse(event.target?.result as string);
+        if (parsed && parsed.stats) {
+          activeProfile.stats = parsed.stats;
+          if (parsed.preferences) {
+            updatePreferences(parsed.preferences);
+          }
+          alert('Profile progress backup imported successfully!');
+        } else {
+          alert('Invalid profile backup format.');
+        }
+      } catch {
+        alert('Failed to parse backup JSON file.');
+      }
+    };
+    reader.readAsText(file);
   };
 
   return (
@@ -234,15 +259,62 @@ export const SettingsView: React.FC = () => {
         </form>
       </div>
 
-      {/* Backup and Data Export */}
-      <div className="bg-surface border border-border rounded-md p-4 flex items-center justify-between">
+      {/* Backup and Data Export / Import */}
+      <div className="bg-surface border border-border rounded-md p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
-          <h3 className="font-bold text-xs text-txt">Export Training Records</h3>
-          <p className="text-[11px] text-txt-muted">Download your stats, lessons and test history as JSON</p>
+          <h3 className="font-bold text-xs text-txt">Backup & Transfer Progress</h3>
+          <p className="text-[11px] text-txt-muted">Export your stats, stars, and history, or restore between Installed and Portable editions.</p>
         </div>
-        <Button variant="outline" size="sm" onClick={handleExportData}>
-          <Download className="w-3.5 h-3.5" /> Export JSON
-        </Button>
+        <div className="flex items-center gap-2">
+          <label className="cursor-pointer">
+            <span className="px-2.5 py-1.5 rounded-sm border border-border bg-surface-2 hover:bg-surface-2/80 text-txt text-xs font-medium flex items-center gap-1.5 transition-colors">
+              <Upload className="w-3.5 h-3.5" /> Import
+            </span>
+            <input type="file" accept=".json" onChange={handleImportData} className="hidden" />
+          </label>
+          <Button variant="outline" size="sm" onClick={handleExportData}>
+            <Download className="w-3.5 h-3.5" /> Export JSON
+          </Button>
+        </div>
+      </div>
+
+      {/* Software Updates & Deployment Mode */}
+      <div className="bg-surface border border-border rounded-md p-5 space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-accent" />
+            <h3 className="font-bold text-sm text-txt">Application Updates & Deployment</h3>
+          </div>
+          <span className={`text-[10px] uppercase font-mono px-2 py-0.5 rounded font-bold ${
+            isPortable ? 'bg-warning-soft text-warning border border-warning/40' : 'bg-accent-soft text-accent'
+          }`}>
+            {isPortable ? 'Portable Mode (./data)' : 'Installed Mode (%APPDATA%)'}
+          </span>
+        </div>
+
+        <p className="text-xs text-txt-muted">
+          Typing Trainer checks GitHub releases for updates automatically in the background.
+        </p>
+
+        <div className="flex items-center gap-3 pt-1">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => checkForUpdates(true)}
+            disabled={status === 'checking'}
+            className="flex items-center gap-1.5"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${status === 'checking' ? 'animate-spin' : ''}`} />
+            <span>{status === 'checking' ? 'Checking...' : 'Check for Updates'}</span>
+          </Button>
+
+          {status === 'available' && (
+            <Button variant="primary" size="sm" onClick={installUpdate} className="flex items-center gap-1.5 shadow-sm">
+              <Download className="w-3.5 h-3.5" />
+              <span>{isPortable ? 'Download Portable ZIP' : `Install v${updateInfo?.version || ''}`}</span>
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* About & License */}
@@ -253,7 +325,7 @@ export const SettingsView: React.FC = () => {
         </div>
         <div className="space-y-1.5 text-xs text-txt-muted">
           <p>
-            <span className="font-semibold text-txt">Typing Trainer</span> &bull; Version 1.0.3
+            <span className="font-semibold text-txt">Typing Trainer</span> &bull; Version 1.1.0
           </p>
           <p>
             Copyright &copy; 2026 Shoyib Ratul (
