@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-01-common-words",
+  "title": {
+    "en": "Common Words Sprint"
+  },
+  "objective": {
+    "en": "Build speed and rhythm with the 100 most common English words."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Focus on smooth transitions between words rather than raw speed."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "the be to of and a in that have I it for not on with he as you do at"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "this but his by from they we say her she or an will my one all would there their what"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "so up out if about who get which go me when make can like time no just him know take people"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "I would like to know if you can make time for me and my people"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

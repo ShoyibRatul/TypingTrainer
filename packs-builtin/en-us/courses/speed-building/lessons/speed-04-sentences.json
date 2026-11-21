@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-04-sentences",
+  "title": {
+    "en": "Sentence Flow Builder"
+  },
+  "objective": {
+    "en": "Practice typing complete sentences with proper capitalization and punctuation at speed."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Read slightly ahead of what you are typing to maintain flow."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "The quick brown fox jumps over the lazy dog near the quiet river bank."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Every morning she reads the paper, drinks her coffee, and plans the day ahead."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "He packed his bag with five dozen quality journals for the long expedition."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Walking through the forest at dawn, they noticed how the golden light filtered through the tall oak trees."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 35,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

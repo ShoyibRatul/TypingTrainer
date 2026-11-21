@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-08-number-prose",
+  "title": {
+    "en": "Numbers in Prose"
+  },
+  "objective": {
+    "en": "Seamlessly integrate number row keys into natural writing with dates, addresses, and quantities."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Return your fingers to home row after each number reach."
+    }
+  ],
+  "steps": [
+    {
+      "type": "sentence",
+      "items": [
+        "The meeting is scheduled for January 15, 2026 at 3:00 PM in Room 204."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Order #4829 contains 7 items weighing 12.5 kg and costs $349.99 total."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Flight BA247 departs at 08:45 from Gate 31B and arrives at 14:20 local time."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

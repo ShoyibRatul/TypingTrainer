@@ -55,7 +55,7 @@ export function applyTheme(mode: ThemeMode = 'system') {
 export function getSavedTheme(): ThemeMode {
   try {
     const saved = localStorage.getItem('typing_trainer_theme');
-    if (saved && (saved === 'system' || THEMES.some(t => t.id === saved))) {
+    if (saved && (saved === 'system' || saved === 'dark' || saved === 'light' || THEMES.some(t => t.id === saved))) {
       return saved as ThemeMode;
     }
   } catch {

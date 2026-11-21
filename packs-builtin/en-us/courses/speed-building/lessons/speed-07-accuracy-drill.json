@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-07-accuracy-drill",
+  "title": {
+    "en": "Accuracy Precision Challenge"
+  },
+  "objective": {
+    "en": "Push for 98% or higher accuracy on tricky word combinations and similar-looking sequences."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Slow down. Accuracy is more important than speed in this drill."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "affect effect accept except assess access desert dessert advice advise"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "principle principal stationary stationery complement compliment weather whether"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Whether the weather affects the principal decision remains to be seen in the stationary report."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "She accepted his advice to assess the effect of the dessert recipe on the complement of guests."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 25,
+    "minAccuracy": 97,
+    "maxErrorsPerStep": null
+  }
+}

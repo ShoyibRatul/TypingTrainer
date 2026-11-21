@@ -71,7 +71,6 @@ export const LessonView: React.FC = () => {
       description: 'Lower diagonal stagger: Z X C V B N M , . /',
       icon: Target,
       lessonIds: [
-        'fund-07-ei', // fallback or bottom row
         'fund-13-cm',
         'fund-14-vn',
         'fund-15-bx',
@@ -119,6 +118,24 @@ export const LessonView: React.FC = () => {
         'fund-33-symbols',
         'fund-34-paragraphs',
         'fund-35-grand-mastery',
+      ],
+    },
+    {
+      id: 'cat-speed',
+      title: 'Speed Building',
+      description: 'Advanced vocabulary, bigrams, trigrams, and endurance text drills',
+      icon: Zap,
+      lessonIds: [
+        'speed-01-common-words',
+        'speed-02-bigrams',
+        'speed-03-trigrams',
+        'speed-04-sentences',
+        'speed-05-paragraphs',
+        'speed-06-mixed-case',
+        'speed-07-accuracy-drill',
+        'speed-08-number-prose',
+        'speed-09-professional',
+        'speed-10-ultimate',
       ],
     },
     {
@@ -179,6 +196,25 @@ export const LessonView: React.FC = () => {
   } | null>(null);
 
   const hiddenInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcuts for the completion modal (Space/Enter → Continue, R → Retry, Esc → Exit)
+  useEffect(() => {
+    if (!completedResult) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        nextStepOrLesson();
+      } else if (e.key.toLowerCase() === 'r') {
+        e.preventDefault();
+        resetDrill();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        setIsPlaying(false);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [completedResult]);
 
   const activeStep: LessonStep =
     activeLesson?.steps[stepIndex] || { type: 'keys', items: ['ff jj ff jj'] };
@@ -559,7 +595,7 @@ export const LessonView: React.FC = () => {
         <div className="p-3 bg-surface-2 rounded-sm border border-border text-[11px] text-txt-muted">
           <span>Completed: </span>
           <strong className="text-txt">{activeProfile?.stats.completedLessons?.length || 0}</strong>
-          <span> / 44 total</span>
+          <span> / 54 total</span>
         </div>
       </aside>
 

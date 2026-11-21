@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-06-mixed-case",
+  "title": {
+    "en": "Mixed Case Challenge"
+  },
+  "objective": {
+    "en": "Master smooth shift-key coordination with proper names, titles, and mixed-case text."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Use the opposite hand shift key: left Shift for right-hand letters, right Shift for left-hand letters."
+    }
+  ],
+  "steps": [
+    {
+      "type": "words",
+      "items": [
+        "Alice Bob Charlie Diana Edward Frank Grace Henry Irene Jack Karen Lewis"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Dr. Martin Luther King Jr. delivered a speech in Washington on August 28."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "The United Nations held a conference in New York City on Tuesday, March 15."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "Professor Williams from Oxford University published her findings in the Journal of Modern Science."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

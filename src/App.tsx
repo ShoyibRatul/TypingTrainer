@@ -93,7 +93,7 @@ const MainLayout: React.FC = () => {
 
         {/* Main Workspace (Full-bleed without web footer) */}
         <main className="flex-1 overflow-hidden p-5 bg-bg flex flex-col min-w-0">
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-y-auto">
             {activeTab === 'home' && (
               <HomeView
                 onNavigate={setActiveTab}

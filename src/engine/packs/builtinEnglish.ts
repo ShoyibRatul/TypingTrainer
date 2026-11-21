@@ -1,6 +1,6 @@
 /**
  * Built-in English (US QWERTY & Alternatives) Master Pack
- * 44 lessons across 3 comprehensive courses (Fundamentals, Programmer, Numpad).
+ * 54 lessons across 4 comprehensive courses (Fundamentals, Programmer, Numpad, Speed Building).
  * Conforms 100% to Typing Trainer Pack Specification.
  */
 
@@ -14,7 +14,7 @@ export const BUILTIN_ENGLISH_MANIFEST: PackManifest = {
   },
   "version": "1.0.0",
   "description": {
-    "en": "Comprehensive English touch-typing master curriculum featuring 40+ lessons, code syntax, numpad, and alternative layouts."
+    "en": "Comprehensive English touch-typing master curriculum featuring 54 lessons, code syntax, numpad, speed building, and alternative layouts."
   },
   "language": "en",
   "region": "US",
@@ -48,7 +48,8 @@ export const BUILTIN_ENGLISH_MANIFEST: PackManifest = {
     "courses": [
       "courses/fundamentals/course.json",
       "courses/programmer/course.json",
-      "courses/numpad/course.json"
+      "courses/numpad/course.json",
+      "courses/speed-building/course.json"
     ],
     "wordlists": [
       "wordlists/frequency-1000.txt"
@@ -1199,6 +1200,53 @@ export const BUILTIN_ENGLISH_COURSES: Record<string, CourseDefinition> = {
           "lessons/prog-03-casing.json",
           "lessons/prog-04-jsx-html.json",
           "lessons/prog-05-snippets.json"
+        ]
+      }
+    ]
+  },
+  "speed-building": {
+    "schemaVersion": 1,
+    "id": "speed-building",
+    "title": {
+      "en": "Speed Building and Advanced Drills"
+    },
+    "description": {
+      "en": "10 advanced exercises to push your typing speed and accuracy beyond fundamentals. Common words, bigrams, trigrams, paragraphs, mixed case, and professional writing."
+    },
+    "layout": "en-us-qwerty",
+    "levels": [
+      {
+        "id": "level-1-word-speed",
+        "title": {
+          "en": "Stage 1: Word-Level Speed"
+        },
+        "lessons": [
+          "lessons/speed-01-common-words.json",
+          "lessons/speed-02-bigrams.json",
+          "lessons/speed-03-trigrams.json"
+        ]
+      },
+      {
+        "id": "level-2-sentence-flow",
+        "title": {
+          "en": "Stage 2: Sentence Flow"
+        },
+        "lessons": [
+          "lessons/speed-04-sentences.json",
+          "lessons/speed-05-paragraphs.json",
+          "lessons/speed-06-mixed-case.json"
+        ]
+      },
+      {
+        "id": "level-3-mastery",
+        "title": {
+          "en": "Stage 3: Advanced Mastery"
+        },
+        "lessons": [
+          "lessons/speed-07-accuracy-drill.json",
+          "lessons/speed-08-number-prose.json",
+          "lessons/speed-09-professional.json",
+          "lessons/speed-10-ultimate.json"
         ]
       }
     ]
@@ -6400,6 +6448,1389 @@ export const BUILTIN_ENGLISH_LESSONS: Record<string, LessonDefinition> = {
     "pass": {
       "minWpm": 38,
       "minAccuracy": 96,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-01-common-words": {
+    "schemaVersion": 1,
+    "id": "speed-01-common-words",
+    "title": {
+      "en": "Common Words Sprint"
+    },
+    "objective": {
+      "en": "Build speed and rhythm with the 100 most common English words."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Focus on smooth transitions between words rather than raw speed."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "the be to of and a in that have I it for not on with he as you do at"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "this but his by from they we say her she or an will my one all would there their what"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "so up out if about who get which go me when make can like time no just him know take people"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "I would like to know if you can make time for me and my people"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-01-common-words.json": {
+    "schemaVersion": 1,
+    "id": "speed-01-common-words",
+    "title": {
+      "en": "Common Words Sprint"
+    },
+    "objective": {
+      "en": "Build speed and rhythm with the 100 most common English words."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Focus on smooth transitions between words rather than raw speed."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "the be to of and a in that have I it for not on with he as you do at"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "this but his by from they we say her she or an will my one all would there their what"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "so up out if about who get which go me when make can like time no just him know take people"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "I would like to know if you can make time for me and my people"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-01-common-words.json": {
+    "schemaVersion": 1,
+    "id": "speed-01-common-words",
+    "title": {
+      "en": "Common Words Sprint"
+    },
+    "objective": {
+      "en": "Build speed and rhythm with the 100 most common English words."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Focus on smooth transitions between words rather than raw speed."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "the be to of and a in that have I it for not on with he as you do at"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "this but his by from they we say her she or an will my one all would there their what"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "so up out if about who get which go me when make can like time no just him know take people"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "I would like to know if you can make time for me and my people"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-02-bigrams": {
+    "schemaVersion": 1,
+    "id": "speed-02-bigrams",
+    "title": {
+      "en": "High-Frequency Bigrams"
+    },
+    "objective": {
+      "en": "Master the most common two-letter combinations in English for fluid typing."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Let your fingers flow through each bigram as a single unit, not two separate keystrokes."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "th he in er an re on at en nd st es or te of ed is it al ar"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "there other enter under state reason another interest order eastern"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "the other eastern states entered another interesting order on the first date"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-02-bigrams.json": {
+    "schemaVersion": 1,
+    "id": "speed-02-bigrams",
+    "title": {
+      "en": "High-Frequency Bigrams"
+    },
+    "objective": {
+      "en": "Master the most common two-letter combinations in English for fluid typing."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Let your fingers flow through each bigram as a single unit, not two separate keystrokes."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "th he in er an re on at en nd st es or te of ed is it al ar"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "there other enter under state reason another interest order eastern"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "the other eastern states entered another interesting order on the first date"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-02-bigrams.json": {
+    "schemaVersion": 1,
+    "id": "speed-02-bigrams",
+    "title": {
+      "en": "High-Frequency Bigrams"
+    },
+    "objective": {
+      "en": "Master the most common two-letter combinations in English for fluid typing."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Let your fingers flow through each bigram as a single unit, not two separate keystrokes."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "th he in er an re on at en nd st es or te of ed is it al ar"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "there other enter under state reason another interest order eastern"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "the other eastern states entered another interesting order on the first date"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-03-trigrams": {
+    "schemaVersion": 1,
+    "id": "speed-03-trigrams",
+    "title": {
+      "en": "Trigram Power Drill"
+    },
+    "objective": {
+      "en": "Train the most common three-letter sequences to accelerate word recognition."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Think of trigrams as single finger movements rather than three individual presses."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "the and tha ent ion tio for nde has nce edt tis oft sth men"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "therefore understand intention formation evidence mention essential"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "therefore the formation of intentions requires essential evidence and understanding"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-03-trigrams.json": {
+    "schemaVersion": 1,
+    "id": "speed-03-trigrams",
+    "title": {
+      "en": "Trigram Power Drill"
+    },
+    "objective": {
+      "en": "Train the most common three-letter sequences to accelerate word recognition."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Think of trigrams as single finger movements rather than three individual presses."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "the and tha ent ion tio for nde has nce edt tis oft sth men"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "therefore understand intention formation evidence mention essential"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "therefore the formation of intentions requires essential evidence and understanding"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-03-trigrams.json": {
+    "schemaVersion": 1,
+    "id": "speed-03-trigrams",
+    "title": {
+      "en": "Trigram Power Drill"
+    },
+    "objective": {
+      "en": "Train the most common three-letter sequences to accelerate word recognition."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Think of trigrams as single finger movements rather than three individual presses."
+      }
+    ],
+    "steps": [
+      {
+        "type": "keys",
+        "items": [
+          "the and tha ent ion tio for nde has nce edt tis oft sth men"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "therefore understand intention formation evidence mention essential"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "therefore the formation of intentions requires essential evidence and understanding"
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-04-sentences": {
+    "schemaVersion": 1,
+    "id": "speed-04-sentences",
+    "title": {
+      "en": "Sentence Flow Builder"
+    },
+    "objective": {
+      "en": "Practice typing complete sentences with proper capitalization and punctuation at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Read slightly ahead of what you are typing to maintain flow."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The quick brown fox jumps over the lazy dog near the quiet river bank."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Every morning she reads the paper, drinks her coffee, and plans the day ahead."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "He packed his bag with five dozen quality journals for the long expedition."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Walking through the forest at dawn, they noticed how the golden light filtered through the tall oak trees."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-04-sentences.json": {
+    "schemaVersion": 1,
+    "id": "speed-04-sentences",
+    "title": {
+      "en": "Sentence Flow Builder"
+    },
+    "objective": {
+      "en": "Practice typing complete sentences with proper capitalization and punctuation at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Read slightly ahead of what you are typing to maintain flow."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The quick brown fox jumps over the lazy dog near the quiet river bank."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Every morning she reads the paper, drinks her coffee, and plans the day ahead."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "He packed his bag with five dozen quality journals for the long expedition."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Walking through the forest at dawn, they noticed how the golden light filtered through the tall oak trees."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-04-sentences.json": {
+    "schemaVersion": 1,
+    "id": "speed-04-sentences",
+    "title": {
+      "en": "Sentence Flow Builder"
+    },
+    "objective": {
+      "en": "Practice typing complete sentences with proper capitalization and punctuation at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Read slightly ahead of what you are typing to maintain flow."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The quick brown fox jumps over the lazy dog near the quiet river bank."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Every morning she reads the paper, drinks her coffee, and plans the day ahead."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "He packed his bag with five dozen quality journals for the long expedition."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Walking through the forest at dawn, they noticed how the golden light filtered through the tall oak trees."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-05-paragraphs": {
+    "schemaVersion": 1,
+    "id": "speed-05-paragraphs",
+    "title": {
+      "en": "Paragraph Endurance"
+    },
+    "objective": {
+      "en": "Sustain typing speed and accuracy through extended multi-sentence passages."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Maintain a steady rhythm. Speed comes from consistency, not bursts."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Learning to type without looking at the keyboard is one of the most valuable skills you can develop. It frees your mind to focus on what you are writing rather than where your fingers need to go."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The best typists in the world maintain a calm and steady rhythm. They do not rush through easy sections or slow down for difficult ones. Instead, they keep an even pace that allows their fingers to find each key with precision and confidence."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-05-paragraphs.json": {
+    "schemaVersion": 1,
+    "id": "speed-05-paragraphs",
+    "title": {
+      "en": "Paragraph Endurance"
+    },
+    "objective": {
+      "en": "Sustain typing speed and accuracy through extended multi-sentence passages."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Maintain a steady rhythm. Speed comes from consistency, not bursts."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Learning to type without looking at the keyboard is one of the most valuable skills you can develop. It frees your mind to focus on what you are writing rather than where your fingers need to go."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The best typists in the world maintain a calm and steady rhythm. They do not rush through easy sections or slow down for difficult ones. Instead, they keep an even pace that allows their fingers to find each key with precision and confidence."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-05-paragraphs.json": {
+    "schemaVersion": 1,
+    "id": "speed-05-paragraphs",
+    "title": {
+      "en": "Paragraph Endurance"
+    },
+    "objective": {
+      "en": "Sustain typing speed and accuracy through extended multi-sentence passages."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Maintain a steady rhythm. Speed comes from consistency, not bursts."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Learning to type without looking at the keyboard is one of the most valuable skills you can develop. It frees your mind to focus on what you are writing rather than where your fingers need to go."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The best typists in the world maintain a calm and steady rhythm. They do not rush through easy sections or slow down for difficult ones. Instead, they keep an even pace that allows their fingers to find each key with precision and confidence."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 93,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-06-mixed-case": {
+    "schemaVersion": 1,
+    "id": "speed-06-mixed-case",
+    "title": {
+      "en": "Mixed Case Challenge"
+    },
+    "objective": {
+      "en": "Master smooth shift-key coordination with proper names, titles, and mixed-case text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Use the opposite hand shift key: left Shift for right-hand letters, right Shift for left-hand letters."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "Alice Bob Charlie Diana Edward Frank Grace Henry Irene Jack Karen Lewis"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Dr. Martin Luther King Jr. delivered a speech in Washington on August 28."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "The United Nations held a conference in New York City on Tuesday, March 15."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Professor Williams from Oxford University published her findings in the Journal of Modern Science."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-06-mixed-case.json": {
+    "schemaVersion": 1,
+    "id": "speed-06-mixed-case",
+    "title": {
+      "en": "Mixed Case Challenge"
+    },
+    "objective": {
+      "en": "Master smooth shift-key coordination with proper names, titles, and mixed-case text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Use the opposite hand shift key: left Shift for right-hand letters, right Shift for left-hand letters."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "Alice Bob Charlie Diana Edward Frank Grace Henry Irene Jack Karen Lewis"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Dr. Martin Luther King Jr. delivered a speech in Washington on August 28."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "The United Nations held a conference in New York City on Tuesday, March 15."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Professor Williams from Oxford University published her findings in the Journal of Modern Science."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-06-mixed-case.json": {
+    "schemaVersion": 1,
+    "id": "speed-06-mixed-case",
+    "title": {
+      "en": "Mixed Case Challenge"
+    },
+    "objective": {
+      "en": "Master smooth shift-key coordination with proper names, titles, and mixed-case text."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Use the opposite hand shift key: left Shift for right-hand letters, right Shift for left-hand letters."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "Alice Bob Charlie Diana Edward Frank Grace Henry Irene Jack Karen Lewis"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Dr. Martin Luther King Jr. delivered a speech in Washington on August 28."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "The United Nations held a conference in New York City on Tuesday, March 15."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Professor Williams from Oxford University published her findings in the Journal of Modern Science."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 30,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-07-accuracy-drill": {
+    "schemaVersion": 1,
+    "id": "speed-07-accuracy-drill",
+    "title": {
+      "en": "Accuracy Precision Challenge"
+    },
+    "objective": {
+      "en": "Push for 98% or higher accuracy on tricky word combinations and similar-looking sequences."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Slow down. Accuracy is more important than speed in this drill."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "affect effect accept except assess access desert dessert advice advise"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "principle principal stationary stationery complement compliment weather whether"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Whether the weather affects the principal decision remains to be seen in the stationary report."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She accepted his advice to assess the effect of the dessert recipe on the complement of guests."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 97,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-07-accuracy-drill.json": {
+    "schemaVersion": 1,
+    "id": "speed-07-accuracy-drill",
+    "title": {
+      "en": "Accuracy Precision Challenge"
+    },
+    "objective": {
+      "en": "Push for 98% or higher accuracy on tricky word combinations and similar-looking sequences."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Slow down. Accuracy is more important than speed in this drill."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "affect effect accept except assess access desert dessert advice advise"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "principle principal stationary stationery complement compliment weather whether"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Whether the weather affects the principal decision remains to be seen in the stationary report."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She accepted his advice to assess the effect of the dessert recipe on the complement of guests."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 97,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-07-accuracy-drill.json": {
+    "schemaVersion": 1,
+    "id": "speed-07-accuracy-drill",
+    "title": {
+      "en": "Accuracy Precision Challenge"
+    },
+    "objective": {
+      "en": "Push for 98% or higher accuracy on tricky word combinations and similar-looking sequences."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Slow down. Accuracy is more important than speed in this drill."
+      }
+    ],
+    "steps": [
+      {
+        "type": "words",
+        "items": [
+          "affect effect accept except assess access desert dessert advice advise"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "words",
+        "items": [
+          "principle principal stationary stationery complement compliment weather whether"
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Whether the weather affects the principal decision remains to be seen in the stationary report."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "She accepted his advice to assess the effect of the dessert recipe on the complement of guests."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 97,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-08-number-prose": {
+    "schemaVersion": 1,
+    "id": "speed-08-number-prose",
+    "title": {
+      "en": "Numbers in Prose"
+    },
+    "objective": {
+      "en": "Seamlessly integrate number row keys into natural writing with dates, addresses, and quantities."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Return your fingers to home row after each number reach."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The meeting is scheduled for January 15, 2026 at 3:00 PM in Room 204."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Order #4829 contains 7 items weighing 12.5 kg and costs $349.99 total."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Flight BA247 departs at 08:45 from Gate 31B and arrives at 14:20 local time."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-08-number-prose.json": {
+    "schemaVersion": 1,
+    "id": "speed-08-number-prose",
+    "title": {
+      "en": "Numbers in Prose"
+    },
+    "objective": {
+      "en": "Seamlessly integrate number row keys into natural writing with dates, addresses, and quantities."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Return your fingers to home row after each number reach."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The meeting is scheduled for January 15, 2026 at 3:00 PM in Room 204."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Order #4829 contains 7 items weighing 12.5 kg and costs $349.99 total."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Flight BA247 departs at 08:45 from Gate 31B and arrives at 14:20 local time."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-08-number-prose.json": {
+    "schemaVersion": 1,
+    "id": "speed-08-number-prose",
+    "title": {
+      "en": "Numbers in Prose"
+    },
+    "objective": {
+      "en": "Seamlessly integrate number row keys into natural writing with dates, addresses, and quantities."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Return your fingers to home row after each number reach."
+      }
+    ],
+    "steps": [
+      {
+        "type": "sentence",
+        "items": [
+          "The meeting is scheduled for January 15, 2026 at 3:00 PM in Room 204."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Order #4829 contains 7 items weighing 12.5 kg and costs $349.99 total."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "sentence",
+        "items": [
+          "Flight BA247 departs at 08:45 from Gate 31B and arrives at 14:20 local time."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 25,
+      "minAccuracy": 92,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-09-professional": {
+    "schemaVersion": 1,
+    "id": "speed-09-professional",
+    "title": {
+      "en": "Professional Writing Drill"
+    },
+    "objective": {
+      "en": "Practice typing professional emails, reports, and business correspondence at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Professional writing demands both speed and precision. Keep errors below 2%."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Dear Mr. Thompson, I am writing to confirm our meeting scheduled for next Thursday at 2:30 PM. Please bring the quarterly sales report and the updated client list."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The project deadline has been moved to December 15. All team members should submit their progress reports by end of day Friday. Contact Sarah at extension 4201 if you have questions."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Following our review of the Q3 financial statements, we recommend increasing the marketing budget by 12% and reallocating resources from the legacy systems division to the new product development team."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-09-professional.json": {
+    "schemaVersion": 1,
+    "id": "speed-09-professional",
+    "title": {
+      "en": "Professional Writing Drill"
+    },
+    "objective": {
+      "en": "Practice typing professional emails, reports, and business correspondence at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Professional writing demands both speed and precision. Keep errors below 2%."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Dear Mr. Thompson, I am writing to confirm our meeting scheduled for next Thursday at 2:30 PM. Please bring the quarterly sales report and the updated client list."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The project deadline has been moved to December 15. All team members should submit their progress reports by end of day Friday. Contact Sarah at extension 4201 if you have questions."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Following our review of the Q3 financial statements, we recommend increasing the marketing budget by 12% and reallocating resources from the legacy systems division to the new product development team."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-09-professional.json": {
+    "schemaVersion": 1,
+    "id": "speed-09-professional",
+    "title": {
+      "en": "Professional Writing Drill"
+    },
+    "objective": {
+      "en": "Practice typing professional emails, reports, and business correspondence at speed."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "Professional writing demands both speed and precision. Keep errors below 2%."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "Dear Mr. Thompson, I am writing to confirm our meeting scheduled for next Thursday at 2:30 PM. Please bring the quarterly sales report and the updated client list."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "The project deadline has been moved to December 15. All team members should submit their progress reports by end of day Friday. Contact Sarah at extension 4201 if you have questions."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Following our review of the Q3 financial statements, we recommend increasing the marketing budget by 12% and reallocating resources from the legacy systems division to the new product development team."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 35,
+      "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-10-ultimate": {
+    "schemaVersion": 1,
+    "id": "speed-10-ultimate",
+    "title": {
+      "en": "Ultimate Speed Challenge"
+    },
+    "objective": {
+      "en": "The final speed test. Type complex, varied text at maximum velocity with high accuracy."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "This is the summit. Trust your muscle memory and let your fingers fly."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The ancient library contained over 50,000 volumes spanning every subject imaginable. From philosophy to physics, history to horticulture, each shelf told a story of human curiosity and the relentless pursuit of knowledge."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "By 2025, renewable energy sources accounted for 38% of global electricity generation. Solar panels covered 12 million rooftops, and wind turbines dotted coastlines from Portugal to Japan, spinning quietly against bright morning skies."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Dr. Elizabeth Chen (MIT, Class of '09) published her groundbreaking research on quantum computing in Nature magazine. Her team's 47-qubit processor achieved a 99.2% gate fidelity, surpassing all previous benchmarks by a significant margin."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 45,
+      "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  },
+  "lessons/speed-10-ultimate.json": {
+    "schemaVersion": 1,
+    "id": "speed-10-ultimate",
+    "title": {
+      "en": "Ultimate Speed Challenge"
+    },
+    "objective": {
+      "en": "The final speed test. Type complex, varied text at maximum velocity with high accuracy."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "This is the summit. Trust your muscle memory and let your fingers fly."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The ancient library contained over 50,000 volumes spanning every subject imaginable. From philosophy to physics, history to horticulture, each shelf told a story of human curiosity and the relentless pursuit of knowledge."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "By 2025, renewable energy sources accounted for 38% of global electricity generation. Solar panels covered 12 million rooftops, and wind turbines dotted coastlines from Portugal to Japan, spinning quietly against bright morning skies."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Dr. Elizabeth Chen (MIT, Class of '09) published her groundbreaking research on quantum computing in Nature magazine. Her team's 47-qubit processor achieved a 99.2% gate fidelity, surpassing all previous benchmarks by a significant margin."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 45,
+      "minAccuracy": 95,
+      "maxErrorsPerStep": null
+    }
+  },
+  "speed-building/lessons/speed-10-ultimate.json": {
+    "schemaVersion": 1,
+    "id": "speed-10-ultimate",
+    "title": {
+      "en": "Ultimate Speed Challenge"
+    },
+    "objective": {
+      "en": "The final speed test. Type complex, varied text at maximum velocity with high accuracy."
+    },
+    "newKeys": [],
+    "tips": [
+      {
+        "en": "This is the summit. Trust your muscle memory and let your fingers fly."
+      }
+    ],
+    "steps": [
+      {
+        "type": "paragraph",
+        "items": [
+          "The ancient library contained over 50,000 volumes spanning every subject imaginable. From philosophy to physics, history to horticulture, each shelf told a story of human curiosity and the relentless pursuit of knowledge."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "By 2025, renewable energy sources accounted for 38% of global electricity generation. Solar panels covered 12 million rooftops, and wind turbines dotted coastlines from Portugal to Japan, spinning quietly against bright morning skies."
+        ],
+        "repeat": 1
+      },
+      {
+        "type": "paragraph",
+        "items": [
+          "Dr. Elizabeth Chen (MIT, Class of '09) published her groundbreaking research on quantum computing in Nature magazine. Her team's 47-qubit processor achieved a 99.2% gate fidelity, surpassing all previous benchmarks by a significant margin."
+        ],
+        "repeat": 1
+      }
+    ],
+    "pass": {
+      "minWpm": 45,
+      "minAccuracy": 95,
       "maxErrorsPerStep": null
     }
   }

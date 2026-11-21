@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-10-ultimate",
+  "title": {
+    "en": "Ultimate Speed Challenge"
+  },
+  "objective": {
+    "en": "The final speed test. Type complex, varied text at maximum velocity with high accuracy."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "This is the summit. Trust your muscle memory and let your fingers fly."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "The ancient library contained over 50,000 volumes spanning every subject imaginable. From philosophy to physics, history to horticulture, each shelf told a story of human curiosity and the relentless pursuit of knowledge."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "By 2025, renewable energy sources accounted for 38% of global electricity generation. Solar panels covered 12 million rooftops, and wind turbines dotted coastlines from Portugal to Japan, spinning quietly against bright morning skies."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "Dr. Elizabeth Chen (MIT, Class of '09) published her groundbreaking research on quantum computing in Nature magazine. Her team's 47-qubit processor achieved a 99.2% gate fidelity, surpassing all previous benchmarks by a significant margin."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 45,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

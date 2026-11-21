@@ -202,8 +202,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-surface border border-border rounded-card w-full max-w-xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 bg-black/60 backdrop-blur-sm p-4" onClick={onClose}>
+      <div className="bg-surface border border-border rounded-card w-full max-w-xl shadow-2xl overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
         {/* Search Header */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-border bg-surface">
           <Search className="w-4 h-4 text-accent flex-shrink-0" />

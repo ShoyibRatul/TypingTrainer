@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-03-trigrams",
+  "title": {
+    "en": "Trigram Power Drill"
+  },
+  "objective": {
+    "en": "Train the most common three-letter sequences to accelerate word recognition."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Think of trigrams as single finger movements rather than three individual presses."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "the and tha ent ion tio for nde has nce edt tis oft sth men"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "therefore understand intention formation evidence mention essential"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "therefore the formation of intentions requires essential evidence and understanding"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}

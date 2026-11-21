@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-09-professional",
+  "title": {
+    "en": "Professional Writing Drill"
+  },
+  "objective": {
+    "en": "Practice typing professional emails, reports, and business correspondence at speed."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Professional writing demands both speed and precision. Keep errors below 2%."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "Dear Mr. Thompson, I am writing to confirm our meeting scheduled for next Thursday at 2:30 PM. Please bring the quarterly sales report and the updated client list."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "The project deadline has been moved to December 15. All team members should submit their progress reports by end of day Friday. Contact Sarah at extension 4201 if you have questions."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "Following our review of the Q3 financial statements, we recommend increasing the marketing budget by 12% and reallocating resources from the legacy systems division to the new product development team."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 35,
+    "minAccuracy": 95,
+    "maxErrorsPerStep": null
+  }
+}

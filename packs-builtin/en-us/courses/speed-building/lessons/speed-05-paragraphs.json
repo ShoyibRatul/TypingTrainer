@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-05-paragraphs",
+  "title": {
+    "en": "Paragraph Endurance"
+  },
+  "objective": {
+    "en": "Sustain typing speed and accuracy through extended multi-sentence passages."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Maintain a steady rhythm. Speed comes from consistency, not bursts."
+    }
+  ],
+  "steps": [
+    {
+      "type": "paragraph",
+      "items": [
+        "Learning to type without looking at the keyboard is one of the most valuable skills you can develop. It frees your mind to focus on what you are writing rather than where your fingers need to go."
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "paragraph",
+      "items": [
+        "The best typists in the world maintain a calm and steady rhythm. They do not rush through easy sections or slow down for difficult ones. Instead, they keep an even pace that allows their fingers to find each key with precision and confidence."
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 35,
+    "minAccuracy": 93,
+    "maxErrorsPerStep": null
+  }
+}

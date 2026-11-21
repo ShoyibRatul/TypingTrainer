@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "speed-02-bigrams",
+  "title": {
+    "en": "High-Frequency Bigrams"
+  },
+  "objective": {
+    "en": "Master the most common two-letter combinations in English for fluid typing."
+  },
+  "newKeys": [],
+  "tips": [
+    {
+      "en": "Let your fingers flow through each bigram as a single unit, not two separate keystrokes."
+    }
+  ],
+  "steps": [
+    {
+      "type": "keys",
+      "items": [
+        "th he in er an re on at en nd st es or te of ed is it al ar"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "words",
+      "items": [
+        "there other enter under state reason another interest order eastern"
+      ],
+      "repeat": 1
+    },
+    {
+      "type": "sentence",
+      "items": [
+        "the other eastern states entered another interesting order on the first date"
+      ],
+      "repeat": 1
+    }
+  ],
+  "pass": {
+    "minWpm": 30,
+    "minAccuracy": 92,
+    "maxErrorsPerStep": null
+  }
+}
