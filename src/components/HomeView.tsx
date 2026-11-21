@@ -249,10 +249,17 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onContinueLesson
             )}
           </div>
 
-          <div className="pt-3 border-t border-border">
+          <div className="pt-3 border-t border-border flex flex-col gap-2">
+            <button
+              onClick={() => onNavigate('curriculum')}
+              className="w-full py-2 rounded-sm bg-accent hover:bg-accent-hover text-xs font-semibold text-on-accent transition-colors flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Smart Review Difficult Keys</span>
+            </button>
             <button
               onClick={() => onNavigate('arcade')}
-              className="w-full py-2 rounded-sm bg-surface-2 hover:bg-surface-2/80 text-xs font-medium text-txt border border-border transition-colors flex items-center justify-center gap-1.5"
+              className="w-full py-2 rounded-sm bg-surface-2 hover:bg-surface-2/80 text-xs font-medium text-txt border border-border transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <span>Play Arcade to Warm Up</span>
               <ArrowRight className="w-3 h-3 text-txt-muted" />

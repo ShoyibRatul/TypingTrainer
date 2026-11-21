@@ -7,6 +7,7 @@ interface ProfileContextType {
   profiles: UserProfile[];
   activeProfile: UserProfile | null;
   isLocked: boolean;
+  isLoaded: boolean;
   createProfile: (name: string, avatar: string, pin?: string) => Promise<UserProfile>;
   switchProfile: (profileId: string, pin?: string) => Promise<{ success: boolean; error?: string }>;
   unlockActiveProfile: (pin: string) => Promise<boolean>;
@@ -31,23 +32,6 @@ const createDefaultStats = (): UserStats => ({
   keyLatencies: {},
 });
 
-const DEFAULT_PROFILE: UserProfile = {
-  id: 'user-default-1',
-  name: 'Learner One',
-  avatar: '🚀',
-  createdAt: Date.now(),
-  lastActiveAt: Date.now(),
-  preferences: {
-    theme: 'dark',
-    soundProfile: 'cherry-blue',
-    soundVolume: 0.6,
-    wpmGoal: 50,
-    showHands: true,
-    showKeyboard: true,
-  },
-  stats: createDefaultStats(),
-};
-
 const ProfileContext = createContext<ProfileContextType | null>(null);
 
 export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -59,15 +43,14 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
   // Initialize from repository
   useEffect(() => {
     profileRepository.getAll().then((list) => {
-      let activeList = list;
-      if (activeList.length === 0) {
-        activeList = [DEFAULT_PROFILE];
-        profileRepository.save(DEFAULT_PROFILE);
-      }
-      setProfiles(activeList);
-
-      const savedId = localStorage.getItem(ACTIVE_ID_KEY) || activeList[0]?.id;
+      setProfiles(list);
+      const savedId = localStorage.getItem(ACTIVE_ID_KEY) || (list[0]?.id ?? '');
       setActiveProfileId(savedId);
+
+      const target = list.find((p) => p.id === savedId);
+      if (target?.pinHash) {
+        setIsLocked(true);
+      }
       setIsLoaded(true);
     });
   }, []);
@@ -223,6 +206,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
         profiles,
         activeProfile,
         isLocked,
+        isLoaded,
         createProfile,
         switchProfile,
         unlockActiveProfile,

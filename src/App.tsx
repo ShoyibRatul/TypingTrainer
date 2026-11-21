@@ -15,6 +15,8 @@ import { ProfileModal } from './components/ProfileModal';
 import { LockScreen } from './components/LockScreen';
 import { CommandPalette } from './components/CommandPalette';
 import { PackImportModal } from './components/PackImportModal';
+import { OnboardingWizard } from './components/OnboardingWizard';
+import { UserSelectScreen } from './components/UserSelectScreen';
 import { applyTheme, initThemeWatcher, getSavedTheme } from './utils/theme';
 
 const MainLayout: React.FC = () => {
@@ -22,7 +24,24 @@ const MainLayout: React.FC = () => {
   const [isProfilesOpen, setIsProfilesOpen] = useState<boolean>(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
   const [isImportPackOpen, setIsImportPackOpen] = useState<boolean>(false);
-  const { isLocked } = useProfile();
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState<boolean>(false);
+  const [isUserSelectOpen, setIsUserSelectOpen] = useState<boolean>(false);
+
+  const { profiles, isLocked, isLoaded } = useProfile();
+
+  // On first load, check if any profile exists or prompt user selection
+  useEffect(() => {
+    if (!isLoaded) return;
+    if (profiles.length === 0) {
+      setIsOnboardingOpen(true);
+    } else {
+      // If multiple profiles exist or user selector was explicitly requested
+      const skipPrompt = localStorage.getItem('typing_trainer_skip_startup_select');
+      if (!skipPrompt && profiles.length > 1) {
+        setIsUserSelectOpen(true);
+      }
+    }
+  }, [isLoaded, profiles.length]);
 
   useEffect(() => {
     // Apply saved theme or system default
@@ -132,6 +151,24 @@ const MainLayout: React.FC = () => {
         onClose={() => setIsImportPackOpen(false)}
         onPackInstalled={() => setActiveTab('packs')}
       />
+
+      {/* First-Run Onboarding Wizard */}
+      {isOnboardingOpen && (
+        <OnboardingWizard
+          onComplete={() => setIsOnboardingOpen(false)}
+        />
+      )}
+
+      {/* Typing Master Startup User Selection Screen */}
+      {isUserSelectOpen && !isOnboardingOpen && (
+        <UserSelectScreen
+          onSelectUser={() => setIsUserSelectOpen(false)}
+          onAddNewUser={() => {
+            setIsUserSelectOpen(false);
+            setIsOnboardingOpen(true);
+          }}
+        />
+      )}
     </div>
   );
 };
