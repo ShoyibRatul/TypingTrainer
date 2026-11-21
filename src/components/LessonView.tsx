@@ -5,6 +5,7 @@ import { VirtualKeyboard } from './VirtualKeyboard';
 import { HandGuide } from './HandGuide';
 import { useProfile } from '../context/ProfileContext';
 import { soundEngine } from '../utils/audio';
+import { TypingSession } from '../engine/session';
 import confetti from 'canvas-confetti';
 import { ChevronRight, RotateCcw, Star, Award, Zap, Target } from 'lucide-react';
 import { Button } from './ui/Button';
@@ -15,21 +16,18 @@ export const LessonView: React.FC = () => {
   const [selectedLesson, setSelectedLesson] = useState<Lesson>(CURRICULUM_MODULES[0].lessons[0]);
   const [exerciseIndex, setExerciseIndex] = useState<number>(0);
 
-  const [inputBuffer, setInputBuffer] = useState<string>('');
-  const [errorCount, setErrorCount] = useState<number>(0);
+  const [session, setSession] = useState<TypingSession | null>(null);
+  const [progressPercent, setProgressPercent] = useState<number>(0);
+  const [currentExpected, setCurrentExpected] = useState<string>('');
+  const [typedGraphemes, setTypedGraphemes] = useState<string[]>([]);
   const [lastActiveKey, setLastActiveKey] = useState<string>('');
-  const [startTime, setStartTime] = useState<number | null>(null);
+  const [mistakeCount, setMistakeCount] = useState<number>(0);
   const [completedResult, setCompletedResult] = useState<TypingResult | null>(null);
-
-  const lastKeyTimeRef = useRef<number>(Date.now());
-  const keyErrorsRef = useRef<Record<string, number>>({});
-  const keyLatenciesRef = useRef<Record<string, number>>({});
 
   const hiddenInputRef = useRef<HTMLInputElement>(null);
 
   const activeExercise: Exercise = selectedLesson.exercises[exerciseIndex] || selectedLesson.exercises[0];
   const targetText = activeExercise.content;
-  const currentChar = targetText[inputBuffer.length] || '';
   const currentFinger = activeExercise.targetFingers[0] || 4;
 
   const focusInput = () => {
@@ -41,12 +39,54 @@ export const LessonView: React.FC = () => {
   }, [selectedLesson, exerciseIndex]);
 
   const resetExercise = () => {
-    setInputBuffer('');
-    setErrorCount(0);
-    setStartTime(null);
+    const newSession = new TypingSession({
+      targetText,
+      onKeystroke: (metrics, nextGrapheme) => {
+        setProgressPercent(newSession.getProgressPercent());
+        setCurrentExpected(nextGrapheme);
+        setTypedGraphemes(newSession.getTypedGraphemes());
+        setMistakeCount(metrics.errors);
+      },
+      onComplete: (finalMetrics) => {
+        let stars = 1;
+        if (finalMetrics.accuracy >= 98 && finalMetrics.wpm >= 25) stars = 3;
+        else if (finalMetrics.accuracy >= 94) stars = 2;
+
+        const result: TypingResult = {
+          wpm: finalMetrics.wpm,
+          rawWpm: finalMetrics.rawWpm,
+          cpm: finalMetrics.cpm,
+          accuracy: finalMetrics.accuracy,
+          elapsedSeconds: finalMetrics.elapsedSeconds,
+          errors: finalMetrics.errors,
+          backspaceCount: 0,
+          stars,
+        };
+
+        setCompletedResult(result);
+        soundEngine.playSuccess();
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.6 }
+        });
+
+        recordLessonCompletion(selectedLesson.id, result);
+        const intervals = newSession.getIntervals();
+        const latenciesMap: Record<string, number> = {};
+        intervals.forEach((i) => {
+          if (i.isCorrect) latenciesMap[i.char] = i.latencyMs;
+        });
+        recordKeyTelemetry(newSession.getKeyErrors(), latenciesMap);
+      },
+    });
+
+    setSession(newSession);
+    setProgressPercent(0);
+    setCurrentExpected(newSession.getCurrentExpected());
+    setTypedGraphemes([]);
+    setMistakeCount(0);
     setCompletedResult(null);
-    keyErrorsRef.current = {};
-    keyLatenciesRef.current = {};
     setTimeout(focusInput, 50);
   };
 
@@ -57,80 +97,25 @@ export const LessonView: React.FC = () => {
       return;
     }
 
-    if (!startTime) {
-      setStartTime(Date.now());
-    }
+    if (!session || session.getStatus() === 'completed') return;
 
-    const now = Date.now();
-    const latency = now - lastKeyTimeRef.current;
-    lastKeyTimeRef.current = now;
-
-    const expected = targetText[inputBuffer.length];
     const soundProfile = activeProfile?.preferences.soundProfile || 'cherry-blue';
     const soundVolume = activeProfile?.preferences.soundVolume ?? 0.6;
 
-    if (e.key === 'Backspace') {
-      return;
-    }
-
-    if (e.key === expected) {
+    const res = session.handleKey(e.key, e.code);
+    if (res.isCorrect) {
       soundEngine.playKeystroke(soundProfile, soundVolume);
-      keyLatenciesRef.current[expected] = latency;
-
-      const nextBuffer = inputBuffer + e.key;
-      setInputBuffer(nextBuffer);
-
-      if (nextBuffer.length >= targetText.length) {
-        finishExercise(nextBuffer, startTime ? (now - startTime) / 1000 : 1);
-      }
     } else {
       soundEngine.playError(soundVolume);
-      setErrorCount(prev => prev + 1);
-      keyErrorsRef.current[expected] = (keyErrorsRef.current[expected] || 0) + 1;
     }
-  };
-
-  const finishExercise = (buffer: string, elapsedSecs: number) => {
-    const words = buffer.length / 5;
-    const minutes = Math.max(elapsedSecs / 60, 0.05);
-    const rawWpm = Math.round(words / minutes);
-    const accuracy = Math.max(0, Math.round(((buffer.length - errorCount) / buffer.length) * 100));
-    const netWpm = Math.max(0, Math.round(rawWpm * (accuracy / 100)));
-    const cpm = Math.round(buffer.length / minutes);
-
-    let stars = 1;
-    if (accuracy >= 98 && netWpm >= 25) stars = 3;
-    else if (accuracy >= 94) stars = 2;
-
-    const result: TypingResult = {
-      wpm: netWpm,
-      rawWpm,
-      cpm,
-      accuracy,
-      elapsedSeconds: Math.round(elapsedSecs),
-      errors: errorCount,
-      backspaceCount: 0,
-      stars,
-    };
-
-    setCompletedResult(result);
-    soundEngine.playSuccess();
-    confetti({
-      particleCount: 70,
-      spread: 60,
-      origin: { y: 0.6 }
-    });
-
-    recordLessonCompletion(selectedLesson.id, result);
-    recordKeyTelemetry(keyErrorsRef.current, keyLatenciesRef.current);
   };
 
   const nextExercise = () => {
     if (exerciseIndex + 1 < selectedLesson.exercises.length) {
-      setExerciseIndex(prev => prev + 1);
+      setExerciseIndex((prev) => prev + 1);
     } else {
-      const allLessons = CURRICULUM_MODULES.flatMap(m => m.lessons);
-      const currIdx = allLessons.findIndex(l => l.id === selectedLesson.id);
+      const allLessons = CURRICULUM_MODULES.flatMap((m) => m.lessons);
+      const currIdx = allLessons.findIndex((l) => l.id === selectedLesson.id);
       if (currIdx + 1 < allLessons.length) {
         setSelectedLesson(allLessons[currIdx + 1]);
         setExerciseIndex(0);
@@ -138,7 +123,7 @@ export const LessonView: React.FC = () => {
     }
   };
 
-  const progressPercent = Math.round((inputBuffer.length / targetText.length) * 100);
+  const targetGraphemes = session ? session.getTargetGraphemes() : [];
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-5">
@@ -152,12 +137,11 @@ export const LessonView: React.FC = () => {
           <p className="text-xs text-txt-muted mt-0.5 max-w-xl">{selectedLesson.description}</p>
         </div>
 
-        {/* Lesson selector */}
         <div className="flex items-center gap-2">
           <select
             value={selectedLesson.id}
             onChange={(e) => {
-              const found = CURRICULUM_MODULES.flatMap(m => m.lessons).find(l => l.id === e.target.value);
+              const found = CURRICULUM_MODULES.flatMap((m) => m.lessons).find((l) => l.id === e.target.value);
               if (found) {
                 setSelectedLesson(found);
                 setExerciseIndex(0);
@@ -165,9 +149,9 @@ export const LessonView: React.FC = () => {
             }}
             className="bg-surface-2 border border-border text-txt text-xs font-medium rounded-btn px-3 py-1.5 focus:border-accent focus:outline-none"
           >
-            {CURRICULUM_MODULES.map(m => (
+            {CURRICULUM_MODULES.map((m) => (
               <optgroup key={m.id} label={`${m.title} (${m.level})`}>
-                {m.lessons.map(l => (
+                {m.lessons.map((l) => (
                   <option key={l.id} value={l.id}>
                     {l.title}
                   </option>
@@ -197,10 +181,9 @@ export const LessonView: React.FC = () => {
           ))}
         </div>
 
-        {/* Accuracy and Progress Ticker */}
         <div className="flex items-center gap-4 text-xs font-medium">
           <span className="text-txt-muted flex items-center gap-1">
-            <Target className="w-3.5 h-3.5 text-danger" /> Mistakes: <span className="text-danger font-semibold">{errorCount}</span>
+            <Target className="w-3.5 h-3.5 text-danger" /> Mistakes: <span className="text-danger font-semibold">{mistakeCount}</span>
           </span>
           <span className="text-txt-muted flex items-center gap-1">
             <Zap className="w-3.5 h-3.5 text-accent" /> Progress: <span className="text-txt font-semibold">{progressPercent}%</span>
@@ -221,7 +204,6 @@ export const LessonView: React.FC = () => {
           onKeyDown={handleKeyDown}
         />
 
-        {/* Instructions banner */}
         <div className="mb-4 text-xs text-txt-muted bg-surface-2 border border-border px-3.5 py-2 rounded-btn flex items-center justify-between">
           <span>💡 {activeExercise.instructions}</span>
           <span className="text-[10px] text-txt-muted italic">Click & type</span>
@@ -229,9 +211,9 @@ export const LessonView: React.FC = () => {
 
         {/* Text Display Stream */}
         <div className="font-mono text-2xl sm:text-3xl tracking-wide leading-relaxed p-6 bg-surface-2 rounded-btn border border-border min-h-[130px] flex flex-wrap items-center">
-          {targetText.split('').map((char, index) => {
-            const isTyped = index < inputBuffer.length;
-            const isCurrent = index === inputBuffer.length;
+          {targetGraphemes.map((char, index) => {
+            const isTyped = index < typedGraphemes.length;
+            const isCurrent = index === typedGraphemes.length;
 
             return (
               <span
@@ -253,7 +235,6 @@ export const LessonView: React.FC = () => {
           })}
         </div>
 
-        {/* Bottom controls */}
         <div className="mt-4 flex items-center justify-between text-xs text-txt-muted">
           <Button variant="ghost" size="sm" onClick={resetExercise}>
             <RotateCcw className="w-3.5 h-3.5" /> Restart Part
@@ -265,21 +246,18 @@ export const LessonView: React.FC = () => {
         </div>
       </div>
 
-      {/* Visual Hand Guide */}
       {activeProfile?.preferences.showHands && (
         <HandGuide activeFinger={currentFinger} />
       )}
 
-      {/* Vector Virtual Keyboard */}
       {activeProfile?.preferences.showKeyboard && (
         <VirtualKeyboard
-          targetChar={currentChar}
+          targetChar={currentExpected}
           activeKey={lastActiveKey}
           targetFinger={currentFinger}
         />
       )}
 
-      {/* Completed Modal */}
       {completedResult && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
           <div className="bg-surface border border-border rounded-card p-6 max-w-sm w-full shadow-lg text-center space-y-5">
@@ -292,21 +270,17 @@ export const LessonView: React.FC = () => {
               <p className="text-xs text-txt-muted mt-1">Muscle memory progress updated.</p>
             </div>
 
-            {/* Star Rating */}
             <div className="flex justify-center gap-1.5">
-              {[1, 2, 3].map(s => (
+              {[1, 2, 3].map((s) => (
                 <Star
                   key={s}
                   className={`w-6 h-6 ${
-                    s <= completedResult.stars
-                      ? 'text-warning fill-warning'
-                      : 'text-border'
+                    s <= completedResult.stars ? 'text-warning fill-warning' : 'text-border'
                   }`}
                 />
               ))}
             </div>
 
-            {/* Score Cards */}
             <div className="grid grid-cols-3 gap-2">
               <div className="bg-surface-2 p-2.5 rounded-btn border border-border">
                 <span className="text-[10px] text-txt-muted block">Net WPM</span>
@@ -322,7 +296,6 @@ export const LessonView: React.FC = () => {
               </div>
             </div>
 
-            {/* Action buttons */}
             <div className="flex gap-2 pt-1">
               <Button variant="outline" className="flex-1" onClick={resetExercise}>
                 <RotateCcw className="w-3.5 h-3.5" /> Retry

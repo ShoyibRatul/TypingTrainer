@@ -9,7 +9,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "test:schemas": "node test/validate-schemas.js"
+    "test:schemas": "node test/validate-schemas.js",
+    "test:engine": "vitest run",
+    "test": "npm run test:schemas && vitest run"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.0.0",
